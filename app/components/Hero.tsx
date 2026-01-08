@@ -8,7 +8,18 @@ export default function Hero() {
   const { t } = useLocale()
   const heroTitle = t('hero.title') || 'Houston Wellness Consultant'
   const heroSubtitle = t('hero.subtitle') || 'Personalized health & wellness coaching in Pinehurst, NC — helping busy people build sustainable healthy habits.'
-  const heroImage = 'https://images.unsplash.com/photo-1526403224743-8b3b9b5d4a88?q=80&w=1600&auto=format&fit=crop'
+  const images = [
+    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
+    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756078132/54707334162_4e1cf2dd7e_o_convert.io_vbughi.png'
+  ]
+
+  const [idx, setIdx] = React.useState(0)
+
+  React.useEffect(() => {
+    const id = setInterval(() => setIdx(i => (i + 1) % images.length), 5000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <section className="relative py-20">
@@ -24,8 +35,16 @@ export default function Hero() {
         </div>
 
         <div className="rounded-lg overflow-hidden shadow-lg">
-          <Image src={heroImage} alt="Wellness coaching" width={800} height={600} className="object-cover w-full h-72 md:h-96" priority />
+          <Image src={images[idx]} alt="Wellness coaching" width={1200} height={800} className="object-cover w-full h-72 md:h-96" priority />
         </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto mt-6 grid grid-cols-3 gap-4">
+        {images.map((src, i) => (
+          <button onClick={() => setIdx(i)} key={i} className={`overflow-hidden rounded-md ${i === idx ? 'ring-2 ring-[rgb(var(--color-primary))]' : 'opacity-80'}`}>
+            <Image src={src} width={400} height={260} alt={`Lilly photo ${i+1}`} className="object-cover w-full h-24 md:h-32" />
+          </button>
+        ))}
       </div>
     </section>
   )

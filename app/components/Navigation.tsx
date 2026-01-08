@@ -33,8 +33,10 @@ export default function Navigation(){
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
-            <div className="w-10 h-10 rounded-full bg-[rgb(var(--color-primary))] flex items-center justify-center text-white font-semibold">LC</div>
-            <span className={`font-semibold ${scrolled ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Lilly Combest logo" width={40} height={40} className="w-10 h-10" />
+              <span className={`font-semibold ${scrolled ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
+            </div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
