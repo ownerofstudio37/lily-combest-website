@@ -1,6 +1,6 @@
-# Lily Combest — Health & Wellness (Pinehurst, TX)
+# Lilly Combest — Health & Wellness (Pinehurst, TX)
 
-This repository is a fresh starter for Lily Combest — a health and wellness consultant based in Pinehurst, Texas. It’s inspired by a previous website template but has been sanitized and rebranded so you can build a site specific to Lily's services.
+This repository is a fresh starter for Lilly Combest — a health and wellness consultant based in Pinehurst, Texas. It’s inspired by a previous website template but has been sanitized and rebranded so you can build a site specific to Lilly's services.
 
 ## Quick start
 

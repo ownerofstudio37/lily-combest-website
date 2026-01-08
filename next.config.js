@@ -1,5 +1,5 @@
 /**
- * Minimal Next.js config adapted for Lily Combest site starter.
+ * Minimal Next.js config adapted for Lilly Combest site starter.
  * Keep environment variables and CSP updated for your final deploy.
  */
 

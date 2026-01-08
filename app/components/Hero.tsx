@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 export default function Hero() {
-  const heroTitle = 'Lily Combest'
+  const heroTitle = 'Lilly Combest'
   const heroSubtitle = 'Personalized health & wellness coaching in Pinehurst, NC — helping busy people build sustainable healthy habits.'
   const heroImage = 'https://images.unsplash.com/photo-1526403224743-8b3b9b5d4a88?q=80&w=1600&auto=format&fit=crop'
 

@@ -2,7 +2,7 @@ export function generateLocalBusinessSchema(){
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    'name': 'Lily Combest',
+    'name': 'Lilly Combest',
     'description': 'Health & wellness coaching in Pinehurst, NC — one-on-one coaching, nutrition planning, and workshops.',
     'url': process.env.NEXT_PUBLIC_SITE_URL || 'https://lilycombest.com',
     'telephone': '',

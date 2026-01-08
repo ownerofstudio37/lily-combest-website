@@ -4,8 +4,8 @@ import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 
 export const metadata = {
-  title: 'Lily Combest — Health & Wellness (Pinehurst, NC)',
-  description: 'Personalized wellness coaching, nutrition guidance, and lifestyle support from Lily Combest in Pinehurst, NC.',
+  title: 'Lilly Combest — Health & Wellness (Pinehurst, NC)',
+  description: 'Personalized wellness coaching, nutrition guidance, and lifestyle support from Lilly Combest in Pinehurst, NC.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

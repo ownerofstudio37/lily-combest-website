@@ -8,7 +8,7 @@ export default function Footer(){
       <div className="container mx-auto px-4 py-12">
         <div className="md:flex md:justify-between md:items-start">
           <div className="mb-6 md:mb-0">
-            <h3 className="text-lg font-semibold">Lily Combest</h3>
+            <h3 className="text-lg font-semibold">Lilly Combest</h3>
             <p className="text-sm text-gray-700">Health & wellness coaching in Pinehurst, NC</p>
             <p className="text-sm text-gray-700 mt-3">Email: <a href="mailto:hello@lilycombest.com" className="text-[rgb(var(--color-primary))]">hello@lilycombest.com</a></p>
           </div>
@@ -34,7 +34,7 @@ export default function Footer(){
           </div>
         </div>
 
-        <div className="mt-8 text-sm text-gray-500 text-center">© {new Date().getFullYear()} Lily Combest. All rights reserved.</div>
+        <div className="mt-8 text-sm text-gray-500 text-center">© {new Date().getFullYear()} Lilly Combest. All rights reserved.</div>
       </div>
 
       {/* Structured data for LocalBusiness */}

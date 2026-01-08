@@ -28,9 +28,9 @@ export default function Navigation(){
     <nav className={`fixed w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-md' : 'bg-transparent'}`} aria-label="Main navigation">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3" aria-label="Lily Combest - Home">
+          <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
             <div className="w-10 h-10 rounded-full bg-[rgb(var(--color-primary))] flex items-center justify-center text-white font-semibold">LC</div>
-            <span className={`font-semibold ${scrolled ? 'text-slate-900' : 'text-white'}`}>Lily Combest</span>
+            <span className={`font-semibold ${scrolled ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
