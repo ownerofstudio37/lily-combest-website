@@ -1,4 +1,7 @@
+"use client"
+
 import React from 'react'
+import { useLocale } from '../components/LocaleProvider'
 
 export default function About() {
   return (
@@ -7,10 +10,10 @@ export default function About() {
       <AboutBody />
     </div>
   )
-}
+} 
 
 function AboutBody(){
-  const { t } = require('../../components/LocaleProvider').useLocale()
+  const { t } = useLocale()
   return (
     <>
       <h1 className="text-3xl font-bold mb-4">{t('about.title') || 'About Lilly'}</h1>
