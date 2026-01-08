@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Sobre Mí",
+    "services": "Servicios",
+    "testimonials": "Testimonios",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "book": "Reserva"
+  },
+  "hero": {
+    "title": "Consultora de Bienestar en Houston",
+    "subtitle": "Descubre el bienestar holístico y las estrategias de salud natural con Lilly Combest, tu experta consultora de bienestar en The Woodlands, Spring y el área del norte de Houston. Desbloquea el potencial de tu salud a través de una guía personalizada.",
+    "cta": "Reserva tu Consulta de Bienestar Gratuita"
+  },
+  "section": {
+    "ready_title": "¿Lista para comenzar?",
+    "ready_text": "Agenda una consulta introductoria gratuita con Lilly para hablar sobre tus objetivos de bienestar y cómo puede ayudarte.",
+    "book": "Reservar consulta gratuita"
+  },
+  "about": {
+    "title": "Sobre Lilly",
+    "paragraph": "Lilly Combest es una consultora de salud y bienestar ubicada en Pinehurst, NC. Ayuda a personas ocupadas a construir hábitos sostenibles para mejorar la energía, el sueño y la nutrición."
+  },
+  "services": {
+    "title": "Servicios",
+    "desc": "Apoyo que te encuentra donde estás — claro, práctico y sostenible.",
+    "list": [
+      "Coaching de bienestar personal",
+      "Planificación de comidas y nutrición",
+      "Reducción de estrés y coaching de sueño",
+      "Talleres virtuales"
+    ]
+  }
+}

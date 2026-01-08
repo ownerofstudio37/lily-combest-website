@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "blog": "Blog",
+    "contact": "Contact",
+    "book": "Book"
+  },
+  "hero": {
+    "title": "Houston Wellness Consultant",
+    "subtitle": "Discover holistic wellness and natural health strategies with Lilly Combest, your expert wellness consultant serving The Woodlands, Spring, and the greater North Houston area. Unlock your health's potential through personalized guidance.",
+    "cta": "Book Your Free Wellness Consultation"
+  },
+  "section": {
+    "ready_title": "Ready to get started?",
+    "ready_text": "Schedule a free introductory consult with Lilly to talk about your wellness goals and how she can help you reach them.",
+    "book": "Book a free consult"
+  },
+  "about": {
+    "title": "About Lilly",
+    "paragraph": "Lilly Combest is a health and wellness consultant based in Pinehurst, NC. She helps busy people build lasting habits for better energy, improved sleep, and sustainable nutrition."
+  },
+  "services": {
+    "title": "Services",
+    "desc": "Support that meets you where you are — clear, practical, and sustainable.",
+    "list": [
+      "One-on-one Wellness Coaching",
+      "Nutrition & Meal Planning",
+      "Stress & Sleep Coaching",
+      "Virtual Workshops"
+    ]
+  }
+}

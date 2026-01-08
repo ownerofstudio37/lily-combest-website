@@ -2,6 +2,7 @@ import './globals.css'
 import React from 'react'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
+import { LocaleProvider } from './components/LocaleProvider'
 
 export const metadata = {
   title: 'Lilly Combest — Health & Wellness (Pinehurst, NC)',
@@ -15,14 +16,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
       </head>
       <body>
-        {/* Navigation placed here so it is present on all pages */}
-        <Navigation />
+        {/* Locale provider wraps site to provide translations */}
+        <LocaleProvider>
+          <Navigation />
 
-        <main id="main" className="min-h-screen pt-16">
-          {children}
-        </main>
+          <main id="main" className="min-h-screen pt-16">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   )

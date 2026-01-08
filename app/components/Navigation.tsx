@@ -16,12 +16,14 @@ export default function Navigation(){
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const { t } = useLocale()
+
   const navItems = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'services', label: 'Services', href: '/services' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'blog', label: 'Blog', href: '/blog' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
+    { id: 'home', label: t('nav.home') || 'Home', href: '/' },
+    { id: 'services', label: t('nav.services') || 'Services', href: '/services' },
+    { id: 'about', label: t('nav.about') || 'About', href: '/about' },
+    { id: 'blog', label: t('nav.blog') || 'Blog', href: '/blog' },
+    { id: 'contact', label: t('nav.contact') || 'Contact', href: '/contact' },
   ]
 
   return (
@@ -39,7 +41,11 @@ export default function Navigation(){
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact" className="ml-2 inline-block bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md">Book</Link>
+            <Link href="/contact" className="ml-2 inline-block bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md">{t('nav.book') || 'Book'}</Link>
+            {/* Language switcher */}
+            <div className="ml-4">
+              <LanguageToggle />
+            </div>
           </div>
 
           <button className="md:hidden p-2 rounded-md text-slate-700" onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="mobile-menu">
