@@ -21,6 +21,35 @@
     "title": "Sobre Lilly",
     "paragraph": "Lilly Combest es una consultora de salud y bienestar ubicada en Pinehurst, NC. Ayuda a personas ocupadas a construir hábitos sostenibles para mejorar la energía, el sueño y la nutrición."
   },
+  "contact": {
+    "title": "Contacto",
+    "intro": "Para programar una consulta gratuita con Lilly, envía un correo a",
+    "email": "hello@lillycombest.com",
+    "cta": "Reservar consulta",
+    "form": {
+      "name": "Tu nombre",
+      "email": "Tu correo",
+      "message": "Mensaje",
+      "send": "Enviar mensaje"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Consejos y artículos sobre nutrición, manejo del estrés y bienestar práctico.",
+    "read_more": "Leer más",
+    "posts": [
+      {
+        "slug": "simple-meal-prep",
+        "title": "Preparación de comidas sencillas para semanas ocupadas",
+        "excerpt": "Consejos para preparar comidas que te ahorran tiempo y te ayudan a comer mejor durante semanas ocupadas."
+      },
+      {
+        "slug": "better-sleep",
+        "title": "5 hábitos para dormir mejor",
+        "excerpt": "Pequeños cambios que puedes hacer hoy para mejorar la calidad de tu sueño y tu energía durante el día."
+      }
+    ]
+  }
   "services": {
     "title": "Servicios",
     "desc": "Apoyo que te encuentra donde estás — claro, práctico y sostenible.",

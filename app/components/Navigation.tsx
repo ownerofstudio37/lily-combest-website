@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useLocale } from './LocaleProvider'
+import LanguageToggle from './LanguageToggle'
 
 export default function Navigation(){
   const pathname = usePathname()
@@ -61,6 +63,9 @@ export default function Navigation(){
               <Link key={item.id} href={item.href} className="py-2 border-b text-slate-800" onClick={() => setIsOpen(false)}>{item.label}</Link>
             ))}
             <Link href="/contact" className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">Book</Link>
+            <div className="pt-2">
+              <LanguageToggle />
+            </div>
           </div>
         </div>
       )}

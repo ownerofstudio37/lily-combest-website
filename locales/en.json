@@ -21,6 +21,35 @@
     "title": "About Lilly",
     "paragraph": "Lilly Combest is a health and wellness consultant based in Pinehurst, NC. She helps busy people build lasting habits for better energy, improved sleep, and sustainable nutrition."
   },
+  "contact": {
+    "title": "Contact",
+    "intro": "To schedule a free consultation with Lilly, email",
+    "email": "hello@lillycombest.com",
+    "cta": "Book a consult",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Message",
+      "send": "Send Message"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Helpful tips and articles about nutrition, stress management, and practical wellness.",
+    "read_more": "Read more",
+    "posts": [
+      {
+        "slug": "simple-meal-prep",
+        "title": "Simple Meal Prep for Busy Weeks",
+        "excerpt": "Time-saving meal prepping tips to help you eat well during busy weeks."
+      },
+      {
+        "slug": "better-sleep",
+        "title": "5 Habits for Better Sleep",
+        "excerpt": "Small changes you can make tonight to improve sleep quality and daytime energy."
+      }
+    ]
+  }
   "services": {
     "title": "Services",
     "desc": "Support that meets you where you are — clear, practical, and sustainable.",
