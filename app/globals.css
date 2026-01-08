@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: 34, 120, 85; /* a calm green */
-  --color-primary-light: 148, 210, 182;
-  --color-primary-dark: 20, 80, 60;
+  /* Primary: Pink palette (replaces the previous green) */
+  --color-primary: 236, 72, 153; /* pink (fuchsia) */
+  --color-primary-light: 252, 165, 193;
+  --color-primary-dark: 180, 28, 94;
+
+  /* Secondary: Yellow/Amber accent */
+  --color-secondary: 245, 158, 11; /* amber/yellow */
+  --color-secondary-light: 250, 204, 21;
+  --color-secondary-dark: 184, 88, 8;
 }
 
 @layer base {
