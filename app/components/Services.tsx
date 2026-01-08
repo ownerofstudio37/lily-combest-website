@@ -1,5 +1,7 @@
+"use client"
+
 import React from 'react'
-import { useLocale } from './LocaleProvider'
+import { useLocale } from './LocaleProvider' 
 
 export default function Services(){
   const { t } = useLocale()

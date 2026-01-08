@@ -1,5 +1,7 @@
+"use client"
+
 import React from 'react'
-import { useLocale } from '../../components/LocaleProvider'
+import { useLocale } from '../../components/LocaleProvider' 
 
 export default function BlogPost({ params }: { params: { slug: string } }){
   const { t } = useLocale()

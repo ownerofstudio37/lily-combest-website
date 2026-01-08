@@ -1,6 +1,8 @@
+"use client"
+
 import React from 'react'
 import Image from 'next/image'
-import { useLocale } from './LocaleProvider'
+import { useLocale } from './LocaleProvider' 
 
 export default function Hero() {
   const { t } = useLocale()
