@@ -5,37 +5,26 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 const generateSEOPrompt = (data: any) => {
   const { topic, keyword, tone, wordCount, targetAudience, seoTargets } = data
 
-  return `You are an expert SEO-optimized blog writer for a wellness consultant. Create a high-quality blog post with the following requirements:
+  return `You are an expert SEO-optimized blog writer for a wellness consultant. Create a high-quality blog post.
 
 TOPIC: ${topic}
-PRIMARY KEYWORD: ${keyword}
-TARGET ZIP CODE: ${seoTargets.zipCode}
-SERVICE RADIUS: ${seoTargets.radius}
-CITIES SERVED: ${seoTargets.cities.join(", ")}
-TARGET AUDIENCE: ${targetAudience}
+KEYWORD: ${keyword}
+TARGET: ${seoTargets.zipCode} zip code, ${seoTargets.radius}
+CITIES: ${seoTargets.cities.join(", ")}
+AUDIENCE: ${targetAudience}
 TONE: ${tone}
-WORD COUNT: ${wordCount} words
+WORDS: ${wordCount}
 
-REQUIREMENTS:
-1. Include the primary keyword naturally 3-5 times throughout the post
-2. Use secondary keywords: ${seoTargets.keywords.slice(0, 3).join(", ")}
-3. Include references to local areas served: ${seoTargets.cities.join(", ")}
-4. Create an engaging, informative post that provides real value
-5. Include practical, actionable tips
-6. Structure with clear H2 and H3 headings
-7. Start with a compelling hook
-8. End with a call-to-action mentioning local consultation availability
+Include: primary keyword 3-5 times, secondary keywords, local area references, H2/H3 headings, CTA.
 
-Output ONLY valid JSON with this exact structure:
+RESPOND WITH ONLY VALID JSON - NO OTHER TEXT:
 {
-  "title": "SEO-optimized title with primary keyword",
-  "excerpt": "2-3 sentence summary including primary keyword",
-  "keywords": ["keyword1", "keyword2", "keyword3"],
-  "metaDescription": "compelling meta description under 160 chars including primary keyword",
-  "content": "<p>Full HTML content...</p>"
-}
-
-Do not include any markdown or code blocks. Return ONLY the JSON object.`
+  "title": "Title with keyword",
+  "excerpt": "2-3 sentence summary",
+  "keywords": ["kw1", "kw2", "kw3"],
+  "metaDescription": "SEO description under 160 chars",
+  "content": "<p>HTML content here</p>"
+}`
 }
 
 export async function POST(request: NextRequest) {
@@ -93,10 +82,25 @@ export async function POST(request: NextRequest) {
     }
 
     const generatedText = result.contents[0].parts[0].text
-    console.log("Generated text received, parsing JSON...")
+    console.log("Generated text received (length:", generatedText.length, "), parsing JSON...")
+    
+    // Validate that it looks like JSON before parsing
+    if (!generatedText.trim().startsWith('{')) {
+      console.error("Response is not JSON, content starts with:", generatedText.substring(0, 100))
+      throw new Error("API returned non-JSON response. Response: " + generatedText.substring(0, 200))
+    }
 
     // Parse the JSON response
-    const content = JSON.parse(generatedText)
+    let content
+    try {
+      // Remove markdown code blocks if present
+      let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+      content = JSON.parse(cleanedText)
+    } catch (parseError: any) {
+      console.error("JSON parse error:", parseError.message)
+      console.error("Raw text:", generatedText.substring(0, 500))
+      throw new Error("Failed to parse API response as JSON: " + parseError.message + ". Response: " + generatedText.substring(0, 200))
+    }
     console.log("Blog post generated successfully")
 
     return NextResponse.json({ success: true, content })
