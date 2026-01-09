@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Disallow bot traffic to admin, api internals, etc. (customize as needed)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow crawling of blog and public pages
+Allow: /blog/
+Allow: /contact/
+Allow: /about/
+Allow: /services/
+
+# Sitemap
+Sitemap: https://lilycombest.com/sitemap.xml
