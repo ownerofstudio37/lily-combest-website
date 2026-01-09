@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,19 +16,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Initialize Supabase client
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-    if (!supabaseUrl || !supabaseKey) {
-      return NextResponse.json(
-        { error: 'Server not configured with Supabase credentials' },
-        { status: 500 }
-      )
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey)
-
     const postData = {
       title,
       slug,
@@ -44,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     if (id) {
       // Update existing post
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('blog_posts')
         .update(postData)
         .eq('id', id)
@@ -62,7 +49,7 @@ export async function POST(request: NextRequest) {
       })
     } else {
       // Create new post
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('blog_posts')
         .insert([{
           ...postData,
