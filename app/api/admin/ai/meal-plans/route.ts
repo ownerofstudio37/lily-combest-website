@@ -65,15 +65,31 @@ export async function POST(request: NextRequest) {
       }),
     })
 
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error("Gemini API error:", response.status, errorText)
-      throw new Error(`Gemini API error: ${response.status} - ${errorText}`)
+    const result = await response.json()
+
+    // Handle both old (contents) and new (candidates) response formats
+    let generatedText = null
+    
+    if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+      generatedText = result.candidates[0].content.parts[0].text
+    } else if (result.contents && result.contents[0] && result.contents[0].parts && result.contents[0].parts[0]) {
+      generatedText = result.contents[0].parts[0].text
+    } else {
+      if (result.error) throw new Error(`Gemini API error: ${result.error.message}`)
+      throw new Error(`Invalid response structure: ${JSON.stringify(result)}`)
     }
 
-    const result = await response.json()
-    const generatedText = result.contents[0].parts[0].text
-    const plan = JSON.parse(generatedText)
+    if (!generatedText.trim().startsWith('{')) {
+      throw new Error("API returned non-JSON response. Response: " + generatedText.substring(0, 200))
+    }
+
+    let plan
+    try {
+      let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+      plan = JSON.parse(cleanedText)
+    } catch (parseError: any) {
+      throw new Error("Failed to parse API response as JSON: " + parseError.message)
+    }
 
     return NextResponse.json({ success: true, plan })
   } catch (error: any) {

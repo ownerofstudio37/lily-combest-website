@@ -76,7 +76,14 @@ export async function POST(request: NextRequest) {
     const result = await response.json()
     console.log("Gemini response received, structure:", JSON.stringify(result, null, 2))
     
-    if (!result.contents || !result.contents[0] || !result.contents[0].parts || !result.contents[0].parts[0]) {
+    // Handle both old (contents) and new (candidates) response formats
+    let generatedText = null
+    
+    if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+      generatedText = result.candidates[0].content.parts[0].text
+    } else if (result.contents && result.contents[0] && result.contents[0].parts && result.contents[0].parts[0]) {
+      generatedText = result.contents[0].parts[0].text
+    } else {
       console.error("Unexpected Gemini response structure. Full response:", JSON.stringify(result, null, 2))
       
       // Check if it's an error response
@@ -110,12 +117,3 @@ export async function POST(request: NextRequest) {
     console.log("Blog post generated successfully")
 
     return NextResponse.json({ success: true, content })
-  } catch (error: any) {
-    console.error("Blog generation error:", error.message || error)
-    console.error("Error stack:", error.stack)
-    return NextResponse.json(
-      { error: error.message || "Failed to generate blog post" },
-      { status: 500 }
-    )
-  }
-}
