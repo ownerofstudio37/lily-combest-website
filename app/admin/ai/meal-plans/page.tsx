@@ -14,13 +14,17 @@ interface MealPlan {
 
 export default function MealPlansGenerator() {
   const [clientName, setClientName] = useState("")
+  const [clientEmail, setClientEmail] = useState("")
   const [dietaryRestrictions, setDietaryRestrictions] = useState("")
   const [mealPreference, setMealPreference] = useState("balanced")
   const [duration, setDuration] = useState("7")
   const [calorieTarget, setCalorieTarget] = useState("2000")
   const [generating, setGenerating] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [sending, setSending] = useState(false)
   const [generatedPlan, setGeneratedPlan] = useState<MealPlan | null>(null)
   const [error, setError] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const handleGenerate = async () => {
     if (!clientName.trim()) {
@@ -56,6 +60,83 @@ export default function MealPlansGenerator() {
       setError(err.message || "Failed to generate meal plan")
     } finally {
       setGenerating(false)
+    }
+  }
+
+  const handleSave = async () => {
+    if (!generatedPlan) return
+    
+    setSaving(true)
+    setError("")
+    setSuccessMessage("")
+
+    try {
+      const response = await fetch("/api/admin/meal-plans/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clientName,
+          plan: generatedPlan,
+        }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new 
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">Client Email</label>
+              <input
+                type="email"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                placeholder="client@example.com"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              />
+            </div>Error(data.error || "Failed to save meal plan")
+      }
+
+      setSuccessMessage("Meal plan saved successfully!")
+      setTimeout(() => setSuccessMessage(""), 3000)
+    } catch (err: any) {
+      setError(err.message || "Failed to save meal plan")
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleSendToClient = async () => {
+    if (!generatedPlan || !clientEmail) {
+      setError("Please provide client email address")
+      return
+    }
+    
+    setSending(true)
+    setError("")
+    setSuccessMessage("")
+
+    try {
+      const response = await fetch("/api/admin/meal-plans/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clientName,
+          clientEmail,
+          plan: generatedPlan,
+        }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || "Failed to send meal plan")
+      }
+
+      setSuccessMessage("Meal plan sent to client successfully!")
+      setTimeout(() => setSuccessMessage(""), 3000)
+    } catch (err: any) {
+      setError(err.message || "Failed to send meal plan")
+    } finally {
+      setSending(false)
     }
   }
 
@@ -187,13 +268,27 @@ export default function MealPlansGenerator() {
                   {generatedPlan.shoppingList.map((item, idx) => (
                     <li key={idx} className="text-gray-700">
                       ☐ {item}
-                    </li>
-                  ))}
-                </ul>
+                    </li
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="flex-1 bg-white border border-gray-300 text-gray-900 font-semibold py-2 rounded-lg hover:bg-gray-50 transition disabled:opacity-50"
+                >
+                  {saving ? "Saving..." : "Save Plan"}
+                </button>
+                <button 
+                  onClick={handleSendToClient}
+                  disabled={sending || !clientEmail}
+                  className="flex-1 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition disabled:opacity-50"
+                >
+                  {sending ? "Sending..." : "Send to Client"}
+                </button>
               </div>
 
-              <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
-                <h3 className="font-semibold text-blue-900 mb-2">Notes</h3>
+              {successMessage && (
+                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                  {successMessage}
+                </div>
+              )}className="font-semibold text-blue-900 mb-2">Notes</h3>
                 <p className="text-blue-800 text-sm">{generatedPlan.notes}</p>
               </div>
 
