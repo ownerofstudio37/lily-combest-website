@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
+    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,6 +99,7 @@ export async function POST(request: NextRequest) {
     let plan
     try {
       let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+      cleanedText = cleanedText.replace(/\n/g, ' ')
       plan = JSON.parse(cleanedText)
     } catch (parseError: any) {
       throw new Error("Failed to parse API response as JSON: " + parseError.message)
