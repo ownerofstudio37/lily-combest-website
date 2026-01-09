@@ -9,17 +9,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const { error } = await supabaseAdmin
+    console.log('Saving meal plan:', {
+      clientName,
+      title: plan.title,
+      duration: typeof plan.duration,
+      calories: typeof plan.calories,
+    })
+
+    // Ensure meals and shoppingList are properly formatted as JSON strings
+    const mealsParsed = typeof plan.meals === 'string' ? plan.meals : JSON.stringify(plan.meals)
+    const shoppingListParsed = typeof plan.shoppingList === 'string' ? plan.shoppingList : JSON.stringify(plan.shoppingList)
+
+    const { data, error } = await supabaseAdmin
       .from('meal_plans')
       .insert({
         client_name: clientName,
         title: plan.title,
-        duration: plan.duration,
-        calories: plan.calories,
-        meals: plan.meals,
-        shopping_list: plan.shoppingList,
-        notes: plan.notes,
-        created_at: new Date().toISOString(),
+        duration: String(plan.duration),
+        calories: String(plan.calories),
+        meals: mealsParsed,
+        shopping_list: shoppingListParsed,
+        notes: plan.notes || '',
       })
 
     if (error) {
@@ -27,6 +37,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
+    console.log('Meal plan saved successfully')
     return NextResponse.json({ success: true })
   } catch (error: any) {
     console.error('Save meal plan error:', error)
