@@ -17,21 +17,16 @@ export default function Contact(){
     e.preventDefault()
     setStatus('sending')
 
-    const formData = new FormData()
-    formData.append('form-name', 'contact')
-    formData.append('name', name)
-    formData.append('email', email)
-    formData.append('message', message)
-
     try {
-      const res = await fetch('/', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
       })
       if (res.ok) {
         setStatus('success')
         setName(''); setEmail(''); setMessage('')
+        setTimeout(() => setStatus('idle'), 5000)
       } else {
         setStatus('error')
       }
@@ -49,10 +44,7 @@ export default function Contact(){
         <Booking />
       </div>
 
-      <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="max-w-xl">
-        <input type="hidden" name="form-name" value="contact" />
-        <p className="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
-
+      <form name="contact" method="POST" onSubmit={handleSubmit} className="max-w-xl">
         <label className="block mb-2 text-sm font-medium">{t('contact.form.name') || 'Your name'}</label>
         <input value={name} onChange={e => setName(e.target.value)} className="w-full border rounded-md px-3 py-2 mb-4" name="name" required />
 
