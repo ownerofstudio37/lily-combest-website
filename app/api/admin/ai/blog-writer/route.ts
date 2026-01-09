@@ -117,3 +117,12 @@ export async function POST(request: NextRequest) {
     console.log("Blog post generated successfully")
 
     return NextResponse.json({ success: true, content })
+  } catch (error: any) {
+    console.error("Blog generation error:", error.message || error)
+    console.error("Error stack:", error.stack)
+    return NextResponse.json(
+      { error: error.message || "Failed to generate blog post" },
+      { status: 500 }
+    )
+  }
+}
