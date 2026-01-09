@@ -60,7 +60,5 @@ export default function Booking(){
 
   return (
     <button onClick={openBooking} className="inline-block bg-[rgb(var(--color-primary))] text-white px-5 py-2 rounded-md">Book a free consult</button>
-      )}
-    </>
   )
 }
