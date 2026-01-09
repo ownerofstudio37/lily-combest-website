@@ -82,18 +82,7 @@ export default function MealPlansGenerator() {
 
       if (!response.ok) {
         const data = await response.json()
-        throw new 
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">Client Email</label>
-              <input
-                type="email"
-                value={clientEmail}
-                onChange={(e) => setClientEmail(e.target.value)}
-                placeholder="client@example.com"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-              />
-            </div>Error(data.error || "Failed to save meal plan")
+        throw new Error(data.error || "Failed to save meal plan")
       }
 
       setSuccessMessage("Meal plan saved successfully!")
@@ -157,6 +146,17 @@ export default function MealPlansGenerator() {
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
                 placeholder="e.g., Sarah Johnson"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">Client Email</label>
+              <input
+                type="email"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                placeholder="client@example.com"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
               />
             </div>
