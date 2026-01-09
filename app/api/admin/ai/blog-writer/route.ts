@@ -94,7 +94,6 @@ export async function POST(request: NextRequest) {
       throw new Error(`Invalid response structure from Gemini API. Response: ${JSON.stringify(result)}`)
     }
 
-    const generatedText = result.contents[0].parts[0].text
     console.log("Generated text received (length:", generatedText.length, "), parsing JSON...")
     
     // Validate that it looks like JSON before parsing
