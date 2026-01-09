@@ -64,7 +64,7 @@ function parseMdx(content: string) {
       let value: any = valueParts.join(':').trim()
       // Parse YAML-ish values
       if (value.startsWith('[') && value.endsWith(']')) {
-        value = value.slice(1, -1).split(',').map(v => v.trim().replace(/"/g, ''))
+        value = value.slice(1, -1).split(',').map((v: string) => v.trim().replace(/"/g, ''))
       } else if (value === 'true') value = true
       else if (value === 'false') value = false
       else if (!isNaN(Number(value)) && value !== '') value = Number(value)
