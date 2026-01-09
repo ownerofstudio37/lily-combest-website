@@ -23,12 +23,10 @@ export async function POST(req: Request) {
         name,
         email,
         message,
-        source: 'contact_form',
-        created_at: new Date().toISOString(),
       })
 
     if (dbError) {
-      console.error('Database error:', dbError)
+      console.error('Database error saving contact:', dbError)
       // Continue to send email even if DB save fails
     }
 
