@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { LogOut, Settings, BarChart3, MessageSquare, BookOpen, Zap } from "lucide-react"
+import { LogOut, Settings, BarChart3, MessageSquare, BookOpen, Zap, FileText } from "lucide-react"
 
 interface AdminUser {
   email: string
