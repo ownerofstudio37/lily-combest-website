@@ -130,7 +130,7 @@ export default function MealPlansGenerator() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8")
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Meal Plan Generator</h1>
         <p className="text-gray-600 mt-2">Create personalized, customized meal plans for your clients</p>
