@@ -90,14 +90,22 @@ export async function POST(request: NextRequest) {
       throw new Error(`Invalid response structure: ${JSON.stringify(result)}`)
     }
 
-    if (!generatedText.trim().startsWith('{')) {
-      throw new Error("API returned non-JSON response")
+    // Clean up markdown and extract JSON
+    let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    cleanedText = cleanedText.replace(/\n/g, ' ')
+
+    // Find JSON object if text doesn't start with {
+    if (!cleanedText.startsWith('{')) {
+      const jsonMatch = cleanedText.match(/\{[\s\S]*\}/)
+      if (jsonMatch) {
+        cleanedText = jsonMatch[0]
+      } else {
+        throw new Error("No JSON object found in API response")
+      }
     }
 
     let plan
     try {
-      let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-      cleanedText = cleanedText.replace(/\n/g, ' ')
       plan = JSON.parse(cleanedText)
     } catch (parseError: any) {
       throw new Error("Failed to parse API response as JSON: " + parseError.message)

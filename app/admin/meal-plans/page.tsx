@@ -9,8 +9,8 @@ interface MealPlan {
   title: string
   duration: number
   calories: number
-  meals: string
-  shopping_list: string
+  meals: string[]
+  shopping_list: string[]
   notes: string
   created_at: string
 }
@@ -39,22 +39,6 @@ export default function SavedMealPlans() {
       setError(err.message)
     } finally {
       setLoading(false)
-    }
-  }
-
-  const parseMeals = (mealsStr: string): string[] => {
-    try {
-      return JSON.parse(mealsStr)
-    } catch {
-      return []
-    }
-  }
-
-  const parseShoppingList = (listStr: string): string[] => {
-    try {
-      return JSON.parse(listStr)
-    } catch {
-      return []
     }
   }
 
@@ -124,7 +108,7 @@ export default function SavedMealPlans() {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Meals</h3>
                       <div className="space-y-2">
-                        {parseMeals(plan.meals).map((meal, idx) => (
+                        {plan.meals.map((meal, idx) => (
                           <div key={idx} className="border-l-4 border-pink-500 pl-4 py-2 text-gray-700">
                             {meal}
                           </div>
@@ -135,7 +119,7 @@ export default function SavedMealPlans() {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Shopping List</h3>
                       <ul className="grid grid-cols-2 gap-2">
-                        {parseShoppingList(plan.shopping_list).map((item, idx) => (
+                        {plan.shopping_list.map((item, idx) => (
                           <li key={idx} className="text-gray-700">
                             ☐ {item}
                           </li>

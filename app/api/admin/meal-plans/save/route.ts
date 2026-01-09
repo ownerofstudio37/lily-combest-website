@@ -30,9 +30,9 @@ export async function POST(request: NextRequest) {
       calories: caloriesInt,
     })
 
-    // Ensure meals and shoppingList are properly formatted as JSON strings
-    const mealsParsed = typeof plan.meals === 'string' ? plan.meals : JSON.stringify(plan.meals)
-    const shoppingListParsed = typeof plan.shoppingList === 'string' ? plan.shoppingList : JSON.stringify(plan.shoppingList)
+    // Parse arrays from JSON strings if needed
+    const mealsArray = typeof plan.meals === 'string' ? JSON.parse(plan.meals) : plan.meals
+    const shoppingListArray = typeof plan.shoppingList === 'string' ? JSON.parse(plan.shoppingList) : plan.shoppingList
 
     const { data, error } = await supabaseAdmin
       .from('meal_plans')
@@ -41,8 +41,8 @@ export async function POST(request: NextRequest) {
         title: plan.title,
         duration: durationInt,
         calories: caloriesInt,
-        meals: mealsParsed,
-        shopping_list: shoppingListParsed,
+        meals: mealsArray,
+        shopping_list: shoppingListArray,
         notes: plan.notes || '',
       })
 
