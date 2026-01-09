@@ -142,15 +142,15 @@ export default function WorkoutsGenerator() {
               </div>
 
               <div className="space-y-4 max-h-96 overflow-y-auto text-sm text-gray-700">
-                <div><strong>Level:</strong> {result.level}</div>
-                {result.assessment && <div><h3 className="font-semibold text-gray-900 mb-1">Assessment:</h3><p>{result.assessment}</p></div>}
+                {result.level && <div><strong>Level:</strong> {String(result.level)}</div>}
+                {result.assessment && <div><h3 className="font-semibold text-gray-900 mb-1">Assessment:</h3><p>{typeof result.assessment === 'string' ? result.assessment : JSON.stringify(result.assessment)}</p></div>}
                 {result.weeklySchedule && (
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Weekly Schedule:</h3>
                     <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.weeklySchedule) && result.weeklySchedule.map((day: string, i: number) => (
+                      {Array.isArray(result.weeklySchedule) ? result.weeklySchedule.map((day: string, i: number) => (
                         <li key={i}>{day}</li>
-                      ))}
+                      )) : <li>{String(result.weeklySchedule)}</li>}
                     </ul>
                   </div>
                 )}
@@ -158,15 +158,20 @@ export default function WorkoutsGenerator() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Exercises:</h3>
                     <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.exercises) && result.exercises.map((ex: string, i: number) => (
+                      {Array.isArray(result.exercises) ? result.exercises.map((ex: string, i: number) => (
                         <li key={i}>{ex}</li>
-                      ))}
+                      )) : <li>{String(result.exercises)}</li>}
                     </ul>
                   </div>
                 )}
-                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{result.nutrition}</p></div>}
-                {result.recovery && <div><h3 className="font-semibold text-gray-900 mb-1">Recovery:</h3><p>{result.recovery}</p></div>}
-                {result.progression && <div><h3 className="font-semibold text-gray-900 mb-1">Progression:</h3><p>{result.progression}</p></div>}
+                {result.warmUp && <div><h3 className="font-semibold text-gray-900 mb-1">Warm-Up:</h3><p>{typeof result.warmUp === 'string' ? result.warmUp : JSON.stringify(result.warmUp)}</p></div>}
+                {result.coolDown && <div><h3 className="font-semibold text-gray-900 mb-1">Cool-Down:</h3><p>{typeof result.coolDown === 'string' ? result.coolDown : JSON.stringify(result.coolDown)}</p></div>}
+                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{typeof result.nutrition === 'string' ? result.nutrition : JSON.stringify(result.nutrition)}</p></div>}
+                {result.recovery && <div><h3 className="font-semibold text-gray-900 mb-1">Recovery:</h3><p>{typeof result.recovery === 'string' ? result.recovery : JSON.stringify(result.recovery)}</p></div>}
+                {result.tracking && <div><h3 className="font-semibold text-gray-900 mb-1">Progress Tracking:</h3><p>{typeof result.tracking === 'string' ? result.tracking : JSON.stringify(result.tracking)}</p></div>}
+                {result.motivation && <div><h3 className="font-semibold text-gray-900 mb-1">Motivation:</h3><p>{typeof result.motivation === 'string' ? result.motivation : JSON.stringify(result.motivation)}</p></div>}
+                {result.progression && <div><h3 className="font-semibold text-gray-900 mb-1">Progression:</h3><p>{typeof result.progression === 'string' ? result.progression : JSON.stringify(result.progression)}</p></div>}
+                {result.notes && <div><h3 className="font-semibold text-gray-900 mb-1">Additional Notes:</h3><p>{typeof result.notes === 'string' ? result.notes : JSON.stringify(result.notes)}</p></div>}
               </div>
 
               <div className="mt-4 space-y-2 flex gap-2">

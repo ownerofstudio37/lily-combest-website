@@ -144,9 +144,9 @@ export default function WellnessPlansGenerator() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Health Goals:</h3>
                     <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.goals) && result.goals.map((goal: string, i: number) => (
+                      {Array.isArray(result.goals) ? result.goals.map((goal: string, i: number) => (
                         <li key={i}>{goal}</li>
-                      ))}
+                      )) : <li>{String(result.goals)}</li>}
                     </ul>
                   </div>
                 )}
@@ -154,16 +154,20 @@ export default function WellnessPlansGenerator() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Daily Habits:</h3>
                     <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.dailyHabits) && result.dailyHabits.map((habit: string, i: number) => (
+                      {Array.isArray(result.dailyHabits) ? result.dailyHabits.map((habit: string, i: number) => (
                         <li key={i}>{habit}</li>
-                      ))}
+                      )) : <li>{String(result.dailyHabits)}</li>}
                     </ul>
                   </div>
                 )}
-                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{result.nutrition}</p></div>}
-                {result.sleep && <div><h3 className="font-semibold text-gray-900 mb-1">Sleep Optimization:</h3><p>{result.sleep}</p></div>}
-                {result.stress && <div><h3 className="font-semibold text-gray-900 mb-1">Stress Management:</h3><p>{result.stress}</p></div>}
-                {result.actionPlan && <div><h3 className="font-semibold text-gray-900 mb-1">30-Day Action Plan:</h3><p>{result.actionPlan}</p></div>}
+                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{typeof result.nutrition === 'string' ? result.nutrition : JSON.stringify(result.nutrition)}</p></div>}
+                {result.sleep && <div><h3 className="font-semibold text-gray-900 mb-1">Sleep Optimization:</h3><p>{typeof result.sleep === 'string' ? result.sleep : JSON.stringify(result.sleep)}</p></div>}
+                {result.stress && <div><h3 className="font-semibold text-gray-900 mb-1">Stress Management:</h3><p>{typeof result.stress === 'string' ? result.stress : JSON.stringify(result.stress)}</p></div>}
+                {result.exercise && <div><h3 className="font-semibold text-gray-900 mb-1">Exercise:</h3><p>{typeof result.exercise === 'string' ? result.exercise : JSON.stringify(result.exercise)}</p></div>}
+                {result.tracking && <div><h3 className="font-semibold text-gray-900 mb-1">Progress Tracking:</h3><p>{typeof result.tracking === 'string' ? result.tracking : JSON.stringify(result.tracking)}</p></div>}
+                {result.weeklyAccountability && <div><h3 className="font-semibold text-gray-900 mb-1">Weekly Accountability:</h3><p>{typeof result.weeklyAccountability === 'string' ? result.weeklyAccountability : JSON.stringify(result.weeklyAccountability)}</p></div>}
+                {result.actionPlan && <div><h3 className="font-semibold text-gray-900 mb-1">30-Day Action Plan:</h3><p>{typeof result.actionPlan === 'string' ? result.actionPlan : JSON.stringify(result.actionPlan)}</p></div>}
+                {result.notes && <div><h3 className="font-semibold text-gray-900 mb-1">Additional Notes:</h3><p>{typeof result.notes === 'string' ? result.notes : JSON.stringify(result.notes)}</p></div>}
               </div>
 
               <div className="mt-4 space-y-2 flex gap-2">
