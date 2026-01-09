@@ -36,15 +36,22 @@ Return ONLY valid JSON, no other text.`
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("Meal plan generation request received")
+    
     if (!GEMINI_API_KEY) {
       console.error("Gemini API key is not configured")
       return NextResponse.json(
-        { error: "Gemini API key not configured. Please add NEXT_PUBLIC_GEMINI_API_KEY to environment variables." },
+        { error: "Gemini API key not configured. Please add GEMINI_API_KEY to environment variables." },
         { status: 500 }
       )
     }
 
+    console.log("API key found, parsing request data")
     const data = await request.json()
+    console.log("Request data:", { clientName: data.clientName, duration: data.duration, calorieTarget: data.calorieTarget })
+
+    const prompt = generateMealPlanPrompt(data)
+    console.log("Calling Gemini API with gemini-1.5-flash...")
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent", {
       method: "POST",
@@ -57,7 +64,7 @@ export async function POST(request: NextRequest) {
           {
             parts: [
               {
-                text: generateMealPlanPrompt(data),
+                text: prompt,
               },
             ],
           },
@@ -65,7 +72,9 @@ export async function POST(request: NextRequest) {
       }),
     })
 
+    console.log("Gemini API response status:", response.status)
     const result = await response.json()
+    console.log("Gemini API response:", JSON.stringify(result).substring(0, 500))
 
     // Handle both old (contents) and new (candidates) response formats
     let generatedText = null
@@ -75,11 +84,16 @@ export async function POST(request: NextRequest) {
     } else if (result.contents && result.contents[0] && result.contents[0].parts && result.contents[0].parts[0]) {
       generatedText = result.contents[0].parts[0].text
     } else {
-      if (result.error) throw new Error(`Gemini API error: ${result.error.message}`)
+      if (result.error) {
+        console.error("Gemini API error response:", result.error)
+        throw new Error(`Gemini API error: ${result.error.message}`)
+      }
+      console.error("Invalid response structure:", result)
       throw new Error(`Invalid response structure: ${JSON.stringify(result)}`)
     }
 
     if (!generatedText.trim().startsWith('{')) {
+      console.error("Response does not start with JSON:", generatedText.substring(0, 200))
       throw new Error("API returned non-JSON response. Response: " + generatedText.substring(0, 200))
     }
 
@@ -88,9 +102,11 @@ export async function POST(request: NextRequest) {
       let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
       plan = JSON.parse(cleanedText)
     } catch (parseError: any) {
+      console.error("JSON parse error:", parseError.message, "Text:", generatedText.substring(0, 300))
       throw new Error("Failed to parse API response as JSON: " + parseError.message)
     }
 
+    console.log("Meal plan generated successfully")
     return NextResponse.json({ success: true, plan })
   } catch (error: any) {
     console.error("Meal plan generation error:", error)
