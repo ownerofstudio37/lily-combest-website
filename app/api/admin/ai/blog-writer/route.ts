@@ -96,22 +96,23 @@ export async function POST(request: NextRequest) {
 
     console.log("Generated text received (length:", generatedText.length, "), parsing JSON...")
     
+    // Remove markdown code blocks if present
+    let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    
     // Validate that it looks like JSON before parsing
-    if (!generatedText.trim().startsWith('{')) {
-      console.error("Response is not JSON, content starts with:", generatedText.substring(0, 100))
-      throw new Error("API returned non-JSON response. Response: " + generatedText.substring(0, 200))
+    if (!cleanedText.startsWith('{')) {
+      console.error("Response is not JSON, content starts with:", cleanedText.substring(0, 100))
+      throw new Error("API returned non-JSON response. Response: " + cleanedText.substring(0, 200))
     }
 
     // Parse the JSON response
     let content
     try {
-      // Remove markdown code blocks if present
-      let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
       content = JSON.parse(cleanedText)
     } catch (parseError: any) {
       console.error("JSON parse error:", parseError.message)
-      console.error("Raw text:", generatedText.substring(0, 500))
-      throw new Error("Failed to parse API response as JSON: " + parseError.message + ". Response: " + generatedText.substring(0, 200))
+      console.error("Raw text:", cleanedText.substring(0, 500))
+      throw new Error("Failed to parse API response as JSON: " + parseError.message + ". Response: " + cleanedText.substring(0, 200))
     }
     console.log("Blog post generated successfully")
 
