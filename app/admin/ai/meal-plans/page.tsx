@@ -268,7 +268,18 @@ export default function MealPlansGenerator() {
                   {generatedPlan.shoppingList.map((item, idx) => (
                     <li key={idx} className="text-gray-700">
                       ☐ {item}
-                    </li
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">Notes</h3>
+                <p className="text-gray-800 text-sm">{generatedPlan.notes}</p>
+              </div>
+
+              <div className="flex gap-4">
+                <button 
                   onClick={handleSave}
                   disabled={saving}
                   className="flex-1 bg-white border border-gray-300 text-gray-900 font-semibold py-2 rounded-lg hover:bg-gray-50 transition disabled:opacity-50"
@@ -288,18 +299,7 @@ export default function MealPlansGenerator() {
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
                   {successMessage}
                 </div>
-              )}className="font-semibold text-blue-900 mb-2">Notes</h3>
-                <p className="text-blue-800 text-sm">{generatedPlan.notes}</p>
-              </div>
-
-              <div className="flex gap-4">
-                <button className="flex-1 bg-white border border-gray-300 text-gray-900 font-semibold py-2 rounded-lg hover:bg-gray-50 transition">
-                  Save Plan
-                </button>
-                <button className="flex-1 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition">
-                  Send to Client
-                </button>
-              </div>
+              )}
             </div>
           )}
         </div>
