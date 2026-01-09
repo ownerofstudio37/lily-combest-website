@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     console.log("Request data:", { clientName: data.clientName, duration: data.duration, calorieTarget: data.calorieTarget })
 
     const prompt = generateMealPlanPrompt(data)
-    console.log("Calling Gemini API with gemini-1.5-flash...")
+    console.log("Calling Gemini API with gemini-2.0-flash...")
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
       method: "POST",
@@ -81,26 +81,32 @@ export async function POST(request: NextRequest) {
     
     if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
       generatedText = result.candidates[0].content.parts[0].text
+      console.log("Extracted text from candidates format")
     } else if (result.contents && result.contents[0] && result.contents[0].parts && result.contents[0].parts[0]) {
       generatedText = result.contents[0].parts[0].text
+      console.log("Extracted text from contents format")
     } else {
       if (result.error) {
         console.error("Gemini API error response:", result.error)
         throw new Error(`Gemini API error: ${result.error.message}`)
       }
-      console.error("Invalid response structure:", result)
-      throw new Error(`Invalid response structure: ${JSON.stringify(result)}`)
+      console.error("Invalid response structure:", JSON.stringify(result).substring(0, 300))
+      throw new Error(`Invalid response structure: ${JSON.stringify(result).substring(0, 200)}`)
     }
 
-    if (!generatedText.trim().startsWith('{')) {
-      console.error("Response does not start with JSON:", generatedText.substring(0, 200))
-      throw new Error("API returned non-JSON response. Response: " + generatedText.substring(0, 200))
+    console.log("Generated text preview:", generatedText?.substring(0, 200))
+
+    if (!generatedText || !generatedText.trim().startsWith('{')) {
+      console.error("Response does not start with JSON:", generatedText?.substring(0, 200))
+      throw new Error("API returned non-JSON response. Response: " + (generatedText?.substring(0, 200) || "null"))
     }
 
     let plan
     try {
       let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+      console.log("Cleaned text for parsing:", cleanedText.substring(0, 200))
       plan = JSON.parse(cleanedText)
+      console.log("Successfully parsed meal plan JSON")
     } catch (parseError: any) {
       console.error("JSON parse error:", parseError.message, "Text:", generatedText.substring(0, 300))
       throw new Error("Failed to parse API response as JSON: " + parseError.message)

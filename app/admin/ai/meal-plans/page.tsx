@@ -44,11 +44,16 @@ export default function MealPlansGenerator() {
         }),
       })
 
-      if (!response.ok) throw new Error("Failed to generate meal plan")
       const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate meal plan")
+      }
+      
       setGeneratedPlan(data.plan)
     } catch (err: any) {
-      setError(err.message)
+      console.error("Meal plan error:", err)
+      setError(err.message || "Failed to generate meal plan")
     } finally {
       setGenerating(false)
     }
