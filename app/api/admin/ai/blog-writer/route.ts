@@ -40,13 +40,21 @@ Do not include any markdown or code blocks. Return ONLY the JSON object.`
 
 export async function POST(request: NextRequest) {
   try {
+    if (!GEMINI_API_KEY) {
+      console.error("Gemini API key is not configured")
+      return NextResponse.json(
+        { error: "Gemini API key not configured. Please add NEXT_PUBLIC_GEMINI_API_KEY to environment variables." },
+        { status: 500 }
+      )
+    }
+
     const data = await request.json()
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": GEMINI_API_KEY || "",
+        "x-goog-api-key": GEMINI_API_KEY,
       },
       body: JSON.stringify({
         contents: [
@@ -62,7 +70,9 @@ export async function POST(request: NextRequest) {
     })
 
     if (!response.ok) {
-      throw new Error("Gemini API request failed")
+      const errorText = await response.text()
+      console.error("Gemini API error:", response.status, errorText)
+      throw new Error(`Gemini API error: ${response.status} - ${errorText}`)
     }
 
     const result = await response.json()
