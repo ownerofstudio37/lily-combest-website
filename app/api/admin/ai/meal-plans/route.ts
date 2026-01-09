@@ -96,19 +96,21 @@ export async function POST(request: NextRequest) {
 
     console.log("Generated text preview:", generatedText?.substring(0, 200))
 
-    if (!generatedText || !generatedText.trim().startsWith('{')) {
-      console.error("Response does not start with JSON:", generatedText?.substring(0, 200))
-      throw new Error("API returned non-JSON response. Response: " + (generatedText?.substring(0, 200) || "null"))
+    // Clean markdown formatting first
+    let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    
+    if (!cleanedText.startsWith('{')) {
+      console.error("Response does not start with JSON:", cleanedText.substring(0, 200))
+      throw new Error("API returned non-JSON response. Response: " + (cleanedText.substring(0, 200) || "null"))
     }
 
     let plan
     try {
-      let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
       console.log("Cleaned text for parsing:", cleanedText.substring(0, 200))
       plan = JSON.parse(cleanedText)
       console.log("Successfully parsed meal plan JSON")
     } catch (parseError: any) {
-      console.error("JSON parse error:", parseError.message, "Text:", generatedText.substring(0, 300))
+      console.error("JSON parse error:", parseError.message, "Text:", cleanedText.substring(0, 300))
       throw new Error("Failed to parse API response as JSON: " + parseError.message)
     }
 
