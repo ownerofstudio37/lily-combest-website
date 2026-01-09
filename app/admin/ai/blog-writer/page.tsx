@@ -59,11 +59,12 @@ export default function AiBlogWriter() {
         }),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error("Failed to generate blog post")
+        throw new Error(data.error || "Failed to generate blog post")
       }
 
-      const data = await response.json()
       setGeneratedContent(data.content)
     } catch (err: any) {
       setError(err.message || "Failed to generate content")
