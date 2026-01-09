@@ -74,11 +74,17 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await response.json()
-    console.log("Gemini response received, parsing...")
+    console.log("Gemini response received, structure:", JSON.stringify(result, null, 2))
     
     if (!result.contents || !result.contents[0] || !result.contents[0].parts || !result.contents[0].parts[0]) {
-      console.error("Unexpected Gemini response structure:", JSON.stringify(result))
-      throw new Error("Invalid response structure from Gemini API")
+      console.error("Unexpected Gemini response structure. Full response:", JSON.stringify(result, null, 2))
+      
+      // Check if it's an error response
+      if (result.error) {
+        throw new Error(`Gemini API error: ${result.error.message || JSON.stringify(result.error)}`)
+      }
+      
+      throw new Error(`Invalid response structure from Gemini API. Response: ${JSON.stringify(result)}`)
     }
 
     const generatedText = result.contents[0].parts[0].text
