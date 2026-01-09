@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -13,6 +14,22 @@ export async function POST(req: Request) {
 
     if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 })
+    }
+
+    // Save to CRM database
+    const { error: dbError } = await supabaseAdmin
+      .from('contacts')
+      .insert({
+        name,
+        email,
+        message,
+        source: 'contact_form',
+        created_at: new Date().toISOString(),
+      })
+
+    if (dbError) {
+      console.error('Database error:', dbError)
+      // Continue to send email even if DB save fails
     }
 
     // Send email via Resend
@@ -32,7 +49,7 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify({ success: true, data }), { status: 200 })
   } catch (error: any) {
-    console.error('Resend error:', error)
-    return new Response(JSON.stringify({ error: error.message || 'Failed to send email' }), { status: 500 })
+    console.error('Contact form error:', error)
+    return new Response(JSON.stringify({ error: error.message || 'Failed to process contact form' }), { status: 500 })
   }
 }
