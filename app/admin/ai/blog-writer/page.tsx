@@ -35,6 +35,7 @@ export default function AiBlogWriter() {
   const [generatedContent, setGeneratedContent] = useState<BlogContent | null>(null)
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState("")
+  const [saving, setSaving] = useState(false)
 
   const handleGenerate = async () => {
     if (!topic.trim() || !selectedKeyword.trim()) {
@@ -77,6 +78,71 @@ export default function AiBlogWriter() {
     navigator.clipboard.writeText(text)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const saveDraft = async () => {
+    if (!generatedContent) return
+    setSaving(true)
+    try {
+      const response = await fetch("/api/admin/blog/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: generatedContent.title,
+          slug: generatedContent.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+          excerpt: generatedContent.excerpt,
+          content: generatedContent.content,
+          featured_image: "",
+          meta_description: generatedContent.metaDescription,
+          keywords: generatedContent.keywords.join(", "),
+          published: false,
+        }),
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to save draft")
+      }
+      alert("Blog post saved as draft successfully!")
+    } catch (err: any) {
+      alert("Error saving draft: " + (err.message || "Unknown error"))
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const publishPost = async () => {
+    if (!generatedContent) return
+    setSaving(true)
+    try {
+      const response = await fetch("/api/admin/blog/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: generatedContent.title,
+          slug: generatedContent.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+          excerpt: generatedContent.excerpt,
+          content: generatedContent.content,
+          featured_image: "",
+          meta_description: generatedContent.metaDescription,
+          keywords: generatedContent.keywords.join(", "),
+          published: true,
+        }),
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to publish post")
+      }
+      alert("Blog post published successfully!")
+      setGeneratedContent(null)
+      setTopic("")
+      setSelectedKeyword("")
+    } catch (err: any) {
+      alert("Error publishing post: " + (err.message || "Unknown error"))
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -263,11 +329,19 @@ export default function AiBlogWriter() {
 
               {/* Action Buttons */}
               <div className="flex gap-4">
-                <button className="flex-1 bg-white border border-gray-300 text-gray-900 font-semibold py-2 rounded-lg hover:bg-gray-50 transition">
-                  Save as Draft
+                <button 
+                  onClick={saveDraft}
+                  disabled={saving}
+                  className="flex-1 bg-white border border-gray-300 text-gray-900 font-semibold py-2 rounded-lg hover:bg-gray-50 transition disabled:opacity-50"
+                >
+                  {saving ? "Saving..." : "Save as Draft"}
                 </button>
-                <button className="flex-1 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition">
-                  Publish Post
+                <button 
+                  onClick={publishPost}
+                  disabled={saving}
+                  className="flex-1 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold py-2 rounded-lg hover:shadow-lg transition disabled:opacity-50"
+                >
+                  {saving ? "Publishing..." : "Publish Post"}
                 </button>
               </div>
             </div>
