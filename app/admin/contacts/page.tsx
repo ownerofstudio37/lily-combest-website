@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Mail, Phone, Calendar } from "lucide-react"
 
 interface Contact {
-  id: number
+  id: string
   name: string
   email: string
   message: string
@@ -15,6 +15,7 @@ interface Contact {
 export default function Contacts() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetchContacts()
@@ -25,10 +26,16 @@ export default function Contacts() {
       const response = await fetch('/api/admin/contacts')
       if (response.ok) {
         const data = await response.json()
+        console.log('Fetched contacts:', data)
         setContacts(data)
+      } else {
+        const errorText = await response.text()
+        console.error('Error response:', errorText)
+        setError('Failed to load contacts')
       }
     } catch (error) {
       console.error('Error fetching contacts:', error)
+      setError('Failed to load contacts')
     } finally {
       setLoading(false)
     }

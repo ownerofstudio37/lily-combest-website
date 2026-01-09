@@ -30,8 +30,8 @@ export async function POST(req: Request) {
       // Continue to send email even if DB save fails
     }
 
-    // Send email via Resend
-    const data = await resend.emails.send({
+    // Send notification email to Lilly
+    await resend.emails.send({
       from: 'hello@hello.lillycombest.com',
       to: 'lilly@lillycombest.com',
       reply_to: email,
@@ -45,7 +45,25 @@ export async function POST(req: Request) {
       `,
     })
 
-    return new Response(JSON.stringify({ success: true, data }), { status: 200 })
+    // Send confirmation email to submitter
+    await resend.emails.send({
+      from: 'Lilly Combest Wellness <hello@hello.lillycombest.com>',
+      to: email,
+      subject: 'Thank you for reaching out!',
+      html: `
+        <h2>Thank you for contacting me, ${name}!</h2>
+        <p>I've received your message and will get back to you as soon as possible.</p>
+        <p>In the meantime, feel free to explore my <a href="https://lillycombest.com/blog">blog</a> for wellness tips and insights.</p>
+        <br>
+        <p><strong>Your message:</strong></p>
+        <p style="padding: 12px; background: #f5f5f5; border-left: 3px solid #e91e8c; margin: 16px 0;">${message.replace(/\n/g, '<br>')}</p>
+        <br>
+        <p>Warm regards,<br>Lilly Combest<br>Wellness Consultant</p>
+        <p style="font-size: 12px; color: #666;">📧 <a href="mailto:lilly@lillycombest.com">lilly@lillycombest.com</a><br>🌐 <a href="https://lillycombest.com">lillycombest.com</a></p>
+      `,
+    })
+
+    return new Response(JSON.stringify({ success: true }), { status: 200 })
   } catch (error: any) {
     console.error('Contact form error:', error)
     return new Response(JSON.stringify({ error: error.message || 'Failed to process contact form' }), { status: 500 })
