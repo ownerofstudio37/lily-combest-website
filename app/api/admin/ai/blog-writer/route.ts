@@ -40,15 +40,22 @@ Do not include any markdown or code blocks. Return ONLY the JSON object.`
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("Blog writer request received")
+    
     if (!GEMINI_API_KEY) {
       console.error("Gemini API key is not configured")
       return NextResponse.json(
-        { error: "Gemini API key not configured. Please add NEXT_PUBLIC_GEMINI_API_KEY to environment variables." },
+        { error: "Gemini API key not configured. Please add GEMINI_API_KEY to Netlify environment variables." },
         { status: 500 }
       )
     }
 
+    console.log("API key found, parsing request data")
     const data = await request.json()
+    console.log("Request data:", { topic: data.topic, keyword: data.keyword, tone: data.tone })
+
+    const prompt = generateSEOPrompt(data)
+    console.log("Calling Gemini API...")
 
     const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
       method: "POST",
@@ -61,7 +68,7 @@ export async function POST(request: NextRequest) {
           {
             parts: [
               {
-                text: generateSEOPrompt(data),
+                text: prompt,
               },
             ],
           },
@@ -69,21 +76,33 @@ export async function POST(request: NextRequest) {
       }),
     })
 
+    console.log("Gemini response status:", response.status)
+
     if (!response.ok) {
       const errorText = await response.text()
-      console.error("Gemini API error:", response.status, errorText)
+      console.error("Gemini API error response:", { status: response.status, body: errorText })
       throw new Error(`Gemini API error: ${response.status} - ${errorText}`)
     }
 
     const result = await response.json()
+    console.log("Gemini response received, parsing...")
+    
+    if (!result.contents || !result.contents[0] || !result.contents[0].parts || !result.contents[0].parts[0]) {
+      console.error("Unexpected Gemini response structure:", JSON.stringify(result))
+      throw new Error("Invalid response structure from Gemini API")
+    }
+
     const generatedText = result.contents[0].parts[0].text
+    console.log("Generated text received, parsing JSON...")
 
     // Parse the JSON response
     const content = JSON.parse(generatedText)
+    console.log("Blog post generated successfully")
 
     return NextResponse.json({ success: true, content })
   } catch (error: any) {
-    console.error("Blog generation error:", error)
+    console.error("Blog generation error:", error.message || error)
+    console.error("Error stack:", error.stack)
     return NextResponse.json(
       { error: error.message || "Failed to generate blog post" },
       { status: 500 }
