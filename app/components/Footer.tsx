@@ -17,9 +17,9 @@ export default function Footer(){
             <div>
               <h4 className="text-sm font-semibold mb-2">Services</h4>
               <ul className="text-sm text-gray-700 space-y-1">
-                <li><Link href="/services/one-on-one">One-on-one coaching</Link></li>
-                <li><Link href="/services/nutrition">Nutrition & meal planning</Link></li>
-                <li><Link href="/services/workshops">Workshops</Link></li>
+                <li><Link href="/services/wellness-coaching">One-on-one coaching</Link></li>
+                <li><Link href="/services/nutrition-meal-planning">Nutrition & meal planning</Link></li>
+                <li><Link href="/services/virtual-workshops">Workshops</Link></li>
               </ul>
             </div>
 
@@ -28,7 +28,6 @@ export default function Footer(){
               <ul className="text-sm text-gray-700 space-y-1">
                 <li><Link href="/about">About</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
-                <li><Link href="/privacy">Privacy</Link></li>
               </ul>
             </div>
           </div>
