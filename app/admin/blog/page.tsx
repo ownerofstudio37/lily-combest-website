@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useState } from 'react'
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 interface BlogPost {
@@ -18,32 +15,22 @@ interface BlogPost {
   updated_at: string
 }
 
-export default function BlogManagement() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default async function BlogManagement() {
+  let posts: BlogPost[] = []
+  let error: string | null = null
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const { data, error } = await supabaseAdmin
-          .from('blog_posts')
-          .select('*')
-          .order('published_at', { ascending: false })
+  try {
+    const { data, error: fetchError } = await supabaseAdmin
+      .from('blog_posts')
+      .select('*')
+      .order('published_at', { ascending: false })
 
-        if (error) throw error
-
-        setPosts(data || [])
-      } catch (err: any) {
-        console.error('Error loading posts:', err)
-        setError(err.message || 'Failed to load blog posts')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadPosts()
-  }, [])
+    if (fetchError) throw fetchError
+    posts = data || []
+  } catch (err: any) {
+    console.error('Error loading posts:', err)
+    error = err.message || 'Failed to load blog posts'
+  }
 
   const publishedPosts = posts.filter(p => p.published)
   const draftPosts = posts.filter(p => !p.published)
@@ -61,14 +48,8 @@ export default function BlogManagement() {
         </div>
       )}
 
-      {loading ? (
-        <div className="text-center py-12">
-          <p className="text-gray-500">Loading blog posts...</p>
-        </div>
-      ) : (
-        <>
-          {/* Published Posts */}
-          <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Published Posts */}
+      <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-lg font-semibold">Published Posts ({publishedPosts.length})</h2>
               <a href="/admin/ai/blog-writer" className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700">
@@ -129,8 +110,30 @@ export default function BlogManagement() {
               </div>
             </div>
           )}
-        </>
-      )}
-    </div>
-  )
-}
+        </div>
+
+        {/* Draft Posts */}
+        {draftPosts.length > 0 && (
+          <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="p-6 border-b border-gray-200">
+              <h2 className="text-lg font-semibold">Drafts ({draftPosts.length})</h2>
+            </div>
+            <div className="divide-y">
+              {draftPosts.map(post => (
+                <div key={post.id} className="p-6 hover:bg-gray-50">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900">{post.title}</h3>
+                      <p className="text-sm text-gray-600 mt-1">/blog/{post.slug}</p>
+                      <p className="text-xs text-gray-500 mt-2">Saved: {new Date(post.updated_at).toLocaleDateString()}</p>
+                    </div>
+                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Draft</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
