@@ -21,17 +21,27 @@ Create a comprehensive meal plan that:
 5. Provides a complete shopping list
 6. Includes helpful nutrition tips
 
-Format the response as JSON with this structure:
+CRITICAL: Return ONLY valid JSON. Use double quotes for all strings. Escape any quotes inside strings with backslash.
+
+Format the response as JSON with this EXACT structure:
 {
   "title": "Meal Plan for ${clientName}",
   "duration": "${duration} days",
   "calories": "${calorieTarget}",
-  "meals": ["Day 1 Breakfast: ...", "Day 1 Lunch: ..."],
-  "shoppingList": ["Item 1", "Item 2"],
-  "notes": "Helpful tips and prep advice"
+  "meals": [
+    "Day 1 Breakfast: Oatmeal with berries (350 cal)",
+    "Day 1 Lunch: Grilled chicken salad (450 cal)",
+    "Day 1 Dinner: Salmon with vegetables (600 cal)"
+  ],
+  "shoppingList": [
+    "Oats",
+    "Fresh berries",
+    "Chicken breast"
+  ],
+  "notes": "Meal prep tips and nutrition advice"
 }
 
-Return ONLY valid JSON, no other text.`
+Return ONLY the JSON object, no markdown formatting, no code blocks, no other text.`
 }
 
 export async function POST(request: NextRequest) {
@@ -96,8 +106,12 @@ export async function POST(request: NextRequest) {
 
     console.log("Generated text preview:", generatedText?.substring(0, 200))
 
-    // Clean markdown formatting first
-    let cleanedText = generatedText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    // Clean markdown formatting and common issues
+    let cleanedText = generatedText
+      .replace(/```json\n?/g, '')
+      .replace(/```\n?/g, '')
+      .replace(/\n/g, ' ')  // Replace newlines that might break JSON
+      .trim()
     
     if (!cleanedText.startsWith('{')) {
       console.error("Response does not start with JSON:", cleanedText.substring(0, 200))
@@ -106,12 +120,13 @@ export async function POST(request: NextRequest) {
 
     let plan
     try {
-      console.log("Cleaned text for parsing:", cleanedText.substring(0, 200))
+      console.log("Cleaned text for parsing:", cleanedText.substring(0, 300))
       plan = JSON.parse(cleanedText)
       console.log("Successfully parsed meal plan JSON")
     } catch (parseError: any) {
-      console.error("JSON parse error:", parseError.message, "Text:", cleanedText.substring(0, 300))
-      throw new Error("Failed to parse API response as JSON: " + parseError.message)
+      console.error("JSON parse error:", parseError.message)
+      console.error("Full cleaned text:", cleanedText)
+      throw new Error("Failed to parse API response as JSON: " + parseError.message + ". The AI generated invalid JSON format.")
     }
 
     console.log("Meal plan generated successfully")
