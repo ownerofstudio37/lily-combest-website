@@ -9,7 +9,7 @@ export async function GET() {
       .from('blog_posts')
       .select('slug, title, created_at, excerpt, featured_image, published_at')
       .eq('published', true)
-      .order('published_at', { ascending: false, nullsLast: true })
+      .order('published_at', { ascending: false, nullsFirst: false })
       .order('created_at', { ascending: false })
 
     if (error) {
