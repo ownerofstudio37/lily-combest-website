@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLocale } from './LocaleProvider'
+import { useBooking } from './Booking'
 import LanguageToggle from './LanguageToggle'
 import BrandLogo from './BrandLogo'
 
@@ -11,6 +12,7 @@ export default function Navigation(){
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { openBooking } = useBooking()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -46,7 +48,7 @@ export default function Navigation(){
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact" className="ml-2 inline-block bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md">{t('nav.book') || 'Book'}</Link>
+            <button onClick={openBooking} className="ml-2 inline-block bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md">{t('nav.book') || 'Book'}</button>
             {/* Language switcher */}
             <div className="ml-4">
               <LanguageToggle />
@@ -65,7 +67,7 @@ export default function Navigation(){
             {navItems.map(item => (
               <Link key={item.id} href={item.href} className="py-2 border-b text-slate-800" onClick={() => setIsOpen(false)}>{item.label}</Link>
             ))}
-            <Link href="/contact" className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">Book</Link>
+            <button onClick={() => { openBooking(); setIsOpen(false) }} className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">Book</button>
             <div className="pt-2">
               <LanguageToggle />
             </div>

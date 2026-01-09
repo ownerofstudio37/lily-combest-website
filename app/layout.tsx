@@ -4,6 +4,7 @@ import React from 'react'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import { LocaleProvider } from './components/LocaleProvider'
+import { BookingProvider } from './components/Booking'
 import { siteConfig } from '@/lib/siteConfig'
 
 export const metadata: Metadata = {
@@ -57,16 +58,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
       </head>
       <body>
-        {/* Locale provider wraps site to provide translations */}
-        <LocaleProvider>
-          <Navigation />
+        {/* Booking provider manages booking modal state globally */}
+        <BookingProvider>
+          {/* Locale provider wraps site to provide translations */}
+          <LocaleProvider>
+            <Navigation />
 
-          <main id="main" className="min-h-screen pt-16">
-            {children}
-          </main>
+            <main id="main" className="min-h-screen pt-16">
+              {children}
+            </main>
 
-          <Footer />
-        </LocaleProvider>
+            <Footer />
+          </LocaleProvider>
+        </BookingProvider>
       </body>
     </html>
   )
