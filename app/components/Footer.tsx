@@ -9,7 +9,7 @@ export default function Footer(){
         <div className="md:flex md:justify-between md:items-start">
           <div className="mb-6 md:mb-0">
             <h3 className="text-lg font-semibold">Lilly Combest</h3>
-            <p className="text-sm text-gray-700">Health & wellness coaching in Pinehurst, NC</p>
+            <p className="text-sm text-gray-700">Health & wellness coaching in Pinehurst, TX</p>
             <p className="text-sm text-gray-700 mt-3">Email: <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))]">lilly@lillycombest.com</a></p>
           </div>
 

@@ -3,7 +3,7 @@ export function generateLocalBusinessSchema(){
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'Lilly Combest',
-    'description': 'Health & wellness coaching in Pinehurst, NC — one-on-one coaching, nutrition planning, and workshops.',
+    'description': 'Health & wellness coaching in Pinehurst, TX — one-on-one coaching, nutrition planning, and workshops.',
     'url': process.env.NEXT_PUBLIC_SITE_URL || 'https://lilycombest.com',
     'telephone': '',
     'address': {
@@ -12,7 +12,7 @@ export function generateLocalBusinessSchema(){
       'addressRegion': 'NC',
       'addressCountry': 'US'
     },
-    'areaServed': 'Pinehurst, NC',
+    'areaServed': 'Pinehurst, TX',
     'sameAs': []
   }
 }

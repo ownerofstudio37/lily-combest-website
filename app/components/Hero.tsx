@@ -7,7 +7,7 @@ import { useLocale } from './LocaleProvider'
 export default function Hero() {
   const { t } = useLocale()
   const heroTitle = t('hero.title') || 'Houston Wellness Consultant'
-  const heroSubtitle = t('hero.subtitle') || 'Personalized health & wellness coaching in Pinehurst, NC — helping busy people build sustainable healthy habits.'
+  const heroSubtitle = t('hero.subtitle') || 'Personalized health & wellness coaching in Pinehurst, TX — helping busy people build sustainable healthy habits.'
   const images = [
     'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
     'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',

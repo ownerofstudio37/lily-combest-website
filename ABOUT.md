@@ -1,6 +1,6 @@
 # About Lilly Combest
 
-Lilly Combest is a health and wellness consultant based in Pinehurst, North Carolina. She specializes in personalized wellness coaching, nutrition guidance, and lifestyle support for busy individuals seeking sustainable health improvements.
+Lilly Combest is a health and wellness consultant based in Pinehurst, Texas. She specializes in personalized wellness coaching, nutrition guidance, and lifestyle support for busy individuals seeking sustainable health improvements.
 
 Services (examples):
 - One-on-one wellness coaching
@@ -8,6 +8,6 @@ Services (examples):
 - Stress reduction and sleep coaching
 - Virtual workshops and group programs
 
-Location: Pinehurst, NC (serving clients locally and virtually)
+Location: Pinehurst, TX (serving clients locally and virtually)
 
 Contact: update `CONTACT.md` and site settings with Lilly's preferred contact details.
