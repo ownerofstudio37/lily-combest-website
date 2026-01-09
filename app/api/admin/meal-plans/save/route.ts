@@ -9,11 +9,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
+    // Parse numbers from strings (e.g., "7 days" -> 7, "3700" -> 3700)
+    const parseDuration = (str: string): number => {
+      const match = str.match(/(\d+)/)
+      return match ? parseInt(match[1]) : 7
+    }
+    
+    const parseCalories = (str: string): number => {
+      const match = str.match(/(\d+)/)
+      return match ? parseInt(match[1]) : 2000
+    }
+
+    const durationInt = parseDuration(plan.duration)
+    const caloriesInt = parseCalories(plan.calories)
+
     console.log('Saving meal plan:', {
       clientName,
       title: plan.title,
-      duration: typeof plan.duration,
-      calories: typeof plan.calories,
+      duration: durationInt,
+      calories: caloriesInt,
     })
 
     // Ensure meals and shoppingList are properly formatted as JSON strings
@@ -25,8 +39,8 @@ export async function POST(request: NextRequest) {
       .insert({
         client_name: clientName,
         title: plan.title,
-        duration: String(plan.duration),
-        calories: String(plan.calories),
+        duration: durationInt,
+        calories: caloriesInt,
         meals: mealsParsed,
         shopping_list: shoppingListParsed,
         notes: plan.notes || '',
