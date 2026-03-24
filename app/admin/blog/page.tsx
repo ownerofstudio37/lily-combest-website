@@ -1,5 +1,7 @@
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
+export const dynamic = 'force-dynamic'
+
 interface BlogPost {
   id: string
   title: string
