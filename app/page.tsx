@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from './components/Hero'
 import Services from './components/Services'
+import Image from 'next/image'
 import { CheckCircle, Heart, Clock, Target, Star } from 'lucide-react'
 
 export default function HomePage() {
@@ -8,6 +9,57 @@ export default function HomePage() {
     <div className="container mx-auto px-4">
       <Hero />
       <Services />
+
+      {/* Wellness Stock Photo Module */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-slate-900">Wellness Lifestyle Inspiration</h2>
+            <p className="mt-2 text-gray-600">A quick look at the wellness pillars we focus on together.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                src: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600',
+                title: 'Nutrition Focus',
+                caption: 'Whole-food meal prep strategies that fit busy schedules.',
+              },
+              {
+                src: 'https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1600',
+                title: 'Movement & Fitness',
+                caption: 'Simple, sustainable movement plans for real life.',
+              },
+              {
+                src: 'https://images.pexels.com/photos/4498151/pexels-photo-4498151.jpeg?auto=compress&cs=tinysrgb&w=1600',
+                title: 'Mindset & Energy',
+                caption: 'Daily routines designed to improve energy and consistency.',
+              },
+              {
+                src: 'https://images.pexels.com/photos/3759657/pexels-photo-3759657.jpeg?auto=compress&cs=tinysrgb&w=1600',
+                title: 'Stress & Recovery',
+                caption: 'Wellness habits for better stress resilience and recovery.',
+              },
+            ].map((photo) => (
+              <article key={photo.title} className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                <div className="h-48 overflow-hidden">
+                  <Image
+                    src={photo.src}
+                    alt={photo.title}
+                    width={700}
+                    height={500}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-slate-900">{photo.title}</h3>
+                  <p className="mt-1 text-sm text-gray-600">{photo.caption}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Why Choose Section */}
       <section className="py-16 bg-gradient-to-br from-pink-50 to-yellow-50">

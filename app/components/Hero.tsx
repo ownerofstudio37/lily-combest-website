@@ -9,11 +9,11 @@ export default function Hero() {
   const heroTitle = t('hero.title') || 'Houston Wellness Consultant'
   const heroSubtitle = t('hero.subtitle') || 'Personalized health & wellness coaching in Pinehurst, TX — helping busy people build sustainable healthy habits.'
   const images = [
-    'https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600',
     'https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
-    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg'
+    'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/4473867/pexels-photo-4473867.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/4498151/pexels-photo-4498151.jpeg?auto=compress&cs=tinysrgb&w=1600'
   ]
 
   const [idx, setIdx] = React.useState(0)
