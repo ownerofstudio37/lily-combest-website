@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export async function POST(request: NextRequest) {
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const { clientName, plan } = await request.json()
 

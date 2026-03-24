@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 
@@ -28,6 +29,10 @@ RESPOND WITH ONLY VALID JSON - NO OTHER TEXT:
 }
 
 export async function POST(request: NextRequest) {
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     console.log("Blog writer request received")
     

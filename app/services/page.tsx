@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLocale } from '../components/LocaleProvider'
 import { useBooking } from '../components/Booking'
 import Image from 'next/image'
+import FaqSchema from '../components/FaqSchema'
 
 export default function Services() {
   const { t } = useLocale()
@@ -35,6 +36,25 @@ export default function Services() {
       href: '/services/virtual-workshops',
       image: 'https://images.pexels.com/photos/1181408/pexels-photo-1181408.jpeg?auto=compress&cs=tinysrgb&w=1600',
     }
+  ]
+
+  const faqItems = [
+    {
+      question: 'How do I get started with wellness coaching?',
+      answer: 'Start with a free consultation call. Lilly reviews your goals, current routine, and challenges, then recommends the best coaching plan for you.',
+    },
+    {
+      question: 'Do you offer virtual sessions?',
+      answer: 'Yes. Coaching and wellness planning can be done virtually, so clients in Pinehurst and nearby cities can get support from anywhere.',
+    },
+    {
+      question: 'Are meal plans customized?',
+      answer: 'Yes. Every meal plan is personalized to your lifestyle, preferences, and goals. The focus is sustainable habits, not restrictive dieting.',
+    },
+    {
+      question: 'Which areas do you serve?',
+      answer: 'Lilly serves Pinehurst, The Woodlands, Spring, Magnolia, and the Greater Houston area, plus virtual clients across Texas.',
+    },
   ]
 
   return (
@@ -70,6 +90,20 @@ export default function Services() {
           {t('section.book') || 'Book a free consult'}
         </button>
       </div>
+
+      <section className="mt-12">
+        <h2 className="text-2xl font-bold mb-4 text-slate-900">Frequently Asked Questions</h2>
+        <div className="space-y-3">
+          {faqItems.map((item) => (
+            <details key={item.question} className="rounded-lg border border-slate-200 bg-white p-4">
+              <summary className="cursor-pointer font-semibold text-slate-900">{item.question}</summary>
+              <p className="mt-2 text-gray-700">{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <FaqSchema items={faqItems} />
     </div>
   )
 }

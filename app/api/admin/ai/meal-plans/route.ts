@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 
@@ -45,6 +46,10 @@ Return ONLY the JSON object, no markdown formatting, no code blocks, no other te
 }
 
 export async function POST(request: NextRequest) {
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     console.log("Meal plan generation request received")
     

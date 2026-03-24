@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from 'resend'
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const { clientName, clientEmail, plan } = await request.json()
 

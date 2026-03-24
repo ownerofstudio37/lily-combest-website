@@ -24,14 +24,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     try {
       const response = await fetch("/api/admin/auth/check")
       if (!response.ok) {
-        router.push("/login")
+        router.push("/login?next=/admin")
         return
       }
       const data = await response.json()
       setUser(data.user)
       setIsAuthenticated(true)
     } catch (error) {
-      router.push("/login")
+      router.push("/login?next=/admin")
     } finally {
       setLoading(false)
     }

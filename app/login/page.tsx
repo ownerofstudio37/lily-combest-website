@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
 
 export default function AdminLogin() {
@@ -10,6 +10,7 @@ export default function AdminLogin() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,7 +30,8 @@ export default function AdminLogin() {
         return
       }
 
-      router.push("/admin")
+      const nextPath = searchParams.get('next') || '/admin'
+      router.push(nextPath)
     } catch (error) {
       setError("An error occurred. Please try again.")
       console.error("Login error:", error)

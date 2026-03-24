@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export async function GET(request: NextRequest) {
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     // Get total contacts count
     const { count: totalContacts } = await supabaseAdmin
