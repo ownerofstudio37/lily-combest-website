@@ -2,8 +2,8 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
 
 export default function AdminLogin() {
@@ -11,8 +11,16 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [nextPath, setNextPath] = useState('/admin')
   const router = useRouter()
-  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const qp = new URLSearchParams(window.location.search)
+    const raw = qp.get('next')
+    // Prevent open redirects; allow only internal absolute paths
+    if (raw && raw.startsWith('/')) setNextPath(raw)
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,7 +40,6 @@ export default function AdminLogin() {
         return
       }
 
-      const nextPath = searchParams.get('next') || '/admin'
       router.push(nextPath)
     } catch (error) {
       setError("An error occurred. Please try again.")
