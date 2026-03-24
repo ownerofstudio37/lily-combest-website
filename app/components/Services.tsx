@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { useLocale } from './LocaleProvider' 
+import { HeartPulse, Salad, MoonStar, Users } from 'lucide-react'
 
 export default function Services(){
   const { t } = useLocale()
@@ -14,6 +15,29 @@ export default function Services(){
     'Virtual Workshops'
   ]
 
+  const cards = [
+    {
+      title: list[0] || 'One-on-one Wellness Coaching',
+      description: 'Custom support to improve daily routines, energy, and healthy consistency.',
+      icon: HeartPulse,
+    },
+    {
+      title: list[1] || 'Nutrition & Meal Planning',
+      description: 'Simple, realistic meal strategies that fit your schedule and goals.',
+      icon: Salad,
+    },
+    {
+      title: list[2] || 'Stress & Sleep Coaching',
+      description: 'Practical systems to reduce overwhelm and improve restorative sleep.',
+      icon: MoonStar,
+    },
+    {
+      title: list[3] || 'Virtual Workshops',
+      description: 'Interactive sessions for teams or groups focused on sustainable wellness.',
+      icon: Users,
+    },
+  ]
+
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto">
@@ -23,12 +47,18 @@ export default function Services(){
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {list.map((s: string) => (
-            <div key={s} className="p-6 border rounded-lg shadow-sm bg-white">
-              <h3 className="font-semibold mb-2">{s}</h3>
-              <p className="text-sm text-gray-700">&nbsp;</p>
+          {cards.map((card) => {
+            const Icon = card.icon
+            return (
+            <div key={card.title} className="p-6 border rounded-xl shadow-sm bg-white hover:shadow-md transition">
+              <div className="mb-4 inline-flex rounded-lg bg-pink-100 p-2 text-pink-700">
+                <Icon size={20} />
+              </div>
+              <h3 className="font-semibold mb-2 text-slate-900">{card.title}</h3>
+              <p className="text-sm text-gray-700">{card.description}</p>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

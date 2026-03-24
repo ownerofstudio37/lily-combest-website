@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: `${siteConfig.name} — Wellness Coach`,
   description: siteConfig.description,
   generator: 'Next.js',
-  keywords: ['wellness', 'coaching', 'nutrition', 'sleep', 'health', 'Pinehurst', 'NC'],
+  keywords: ['wellness coaching', 'nutrition coaching', 'health consultant', 'sleep coaching', 'Pinehurst TX', 'The Woodlands', 'Houston wellness coach'],
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   publisher: siteConfig.author,

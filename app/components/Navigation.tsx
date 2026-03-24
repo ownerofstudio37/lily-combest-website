@@ -10,6 +10,7 @@ import BrandLogo from './BrandLogo'
 
 export default function Navigation(){
   const pathname = usePathname()
+  const isHome = pathname === '/'
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { openBooking } = useBooking()
@@ -32,30 +33,35 @@ export default function Navigation(){
   ]
 
   return (
-    <nav className={`fixed w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-md' : 'bg-transparent'}`} aria-label="Main navigation">
+    <nav className={`fixed w-full z-40 transition-all duration-300 ${scrolled || !isHome ? 'bg-white/95 backdrop-blur shadow-md' : 'bg-transparent'}`} aria-label="Main navigation">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
             <div className="flex items-center gap-3">
               <BrandLogo width={40} height={40} />
-              <span className={`font-semibold ${scrolled ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
+              <span className={`font-semibold ${scrolled || !isHome ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map(item => (
-              <Link key={item.id} href={item.href} className={`text-sm font-medium ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : scrolled ? 'text-slate-700' : 'text-white'}`}>
+              <Link key={item.id} href={item.href} className={`text-sm font-medium transition-colors ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : scrolled || !isHome ? 'text-slate-700 hover:text-slate-900' : 'text-white/90 hover:text-white'}`}>
                 {item.label}
               </Link>
             ))}
-            <button onClick={openBooking} className="ml-2 inline-block bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md">{t('nav.book') || 'Book'}</button>
+            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-pink-500 to-amber-400 text-white px-4 py-2 rounded-md shadow hover:shadow-md transition">{t('nav.book') || 'Book'}</button>
             {/* Language switcher */}
             <div className="ml-4">
               <LanguageToggle />
             </div>
           </div>
 
-          <button className="md:hidden p-2 rounded-md text-slate-700" onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="mobile-menu">
+          <button
+            className="md:hidden p-2 rounded-md text-slate-700"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} /></svg>
           </button>
         </div>

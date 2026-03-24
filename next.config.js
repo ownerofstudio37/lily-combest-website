@@ -7,12 +7,27 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  async redirects() {
+    return [
+      {
+        source: '/admin/login',
+        destination: '/login',
+        permanent: false,
+      },
+    ]
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
         port: '',
         pathname: '/**',
       }

@@ -24,14 +24,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     try {
       const response = await fetch("/api/admin/auth/check")
       if (!response.ok) {
-        router.push("/admin/login")
+        router.push("/login")
         return
       }
       const data = await response.json()
       setUser(data.user)
       setIsAuthenticated(true)
     } catch (error) {
-      router.push("/admin/login")
+      router.push("/login")
     } finally {
       setLoading(false)
     }
@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const handleLogout = async () => {
     try {
       await fetch("/api/admin/auth/logout", { method: "POST" })
-      router.push("/admin/login")
+      router.push("/login")
     } catch (error) {
       console.error("Logout failed:", error)
     }
