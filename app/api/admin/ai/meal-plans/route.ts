@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
+const GEMINI_MODEL = process.env.GOOGLE_GENAI_MODEL || process.env.GEMINI_MODEL || "gemini-2.5-flash"
 
 const generateMealPlanPrompt = (data: any) => {
   const { clientName, dietaryRestrictions, mealPreference, duration, calorieTarget } = data
@@ -66,9 +67,9 @@ export async function POST(request: NextRequest) {
     console.log("Request data:", { clientName: data.clientName, duration: data.duration, calorieTarget: data.calorieTarget })
 
     const prompt = generateMealPlanPrompt(data)
-    console.log("Calling Gemini API with gemini-2.0-flash...")
+    console.log(`Calling Gemini API with ${GEMINI_MODEL}...`)
 
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
