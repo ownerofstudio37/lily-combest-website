@@ -18,13 +18,21 @@ export default function BlogPage(){
   const { t } = useLocale()
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     async function loadPosts() {
-      const res = await fetch('/api/blog')
-      const data = await res.json()
-      setPosts(data)
-      setLoading(false)
+      try {
+        const res = await fetch('/api/blog')
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Failed to load blog posts')
+        setPosts(Array.isArray(data) ? data : [])
+      } catch (err: any) {
+        setPosts([])
+        setError(err?.message || 'Failed to load blog posts')
+      } finally {
+        setLoading(false)
+      }
     }
     loadPosts()
   }, [])
@@ -42,6 +50,18 @@ export default function BlogPage(){
     <div className="max-w-4xl mx-auto py-16 px-4">
       <h1 className="text-3xl font-bold mb-4">{t('blog.title') || 'Blog'}</h1>
       <p className="text-gray-700 mb-8">{t('blog.description') || 'Helpful tips and articles.'}</p>
+
+      {error && (
+        <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900">
+          {error}
+        </div>
+      )}
+
+      {!error && posts.length === 0 && (
+        <div className="mb-6 rounded-lg border border-slate-200 bg-white px-4 py-6 text-slate-600">
+          No blog posts available yet.
+        </div>
+      )}
 
       <div className="space-y-8">
         {posts.map((p) => (

@@ -1,5 +1,6 @@
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { NextResponse } from 'next/server'
+import { getAllPosts } from '@/lib/blog'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,7 +15,16 @@ export async function GET() {
 
     if (error) {
       console.error('Blog fetch error:', error)
-      return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 })
+      const fallbackPosts = await getAllPosts()
+      const formattedFallback = fallbackPosts.map(post => ({
+        slug: post.slug,
+        title: post.title,
+        date: post.date,
+        excerpt: post.excerpt || '',
+        featured_image: post.featured_image || '',
+        readingTime: post.readingTime || 2,
+      }))
+      return NextResponse.json(formattedFallback)
     }
 
     // Transform for blog page format
@@ -30,6 +40,15 @@ export async function GET() {
     return NextResponse.json(posts)
   } catch (error) {
     console.error('Blog API error:', error)
-    return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 })
+    const fallbackPosts = await getAllPosts()
+    const formattedFallback = fallbackPosts.map(post => ({
+      slug: post.slug,
+      title: post.title,
+      date: post.date,
+      excerpt: post.excerpt || '',
+      featured_image: post.featured_image || '',
+      readingTime: post.readingTime || 2,
+    }))
+    return NextResponse.json(formattedFallback)
   }
 }

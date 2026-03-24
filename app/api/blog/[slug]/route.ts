@@ -1,5 +1,6 @@
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { NextResponse } from 'next/server'
+import { getPost } from '@/lib/blog'
 
 export async function GET(req: Request, { params }: { params: { slug?: string } }) {
   try {
@@ -12,7 +13,18 @@ export async function GET(req: Request, { params }: { params: { slug?: string } 
         .single()
 
       if (error || !post) {
-        return NextResponse.json({ error: 'Not found' }, { status: 404 })
+        const fallback = getPost(params.slug)
+        if (!fallback) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+
+        return NextResponse.json({
+          slug: fallback.slug,
+          title: fallback.title,
+          date: fallback.date,
+          author: fallback.author,
+          featured_image: fallback.featured_image,
+          content: fallback.content,
+          readingTime: fallback.readingTime,
+        })
       }
 
       return NextResponse.json(post)
@@ -24,12 +36,26 @@ export async function GET(req: Request, { params }: { params: { slug?: string } 
         .order('published_at', { nullsFirst: false, ascending: false })
 
       if (error) {
-        return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 })
+        return NextResponse.json([], { status: 200 })
       }
 
       return NextResponse.json(posts || [])
     }
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 })
+    if (params.slug) {
+      const fallback = getPost(params.slug)
+      if (!fallback) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+      return NextResponse.json({
+        slug: fallback.slug,
+        title: fallback.title,
+        date: fallback.date,
+        author: fallback.author,
+        featured_image: fallback.featured_image,
+        content: fallback.content,
+        readingTime: fallback.readingTime,
+      })
+    }
+
+    return NextResponse.json([], { status: 200 })
   }
 }
