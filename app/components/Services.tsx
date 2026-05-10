@@ -51,7 +51,7 @@ export default function Services(){
             const Icon = card.icon
             return (
             <div key={card.title} className="p-6 organic-card hover:shadow-md transition">
-              <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.9)] p-2 text-[rgb(var(--color-primary-dark))]">
+              <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.78)] p-2 text-[rgb(var(--color-primary-dark))]">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold mb-2 text-slate-900">{card.title}</h3>

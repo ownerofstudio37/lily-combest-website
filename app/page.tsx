@@ -19,6 +19,10 @@ export default function HomePage() {
       <Hero />
       <Services />
 
+      <svg className="wave-divider" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,56 C200,96 360,18 560,42 C760,66 930,96 1140,64 C1260,46 1350,36 1440,56 L1440,100 L0,100 Z" fill="currentColor" />
+      </svg>
+
       {/* Holistic Lifestyle Gallery */}
       <section className="py-12">
         <div className="max-w-6xl mx-auto">
@@ -53,7 +57,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 md:px-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">A Premium, Real-Life Approach</h2>
-            <p className="text-[rgba(236,246,212,0.9)] max-w-2xl mx-auto">No extremes. No all-or-nothing plans. Just proven wellness strategy tailored to your season of life.</p>
+            <p className="text-[rgba(244,232,237,0.92)] max-w-2xl mx-auto">No extremes. No all-or-nothing plans. Just proven wellness strategy tailored to your season of life.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -62,16 +66,20 @@ export default function HomePage() {
               { title: 'Sustainable Results', text: 'We build habits that work long-term, not short-term crash cycles.' },
               { title: 'Support + Accountability', text: 'Consistent guidance so you stay clear, consistent, and supported.' },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl bg-[rgba(236,246,212,0.12)] p-6 border border-[rgba(236,246,212,0.18)]">
+              <div key={item.title} className="rounded-2xl bg-[rgba(244,232,237,0.12)] p-6 border border-[rgba(244,232,237,0.2)]">
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-[rgba(236,246,212,0.9)]">{item.text}</p>
+                <p className="text-[rgba(244,232,237,0.9)]">{item.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 rounded-[2rem] bg-[rgba(var(--color-secondary-light),0.52)]">
+      <svg className="wave-divider--cream" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,46 C160,86 360,10 560,36 C760,62 960,92 1160,68 C1280,54 1360,44 1440,56 L1440,100 L0,100 Z" fill="currentColor" />
+      </svg>
+
+      <section className="py-16 rounded-[2rem] section-petal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
@@ -106,7 +114,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 rounded-[2rem] bg-[rgba(255,255,255,0.65)]">
+      <svg className="wave-divider" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,58 C180,90 320,24 530,44 C760,66 930,98 1140,70 C1260,54 1340,42 1440,58 L1440,100 L0,100 Z" fill="currentColor" />
+      </svg>
+
+      <section className="py-16 rounded-[2rem] section-mint">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">What You'll Get</h2>
@@ -132,6 +144,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <svg className="wave-divider--cream" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,52 C190,88 360,26 550,42 C760,60 960,88 1160,70 C1280,58 1360,44 1440,56 L1440,100 L0,100 Z" fill="currentColor" />
+      </svg>
 
       <section className="py-16 rounded-[2rem] section-cream">
         <div className="max-w-6xl mx-auto">
@@ -171,7 +187,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 rounded-[2rem] bg-[rgba(var(--color-secondary-light),0.5)]">
+      <svg className="wave-divider" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,56 C170,90 340,16 560,38 C760,58 940,94 1140,74 C1260,62 1360,50 1440,58 L1440,100 L0,100 Z" fill="currentColor" />
+      </svg>
+
+      <section className="py-16 rounded-[2rem] bg-[rgba(var(--color-secondary-light),0.64)]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Serving Pinehurst, The Woodlands & Greater Houston</h2>
           <p className="text-gray-700 mb-6">I provide personalized wellness coaching to clients throughout the 77362 area and beyond. Whether you prefer in-person sessions or virtual coaching, I'm here to support your health journey.</p>
@@ -186,9 +206,9 @@ export default function HomePage() {
       <section className="py-16 rounded-[2rem] bg-[rgb(var(--color-primary-dark))] text-white">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
-          <p className="text-[rgba(238,246,216,0.9)] mb-8">Request a free introductory consult to talk about your wellness goals and how I can help you reach them. No pressure, no sales pitch — just an honest conversation about your health.</p>
+          <p className="text-[rgba(244,232,237,0.9)] mb-8">Request a free introductory consult to talk about your wellness goals and how I can help you reach them. No pressure, no sales pitch — just an honest conversation about your health.</p>
           <a href="/contact#consultation-request" className="inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white font-semibold px-8 py-4 rounded-xl text-lg hover:shadow-xl transition">Request Your Free Consult</a>
-          <p className="text-sm text-[rgba(238,246,216,0.86)] mt-4">📍 Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
+          <p className="text-sm text-[rgba(244,232,237,0.88)] mt-4">📍 Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
         </div>
       </section>
     </div>
