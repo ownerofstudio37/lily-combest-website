@@ -3,17 +3,41 @@
 import React, { useEffect, useState } from 'react'
 
 const LOGO_KEY = 'brandLogo'
-const DEFAULT = '/logo.svg'
+const DEFAULT_MARK = '/logo.svg'
+const DEFAULT_WORDMARK = '/logo-wordmark.svg'
 
-export default function BrandLogo({ width = 40, height = 40 }: { width?: number; height?: number }){
-  const [src, setSrc] = useState<string>(DEFAULT)
+type LogoVariant = 'mark' | 'wordmark'
+
+export default function BrandLogo({
+  width = 40,
+  height = 40,
+  variant = 'mark',
+  className = '',
+}: {
+  width?: number
+  height?: number
+  variant?: LogoVariant
+  className?: string
+}){
+  const [src, setSrc] = useState<string>(variant === 'wordmark' ? DEFAULT_WORDMARK : DEFAULT_MARK)
 
   useEffect(() => {
+    if (variant === 'wordmark') {
+      setSrc(DEFAULT_WORDMARK)
+      return
+    }
     const stored = typeof window !== 'undefined' ? localStorage.getItem(LOGO_KEY) : null
     if (stored) setSrc(stored)
-  }, [])
+    else setSrc(DEFAULT_MARK)
+  }, [variant])
 
   return (
-    <img src={src} alt="Lilly Combest logo" width={width} height={height} className="w-10 h-10 object-contain" />
+    <img
+      src={src}
+      alt={variant === 'wordmark' ? 'Lilly Combest wordmark' : 'Lilly Combest logo'}
+      width={width}
+      height={height}
+      className={`object-contain ${className}`.trim()}
+    />
   )
 }

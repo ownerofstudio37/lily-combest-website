@@ -1,5 +1,14 @@
-<svg width="500" height="80" viewBox="0 0 500 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="logoWordmarkTitle" role="img">
+<svg width="620" height="120" viewBox="0 0 620 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="logoWordmarkTitle" role="img">
   <title id="logoWordmarkTitle">Lilly Combest wordmark</title>
-  <text x="0" y="58" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" font-size="42" font-weight="700" fill="rgb(236,72,153)">Lilly</text>
-  <text x="110" y="58" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" font-size="42" font-weight="400" fill="rgb(34,34,34)">Combest</text>
+
+  <g transform="translate(8,14)">
+    <rect width="92" height="92" rx="30" fill="#F3EDE0"/>
+    <rect x="1.5" y="1.5" width="89" height="89" rx="28.5" stroke="#4A5D3F" stroke-opacity="0.18" stroke-width="3"/>
+    <path d="M52 30C58 17 71 11 84 14C78 28 66 33 52 30Z" fill="#9DB75A"/>
+    <text x="24" y="61" font-family="'Cormorant Garamond', Georgia, serif" font-size="40" font-weight="700" fill="#2F3C29">L</text>
+    <text x="47" y="64" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial" font-size="22" font-weight="600" fill="#4A5D3F">C</text>
+  </g>
+
+  <text x="120" y="58" font-family="'Cormorant Garamond', Georgia, serif" font-size="54" font-weight="600" fill="#2F3C29">Lilly Combest</text>
+  <text x="122" y="86" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial" font-size="15" letter-spacing="1.6" fill="#7B8373">WELLNESS COACHING</text>
 </svg>

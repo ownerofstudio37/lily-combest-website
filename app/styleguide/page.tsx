@@ -5,10 +5,10 @@ import WaveDivider from '../components/WaveDivider'
 
 export default function Styleguide(){
   const options = [
-    { id: 'logo', src: '/logo.svg', name: 'Primary badge' },
-    { id: 'logo-badge', src: '/logo-badge.svg', name: 'Badge only' },
-    { id: 'logo-badge-word', src: '/logo-badge-word.svg', name: 'Badge + Word' },
-    { id: 'logo-wordmark', src: '/logo-wordmark.svg', name: 'Wordmark' },
+    { id: 'logo', src: '/logo.svg', name: 'Primary Mark (Rounded Square)' },
+    { id: 'logo-badge', src: '/logo-badge.svg', name: 'Circular Badge' },
+    { id: 'logo-badge-word', src: '/logo-badge-word.svg', name: 'Badge + Wordmark' },
+    { id: 'logo-wordmark', src: '/logo-wordmark.svg', name: 'Full Wordmark Lockup' },
   ]
 
   const setLogo = (src: string) => {

@@ -38,8 +38,11 @@ export default function Navigation(){
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
             <div className="flex items-center gap-3">
-              <BrandLogo width={40} height={40} />
-              <span className="font-semibold text-[rgb(var(--color-primary-dark))]">Lilly Combest</span>
+              <BrandLogo width={42} height={42} className="h-10 w-10" />
+              <div className="leading-tight">
+                <span className="block font-semibold text-[rgb(var(--color-primary-dark))]">Lilly Combest</span>
+                <span className="block text-[10px] uppercase tracking-[0.14em] text-[rgba(47,60,41,0.72)]">Wellness Coaching</span>
+              </div>
             </div>
           </Link>
 

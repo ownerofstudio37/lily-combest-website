@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import LocalBusinessSchema from './LocalBusinessSchema'
+import BrandLogo from './BrandLogo'
 
 export default function Footer(){
   return (
@@ -8,7 +9,13 @@ export default function Footer(){
       <div className="container mx-auto px-4 py-14">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <h3 className="text-xl font-semibold text-white">Lilly Combest Wellness</h3>
+            <div className="flex items-center gap-3">
+              <BrandLogo width={46} height={46} className="h-11 w-11" />
+              <div>
+                <h3 className="text-xl font-semibold text-white leading-tight">Lilly Combest</h3>
+                <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Wellness Coaching</p>
+              </div>
+            </div>
             <p className="mt-3 text-sm leading-6 text-slate-300">
               Personalized wellness coaching in Pinehurst, TX for nutrition, energy, stress support, and sustainable healthy habits.
             </p>
