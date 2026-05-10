@@ -17,13 +17,13 @@ export default function Styleguide(){
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-4">
+    <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
       <h1 className="text-3xl font-bold mb-6">Styleguide & Logo Variants</h1>
       <p className="mb-6 text-gray-700">Choose a logo variant to preview and set as the site logo (selection persists in your browser).</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {options.map(o => (
-          <div key={o.id} className="p-4 border rounded-lg flex items-center justify-between">
+          <div key={o.id} className="p-4 organic-card flex items-center justify-between">
             <div className="flex items-center gap-4">
               <img src={o.src} alt={o.name} width={96} height={96} className="w-24 h-24 object-contain" />
               <div>
@@ -32,7 +32,7 @@ export default function Styleguide(){
               </div>
             </div>
             <div>
-              <button className="bg-[rgb(var(--color-primary))] text-white px-4 py-2 rounded-md" onClick={() => setLogo(o.src)}>Use</button>
+              <button className="bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white px-4 py-2 rounded-md" onClick={() => setLogo(o.src)}>Use</button>
             </div>
           </div>
         ))}

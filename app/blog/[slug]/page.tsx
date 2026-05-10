@@ -33,7 +33,7 @@ export default function BlogPost({ params }: { params: { slug: string } }){
 
   if (loading) {
     return (
-      <div className="max-w-3xl mx-auto py-16 px-4">
+      <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
         <p>Loading...</p>
       </div>
     )
@@ -41,32 +41,32 @@ export default function BlogPost({ params }: { params: { slug: string } }){
 
   if (!post) {
     return (
-      <div className="max-w-3xl mx-auto py-16 px-4">
+      <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
         <p className="text-gray-700">Post not found</p>
       </div>
     )
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-16 px-4">
+    <div className="max-w-4xl mx-auto py-16 px-4 section-petal rounded-[2rem]">
       {post.featured_image && (
-        <div className="mb-8 rounded-lg overflow-hidden">
+        <div className="mb-8 rounded-2xl overflow-hidden organic-ring">
           <Image src={post.featured_image} alt={post.title} width={800} height={400} className="object-cover w-full h-96" />
         </div>
       )}
 
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <h1 className="text-4xl font-bold mb-4 text-slate-900">{post.title}</h1>
       <p className="text-gray-600 mb-8">
         By {post.author} • {new Date(post.date).toLocaleDateString()} • {post.readingTime} min read
       </p>
 
       <div 
-        className="prose prose-lg max-w-none mb-12 text-gray-700"
+        className="prose prose-lg max-w-none mb-12 text-gray-700 organic-card p-8"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
-      <div className="border-t pt-8">
-        <p className="text-sm text-gray-600">Have questions? <a href="/contact" className="text-[rgb(var(--color-primary))] font-semibold">Get in touch</a></p>
+      <div className="border-t border-[rgba(167,146,117,0.35)] pt-8">
+        <p className="text-sm text-gray-700">Have questions? <a href="/contact#consultation-request" className="text-[rgb(var(--color-primary))] font-semibold">Request a consultation</a></p>
       </div>
     </div>
   )

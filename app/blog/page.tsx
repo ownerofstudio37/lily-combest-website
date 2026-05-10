@@ -39,7 +39,7 @@ export default function BlogPage(){
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto py-16 px-4">
+      <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
         <h1 className="text-3xl font-bold mb-4">{t('blog.title') || 'Blog'}</h1>
         <p className="text-gray-700">Loading...</p>
       </div>
@@ -47,9 +47,22 @@ export default function BlogPage(){
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-4">
+    <div className="max-w-5xl mx-auto py-16 px-4 section-petal rounded-[2rem]">
       <h1 className="text-3xl font-bold mb-4">{t('blog.title') || 'Blog'}</h1>
       <p className="text-gray-700 mb-8">{t('blog.description') || 'Helpful tips and articles.'}</p>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        {[
+          'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
+          'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
+          'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
+          'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+        ].map((src, i) => (
+          <div key={i} className="rounded-2xl overflow-hidden organic-ring">
+            <Image src={src} alt={`Blog wellness mood image ${i + 1}`} width={500} height={400} className="h-24 md:h-32 w-full object-cover" />
+          </div>
+        ))}
+      </div>
 
       {error && (
         <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900">
@@ -58,14 +71,14 @@ export default function BlogPage(){
       )}
 
       {!error && posts.length === 0 && (
-        <div className="mb-6 rounded-lg border border-slate-200 bg-white px-4 py-6 text-slate-600">
+        <div className="mb-6 organic-card px-4 py-6 text-slate-600">
           No blog posts available yet.
         </div>
       )}
 
       <div className="space-y-8">
         {posts.map((p) => (
-          <article key={p.slug} className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+          <article key={p.slug} className="organic-card overflow-hidden hover:shadow-md transition-shadow">
             <div className="grid md:grid-cols-3 gap-4 md:gap-0">
               {p.featured_image && (
                 <div className="md:col-span-1 h-48 md:h-auto overflow-hidden">
