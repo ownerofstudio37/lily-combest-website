@@ -33,23 +33,23 @@ export default function Navigation(){
   ]
 
   return (
-    <nav className={`fixed w-full z-40 transition-all duration-300 ${scrolled || !isHome ? 'bg-white/95 backdrop-blur shadow-md' : 'bg-transparent'}`} aria-label="Main navigation">
+    <nav className={`fixed w-full z-40 transition-all duration-300 border-b border-[rgba(74,93,63,0.08)] ${scrolled || !isHome ? 'bg-[rgba(245,241,232,0.94)] backdrop-blur-md shadow-sm' : 'bg-[rgba(245,241,232,0.72)] backdrop-blur-md'}`} aria-label="Main navigation">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
             <div className="flex items-center gap-3">
               <BrandLogo width={40} height={40} />
-              <span className={`font-semibold ${scrolled || !isHome ? 'text-slate-900' : 'text-white'}`}>Lilly Combest</span>
+              <span className="font-semibold text-[rgb(var(--color-primary-dark))]">Lilly Combest</span>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map(item => (
-              <Link key={item.id} href={item.href} className={`text-sm font-medium transition-colors ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : scrolled || !isHome ? 'text-slate-700 hover:text-slate-900' : 'text-white/90 hover:text-white'}`}>
+              <Link key={item.id} href={item.href} className={`text-sm font-medium transition-colors ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : 'text-slate-700 hover:text-[rgb(var(--color-primary-dark))]'}`}>
                 {item.label}
               </Link>
             ))}
-            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white px-4 py-2 rounded-xl shadow hover:shadow-md transition">{t('nav.book') || 'Request Date'}</button>
+            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary-dark))] text-white px-4 py-2 rounded-xl shadow hover:shadow-md transition">{t('nav.book') || 'Request Date'}</button>
             {/* Language switcher */}
             <div className="ml-4">
               <LanguageToggle />
