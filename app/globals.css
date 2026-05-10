@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  /* Earthy cream + pastel petal palette */
-  --color-primary: 181, 125, 141; /* dusty rose */
-  --color-primary-light: 246, 230, 236; /* very light pink */
-  --color-primary-dark: 130, 86, 99;
+  /* Green Goddess inspired palette */
+  --color-primary: 74, 93, 63; /* sage green */
+  --color-primary-light: 227, 236, 201; /* soft lime */
+  --color-primary-dark: 47, 60, 41;
 
-  --color-secondary: 167, 146, 117; /* warm sand */
-  --color-secondary-light: 235, 224, 209;
-  --color-secondary-dark: 118, 99, 73;
+  --color-secondary: 180, 207, 102; /* chartreuse accent */
+  --color-secondary-light: 236, 246, 212;
+  --color-secondary-dark: 124, 146, 63;
 
-  --color-cream: 252, 246, 238;
-  --color-ink: 34, 30, 28;
+  --color-cream: 245, 241, 232;
+  --color-ink: 37, 42, 34;
 }
 
 @layer base {
@@ -30,34 +30,26 @@
 
 @layer components {
   .organic-card {
-    border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 24px rgba(49, 35, 40, 0.07);
+    border-radius: 1.25rem;
+    border: 1px solid rgba(74, 93, 63, 0.08);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 28px rgba(47, 60, 41, 0.09);
     backdrop-filter: blur(6px);
   }
 
   .section-cream {
-    background: linear-gradient(180deg, rgba(var(--color-cream), 1) 0%, rgba(255, 255, 255, 0.95) 100%);
+    background: linear-gradient(180deg, rgba(245, 241, 232, 1) 0%, rgba(240, 236, 224, 1) 100%);
   }
 
   .section-petal {
-    background: radial-gradient(circle at 10% 10%, rgba(var(--color-primary-light), 0.9), rgba(var(--color-cream), 0.8) 45%, rgba(255,255,255,0.95) 100%);
+    background: linear-gradient(180deg, rgba(237, 243, 223, 0.95) 0%, rgba(245, 241, 232, 0.96) 100%);
   }
 
   .organic-ring {
-    box-shadow: 0 0 0 1px rgba(181, 125, 141, 0.2);
+    box-shadow: 0 0 0 1px rgba(74, 93, 63, 0.18);
   }
 
   .organic-blob {
     border-radius: 55% 45% 60% 40% / 45% 60% 40% 55%;
-  }
-
-  .soft-wave-top {
-    clip-path: ellipse(120% 100% at 50% 0%);
-  }
-
-  .soft-wave-bottom {
-    clip-path: ellipse(120% 100% at 50% 100%);
   }
 }
