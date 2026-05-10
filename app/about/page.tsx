@@ -8,7 +8,7 @@ export default function About() {
   const { t } = useLocale()
   
   return (
-    <div className="max-w-5xl mx-auto py-16 px-4">
+    <div className="max-w-5xl mx-auto py-16 px-4 section-petal rounded-[2rem]">
       <h1 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">{t('about.title') || 'About Lilly'}</h1>
 
       <div className="grid md:grid-cols-2 gap-8 items-center mb-10">
@@ -18,18 +18,38 @@ export default function About() {
           <p className="text-gray-700 leading-relaxed">If you're looking for a local wellness coach in Texas who focuses on long-term progress, Lilly can guide you with accountability and support at each step.</p>
         </div>
 
-        <div className="rounded-2xl overflow-hidden shadow-lg ring-1 ring-slate-200">
-          <Image
-            src="https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            alt="Wellness coaching session focused on nutrition and healthy habits"
-            width={900}
-            height={1100}
-            className="h-full w-full object-cover"
-          />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="rounded-2xl overflow-hidden shadow-lg ring-1 ring-slate-200 col-span-2">
+            <Image
+              src="https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              alt="Wellness coaching session focused on nutrition and healthy habits"
+              width={900}
+              height={700}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden shadow-sm ring-1 ring-slate-200">
+            <Image
+              src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg"
+              alt="Lilly Combest coaching portrait"
+              width={500}
+              height={500}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden shadow-sm ring-1 ring-slate-200">
+            <Image
+              src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg"
+              alt="Fresh healthy ingredients"
+              width={500}
+              height={500}
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+      <div className="organic-card p-8">
         <h2 className="text-2xl font-bold mb-4 text-slate-900">What Makes Her Different</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-2">
           <li>Real-world strategies for busy lifestyles</li>

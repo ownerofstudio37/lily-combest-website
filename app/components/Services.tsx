@@ -39,7 +39,8 @@ export default function Services(){
   ]
 
   return (
-    <section className="py-16">
+    <section className="py-16 section-cream relative overflow-hidden">
+      <div className="absolute right-0 top-10 h-56 w-56 organic-blob bg-[rgba(181,125,141,0.14)] blur-2xl" />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-semibold">{title}</h2>
@@ -50,8 +51,8 @@ export default function Services(){
           {cards.map((card) => {
             const Icon = card.icon
             return (
-            <div key={card.title} className="p-6 border rounded-xl shadow-sm bg-white hover:shadow-md transition">
-              <div className="mb-4 inline-flex rounded-lg bg-pink-100 p-2 text-pink-700">
+            <div key={card.title} className="p-6 organic-card hover:shadow-md transition">
+              <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-primary-light),0.8)] p-2 text-[rgb(var(--color-primary-dark))]">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold mb-2 text-slate-900">{card.title}</h3>

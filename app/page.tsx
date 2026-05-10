@@ -5,43 +5,56 @@ import Image from 'next/image'
 import { CheckCircle, Heart, Clock, Target, Star } from 'lucide-react'
 
 export default function HomePage() {
+  const holisticGallery = [
+    {
+      src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg',
+      title: 'Personalized Coaching',
+      caption: 'Concierge wellness support designed around your real routine.',
+    },
+    {
+      src: 'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      title: 'Mindful Meditation',
+      caption: 'Nervous-system tools to help you reset and recover.',
+    },
+    {
+      src: 'https://images.pexels.com/photos/6693654/pexels-photo-6693654.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      title: 'Smart Supplement Support',
+      caption: 'Practical supplement guidance based on your goals.',
+    },
+    {
+      src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
+      title: 'Nourishing Meals',
+      caption: 'Balanced nutrition that feels elevated and sustainable.',
+    },
+    {
+      src: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      title: 'Yoga & Movement',
+      caption: 'Low-pressure movement that builds consistency.',
+    },
+    {
+      src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+      title: 'Restorative Recovery',
+      caption: 'Better sleep habits for stronger energy and focus.',
+    },
+  ]
+
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 section-cream">
       <Hero />
       <Services />
 
-      {/* Wellness Stock Photo Module */}
-      <section className="py-16">
+      {/* Holistic Lifestyle Gallery */}
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute -left-16 top-10 h-64 w-64 organic-blob bg-[rgba(181,125,141,0.14)] blur-3xl" />
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-slate-900">Wellness Lifestyle Inspiration</h2>
-            <p className="mt-2 text-gray-600">A quick look at the wellness pillars we focus on together.</p>
+            <h2 className="text-3xl font-bold text-slate-900">Holistic Lifestyle Inspiration</h2>
+            <p className="mt-2 text-gray-600">High-end wellness visuals inspired by your brand direction, with your Cloudinary photos woven throughout.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                src: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600',
-                title: 'Nutrition Focus',
-                caption: 'Whole-food meal prep strategies that fit busy schedules.',
-              },
-              {
-                src: 'https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1600',
-                title: 'Movement & Fitness',
-                caption: 'Simple, sustainable movement plans for real life.',
-              },
-              {
-                src: 'https://images.pexels.com/photos/4498151/pexels-photo-4498151.jpeg?auto=compress&cs=tinysrgb&w=1600',
-                title: 'Mindset & Energy',
-                caption: 'Daily routines designed to improve energy and consistency.',
-              },
-              {
-                src: 'https://images.pexels.com/photos/3759657/pexels-photo-3759657.jpeg?auto=compress&cs=tinysrgb&w=1600',
-                title: 'Stress & Recovery',
-                caption: 'Wellness habits for better stress resilience and recovery.',
-              },
-            ].map((photo) => (
-              <article key={photo.title} className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {holisticGallery.map((photo) => (
+              <article key={photo.title} className="organic-card overflow-hidden hover:shadow-md transition">
                 <div className="h-48 overflow-hidden">
                   <Image
                     src={photo.src}
@@ -62,7 +75,7 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-16 bg-gradient-to-br from-pink-50 to-yellow-50">
+      <section className="py-16 section-petal rounded-[2rem]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Why Work With Me?</h2>
@@ -71,19 +84,19 @@ export default function HomePage() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Heart className="text-pink-500 mb-4" size={40} />
+              <Heart className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Personalized Approach</h3>
               <p className="text-gray-600">No cookie-cutter plans. Every client gets a custom wellness strategy designed specifically for their lifestyle, goals, and challenges.</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Target className="text-pink-500 mb-4" size={40} />
+              <Target className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Results-Focused</h3>
               <p className="text-gray-600">We focus on sustainable habits that create lasting change — not quick fixes that fade away in a few weeks.</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Clock className="text-pink-500 mb-4" size={40} />
+              <Clock className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Ongoing Support</h3>
               <p className="text-gray-600">Get regular check-ins, accountability, and adjustments as your life changes. You're never doing this alone.</p>
             </div>
@@ -101,25 +114,25 @@ export default function HomePage() {
           
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <div className="w-16 h-16 bg-gradient-to-br from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
               <h3 className="font-semibold mb-2">Request a Free Consult</h3>
               <p className="text-sm text-gray-600">Send your preferred dates and goals, and Lilly will confirm the best consultation time.</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <div className="w-16 h-16 bg-gradient-to-br from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
               <h3 className="font-semibold mb-2">Create Your Plan</h3>
               <p className="text-sm text-gray-600">Together, we'll build a personalized wellness roadmap tailored to your unique needs.</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+              <div className="w-16 h-16 bg-gradient-to-br from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
               <h3 className="font-semibold mb-2">Take Action</h3>
               <p className="text-sm text-gray-600">Start implementing changes with ongoing guidance, support, and accountability.</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+              <div className="w-16 h-16 bg-gradient-to-br from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
               <h3 className="font-semibold mb-2">See Results</h3>
               <p className="text-sm text-gray-600">Track progress, celebrate wins, and adjust as needed to keep moving toward your goals.</p>
             </div>
@@ -195,7 +208,7 @@ export default function HomePage() {
       </section>
 
       {/* Local SEO Section */}
-      <section className="py-16 bg-gradient-to-br from-pink-50 to-yellow-50">
+      <section className="py-16 bg-[rgba(var(--color-primary-light),0.35)] rounded-[2rem]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Serving Pinehurst, The Woodlands & Greater Houston</h2>
           <p className="text-gray-700 mb-6">I provide personalized wellness coaching to clients throughout the 77362 area and beyond. Whether you prefer in-person sessions or virtual coaching, I'm here to support your health journey.</p>
@@ -212,7 +225,7 @@ export default function HomePage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
           <p className="text-gray-700 mb-8">Request a free introductory consult to talk about your wellness goals and how I can help you reach them. No pressure, no sales pitch — just an honest conversation about your health.</p>
-          <a href="/contact#consultation-request" className="inline-block bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:shadow-xl transition">Request Your Free Consult</a>
+          <a href="/contact#consultation-request" className="inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white font-semibold px-8 py-4 rounded-xl text-lg hover:shadow-xl transition">Request Your Free Consult</a>
           <p className="text-sm text-gray-500 mt-4">📍 Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
         </div>
       </section>

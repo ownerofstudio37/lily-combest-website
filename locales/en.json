@@ -5,17 +5,17 @@
     "testimonials": "Testimonials",
     "blog": "Blog",
     "contact": "Contact",
-    "book": "Book"
+    "book": "Request Date"
   },
   "hero": {
     "title": "Houston Wellness Consultant",
     "subtitle": "Discover holistic wellness and natural health strategies with Lilly Combest, your expert wellness consultant serving The Woodlands, Spring, and the greater North Houston area. Unlock your health's potential through personalized guidance.",
-    "cta": "Book Your Free Wellness Consultation"
+    "cta": "Request Your Free Wellness Consultation"
   },
   "section": {
     "ready_title": "Ready to get started?",
-    "ready_text": "Schedule a free introductory consult with Lilly to talk about your wellness goals and how she can help you reach them.",
-    "book": "Book a free consult"
+    "ready_text": "Request a free introductory consult with Lilly to talk about your wellness goals and how she can help you reach them.",
+    "book": "Request a free consult"
   },
   "about": {
     "title": "About Lilly",
@@ -23,9 +23,9 @@
   },
   "contact": {
     "title": "Contact",
-    "intro": "To schedule a free consultation with Lilly, email",
+    "intro": "To request a free consultation date with Lilly, email",
     "email": "lilly@lillycombest.com",
-    "cta": "Book a consult",
+    "cta": "Request a consult",
     "form": {
       "name": "Your name",
       "email": "Your email",

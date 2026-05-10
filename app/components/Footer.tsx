@@ -14,7 +14,7 @@ export default function Footer(){
             </p>
             <p className="mt-4 text-sm text-slate-300">
               Email:{' '}
-              <a href="mailto:lilly@lillycombest.com" className="text-pink-300 hover:text-pink-200 transition-colors">
+              <a href="mailto:lilly@lillycombest.com" className="text-rose-200 hover:text-rose-100 transition-colors">
                 lilly@lillycombest.com
               </a>
             </p>
@@ -37,7 +37,7 @@ export default function Footer(){
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
-              <li><Link href="/login" className="text-pink-300 hover:text-pink-200 transition-colors">Admin Login</Link></li>
+              <li><Link href="/login" className="text-rose-200 hover:text-rose-100 transition-colors">Admin Login</Link></li>
             </ul>
           </div>
         </div>

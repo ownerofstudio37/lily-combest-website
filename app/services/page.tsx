@@ -10,6 +10,12 @@ import FaqSchema from '../components/FaqSchema'
 export default function Services() {
   const { t } = useLocale()
   const { openBooking } = useBooking()
+  const featuredPhotos = [
+    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg',
+    'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+  ]
   
   const services = [
     {
@@ -58,13 +64,27 @@ export default function Services() {
   ]
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-4">
+    <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
       <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('services.title') || 'Services'}</h1>
       <p className="text-lg text-gray-700 mb-12">{t('services.desc') || 'Support that meets you where you are — clear, practical, and sustainable.'}</p>
 
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        {featuredPhotos.map((src, i) => (
+          <div key={i} className="rounded-2xl overflow-hidden organic-ring">
+            <Image
+              src={src}
+              alt={`Holistic coaching highlight ${i + 1}`}
+              width={500}
+              height={420}
+              className="h-28 md:h-36 w-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
       <div className="grid md:grid-cols-2 gap-6 mb-12">
         {services.map((service, idx) => (
-          <Link key={idx} href={service.href} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-[rgb(var(--color-primary))] transition block bg-white">
+          <Link key={idx} href={service.href} className="organic-card overflow-hidden hover:shadow-lg hover:border-[rgba(181,125,141,0.45)] transition block">
             <div className="h-52 overflow-hidden">
               <Image
                 src={service.image}
@@ -83,10 +103,10 @@ export default function Services() {
         ))}
       </div>
 
-      <div className="bg-gray-50 rounded-lg p-8 text-center">
+      <div className="bg-[rgba(var(--color-primary-light),0.45)] rounded-2xl p-8 text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
         <p className="text-gray-700 mb-6">Request a free 30-minute introductory call and Lilly will confirm a time that works for both of you.</p>
-        <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
+        <button onClick={openBooking} className="bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white px-8 py-3 rounded-xl font-medium hover:opacity-90 transition">
           {t('section.book') || 'Request a free consult'}
         </button>
       </div>

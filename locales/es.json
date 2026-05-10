@@ -5,17 +5,17 @@
     "testimonials": "Testimonios",
     "blog": "Blog",
     "contact": "Contacto",
-    "book": "Reserva"
+    "book": "Solicitar fecha"
   },
   "hero": {
     "title": "Consultora de Bienestar en Houston",
     "subtitle": "Descubre el bienestar holístico y las estrategias de salud natural con Lilly Combest, tu experta consultora de bienestar en The Woodlands, Spring y el área del norte de Houston. Desbloquea el potencial de tu salud a través de una guía personalizada.",
-    "cta": "Reserva tu Consulta de Bienestar Gratuita"
+    "cta": "Solicita tu Consulta de Bienestar Gratuita"
   },
   "section": {
     "ready_title": "¿Lista para comenzar?",
-    "ready_text": "Agenda una consulta introductoria gratuita con Lilly para hablar sobre tus objetivos de bienestar y cómo puede ayudarte.",
-    "book": "Reservar consulta gratuita"
+    "ready_text": "Solicita una consulta introductoria gratuita con Lilly para hablar sobre tus objetivos de bienestar y cómo puede ayudarte.",
+    "book": "Solicitar consulta gratuita"
   },
   "about": {
     "title": "Sobre Lilly",
@@ -23,9 +23,9 @@
   },
   "contact": {
     "title": "Contacto",
-    "intro": "Para programar una consulta gratuita con Lilly, envía un correo a",
+    "intro": "Para solicitar una fecha de consulta gratuita con Lilly, envía un correo a",
     "email": "lilly@lillycombest.com",
-    "cta": "Reservar consulta",
+    "cta": "Solicitar consulta",
     "form": {
       "name": "Tu nombre",
       "email": "Tu correo",

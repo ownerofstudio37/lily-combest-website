@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  /* Primary: Pink palette (replaces the previous green) */
-  --color-primary: 236, 72, 153; /* pink (fuchsia) */
-  --color-primary-light: 252, 165, 193;
-  --color-primary-dark: 180, 28, 94;
+  /* Earthy cream + pastel petal palette */
+  --color-primary: 181, 125, 141; /* dusty rose */
+  --color-primary-light: 246, 230, 236; /* very light pink */
+  --color-primary-dark: 130, 86, 99;
 
-  /* Secondary: Yellow/Amber accent */
-  --color-secondary: 245, 158, 11; /* amber/yellow */
-  --color-secondary-light: 250, 204, 21;
-  --color-secondary-dark: 184, 88, 8;
+  --color-secondary: 167, 146, 117; /* warm sand */
+  --color-secondary-light: 235, 224, 209;
+  --color-secondary-dark: 118, 99, 73;
+
+  --color-cream: 252, 246, 238;
+  --color-ink: 34, 30, 28;
 }
 
 @layer base {
@@ -21,6 +23,41 @@
   }
 
   body {
-    @apply bg-white text-slate-900;
+    background: rgb(var(--color-cream));
+    color: rgb(var(--color-ink));
+  }
+}
+
+@layer components {
+  .organic-card {
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 24px rgba(49, 35, 40, 0.07);
+    backdrop-filter: blur(6px);
+  }
+
+  .section-cream {
+    background: linear-gradient(180deg, rgba(var(--color-cream), 1) 0%, rgba(255, 255, 255, 0.95) 100%);
+  }
+
+  .section-petal {
+    background: radial-gradient(circle at 10% 10%, rgba(var(--color-primary-light), 0.9), rgba(var(--color-cream), 0.8) 45%, rgba(255,255,255,0.95) 100%);
+  }
+
+  .organic-ring {
+    box-shadow: 0 0 0 1px rgba(181, 125, 141, 0.2);
+  }
+
+  .organic-blob {
+    border-radius: 55% 45% 60% 40% / 45% 60% 40% 55%;
+  }
+
+  .soft-wave-top {
+    clip-path: ellipse(120% 100% at 50% 0%);
+  }
+
+  .soft-wave-bottom {
+    clip-path: ellipse(120% 100% at 50% 100%);
   }
 }

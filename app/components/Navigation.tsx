@@ -49,7 +49,7 @@ export default function Navigation(){
                 {item.label}
               </Link>
             ))}
-            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-pink-500 to-amber-400 text-white px-4 py-2 rounded-md shadow hover:shadow-md transition">{t('nav.book') || 'Book'}</button>
+            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white px-4 py-2 rounded-xl shadow hover:shadow-md transition">{t('nav.book') || 'Request Date'}</button>
             {/* Language switcher */}
             <div className="ml-4">
               <LanguageToggle />
@@ -73,7 +73,7 @@ export default function Navigation(){
             {navItems.map(item => (
               <Link key={item.id} href={item.href} className="py-2 border-b text-slate-800" onClick={() => setIsOpen(false)}>{item.label}</Link>
             ))}
-            <button onClick={() => { openBooking(); setIsOpen(false) }} className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">Book</button>
+            <button onClick={() => { openBooking(); setIsOpen(false) }} className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">{t('nav.book') || 'Request Date'}</button>
             <div className="pt-2">
               <LanguageToggle />
             </div>
