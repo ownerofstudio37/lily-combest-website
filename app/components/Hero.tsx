@@ -21,7 +21,7 @@ export default function Hero() {
   }, [images.length])
 
   return (
-    <section className="relative min-h-[78vh] overflow-hidden rounded-[2rem]">
+    <section className="relative min-h-[78vh] overflow-hidden">
       <Image
         src={images[idx]}
         alt="Holistic wellness hero"
