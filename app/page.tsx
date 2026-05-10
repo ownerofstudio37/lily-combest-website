@@ -83,19 +83,19 @@ export default function HomePage() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <Heart className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Personalized Approach</h3>
               <p className="text-gray-600">No cookie-cutter plans. Every client gets a custom wellness strategy designed specifically for their lifestyle, goals, and challenges.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <Target className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Results-Focused</h3>
               <p className="text-gray-600">We focus on sustainable habits that create lasting change — not quick fixes that fade away in a few weeks.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <Clock className="text-[rgb(var(--color-primary))] mb-4" size={40} />
               <h3 className="text-xl font-semibold mb-3">Ongoing Support</h3>
               <p className="text-gray-600">Get regular check-ins, accountability, and adjustments as your life changes. You're never doing this alone.</p>
@@ -105,7 +105,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-16">
+      <section className="py-16 section-cream rounded-[2rem]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
@@ -141,7 +141,7 @@ export default function HomePage() {
       </section>
 
       {/* What You'll Get */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 section-petal rounded-[2rem]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">What You'll Get</h2>
@@ -159,8 +159,8 @@ export default function HomePage() {
               'Progress tracking tools',
               'Adjustments as your needs change'
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 flex-shrink-0 mt-1" size={20} />
+              <div key={i} className="flex items-start gap-3 organic-card p-4">
+                <CheckCircle className="text-[rgb(var(--color-secondary))] flex-shrink-0 mt-1" size={20} />
                 <span className="text-gray-700">{item}</span>
               </div>
             ))}
@@ -169,7 +169,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16">
+      <section className="py-16 section-cream rounded-[2rem]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Client Success Stories</h2>
@@ -177,27 +177,27 @@ export default function HomePage() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <div className="flex mb-4">
-                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-yellow-400 fill-yellow-400" size={20} />)}
+                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-[rgb(var(--color-secondary))] fill-[rgb(var(--color-secondary))]" size={20} />)}
               </div>
               <p className="text-gray-700 mb-4">"Lilly helped me completely transform my relationship with food and exercise. I've lost 30 pounds and feel better than I have in years!"</p>
               <p className="font-semibold">— Sarah M.</p>
               <p className="text-sm text-gray-500">Pinehurst, TX</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <div className="flex mb-4">
-                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-yellow-400 fill-yellow-400" size={20} />)}
+                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-[rgb(var(--color-secondary))] fill-[rgb(var(--color-secondary))]" size={20} />)}
               </div>
               <p className="text-gray-700 mb-4">"As a busy mom, I thought I'd never have time for myself. Lilly showed me how to prioritize my health without sacrificing family time."</p>
               <p className="font-semibold">— Jennifer L.</p>
               <p className="text-sm text-gray-500">The Woodlands, TX</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="organic-card p-6">
               <div className="flex mb-4">
-                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-yellow-400 fill-yellow-400" size={20} />)}
+                {[1, 2, 3, 4, 5].map(n => <Star key={n} className="text-[rgb(var(--color-secondary))] fill-[rgb(var(--color-secondary))]" size={20} />)}
               </div>
               <p className="text-gray-700 mb-4">"Working with Lilly has been life-changing. My energy is up, my stress is down, and I finally feel like I'm in control of my health."</p>
               <p className="font-semibold">— Michael T.</p>
@@ -214,7 +214,7 @@ export default function HomePage() {
           <p className="text-gray-700 mb-6">I provide personalized wellness coaching to clients throughout the 77362 area and beyond. Whether you prefer in-person sessions or virtual coaching, I'm here to support your health journey.</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
             {['Pinehurst', 'The Woodlands', 'Tomball', 'Magnolia', 'Spring', 'Conroe', 'Houston'].map(city => (
-              <span key={city} className="bg-white px-4 py-2 rounded-full shadow-sm">{city}</span>
+              <span key={city} className="organic-card px-4 py-2 rounded-full">{city}</span>
             ))}
           </div>
         </div>

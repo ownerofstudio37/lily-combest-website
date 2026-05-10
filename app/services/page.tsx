@@ -115,7 +115,7 @@ export default function Services() {
         <h2 className="text-2xl font-bold mb-4 text-slate-900">Frequently Asked Questions</h2>
         <div className="space-y-3">
           {faqItems.map((item) => (
-            <details key={item.question} className="rounded-lg border border-slate-200 bg-white p-4">
+            <details key={item.question} className="organic-card p-4">
               <summary className="cursor-pointer font-semibold text-slate-900">{item.question}</summary>
               <p className="mt-2 text-gray-700">{item.answer}</p>
             </details>

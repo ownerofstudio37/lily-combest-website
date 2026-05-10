@@ -32,7 +32,7 @@ export default function Hero() {
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <p className="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[rgb(var(--color-primary-dark))] organic-ring">
+          <p className="inline-flex items-center rounded-full bg-[rgba(var(--color-primary-light),0.92)] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[rgb(var(--color-primary-dark))] organic-ring">
             Pinehurst, TX + Virtual Coaching
           </p>
           <h1 className="mt-4 text-4xl md:text-5xl font-bold leading-tight text-slate-900">{heroTitle}</h1>
@@ -40,7 +40,7 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a href="/contact#consultation-request" className="inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary))] text-white px-6 py-3 rounded-xl shadow hover:shadow-md transition">{t('hero.cta') || 'Request a Consultation Date'}</a>
-            <a href="/about" className="inline-block border border-[rgba(167,146,117,0.35)] bg-white px-6 py-3 rounded-xl text-slate-800 hover:bg-[rgba(255,255,255,0.92)] transition">{t('section.ready_title') || 'Learn More'}</a>
+            <a href="/about" className="inline-block border border-[rgba(167,146,117,0.35)] bg-[rgba(255,255,255,0.88)] px-6 py-3 rounded-xl text-slate-800 hover:bg-[rgba(255,255,255,0.96)] transition">{t('section.ready_title') || 'Learn More'}</a>
           </div>
 
           <div className="mt-8 grid grid-cols-3 gap-3 text-center">
@@ -82,7 +82,7 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="mt-10 h-10 w-full bg-white/70 soft-wave-top" />
+      <div className="mt-10 h-10 w-full bg-[rgba(var(--color-primary-light),0.55)] soft-wave-top" />
     </section>
   )
 }
