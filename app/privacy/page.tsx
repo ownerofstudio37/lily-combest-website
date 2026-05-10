@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import WaveDivider from '../components/WaveDivider'
 
 export const metadata = {
   title: 'Privacy Policy | Lilly Combest',
@@ -24,6 +25,8 @@ export default function PrivacyPage() {
             </div>
           ))}
         </div>
+
+        <WaveDivider tone="mint" />
         
         <div className="prose prose-lg max-w-none space-y-6 text-gray-700 organic-card p-8">
           <section>

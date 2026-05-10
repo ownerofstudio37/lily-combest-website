@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
+import WaveDivider from '../components/WaveDivider'
 
 export default function Contact(){
   const { t } = useLocale()
@@ -42,6 +43,8 @@ export default function Contact(){
         <p className="text-slate-800 font-medium">Prefer email?</p>
         <p className="text-gray-700 mt-1">Send your preferred dates and goals to <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))]">lilly@lillycombest.com</a>.</p>
       </div>
+
+      <WaveDivider tone="petal" />
 
       <div className="grid lg:grid-cols-5 gap-6 items-start">
         <form id="consultation-request" name="contact" method="POST" onSubmit={handleSubmit} className="lg:col-span-3 organic-card p-6">

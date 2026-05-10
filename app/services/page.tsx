@@ -6,6 +6,7 @@ import { useLocale } from '../components/LocaleProvider'
 import { useBooking } from '../components/Booking'
 import Image from 'next/image'
 import FaqSchema from '../components/FaqSchema'
+import WaveDivider from '../components/WaveDivider'
 
 export default function Services() {
   const { t } = useLocale()
@@ -82,6 +83,8 @@ export default function Services() {
         ))}
       </div>
 
+      <WaveDivider tone="mint" />
+
       <div className="grid md:grid-cols-2 gap-6 mb-12">
         {services.map((service, idx) => (
           <Link key={idx} href={service.href} className="organic-card overflow-hidden hover:shadow-lg hover:border-[rgba(181,125,141,0.45)] transition block">
@@ -103,6 +106,8 @@ export default function Services() {
         ))}
       </div>
 
+      <WaveDivider tone="petal" />
+
       <div className="bg-[rgba(var(--color-primary-light),0.45)] rounded-2xl p-8 text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
         <p className="text-gray-700 mb-6">Request a free 30-minute introductory call and Lilly will confirm a time that works for both of you.</p>
@@ -110,6 +115,8 @@ export default function Services() {
           {t('section.book') || 'Request a free consult'}
         </button>
       </div>
+
+      <WaveDivider tone="cream" />
 
       <section className="mt-12">
         <h2 className="text-2xl font-bold mb-4 text-slate-900">Frequently Asked Questions</h2>

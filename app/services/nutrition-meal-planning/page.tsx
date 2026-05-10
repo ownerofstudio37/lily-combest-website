@@ -4,6 +4,7 @@ import React from 'react'
 import { useBooking } from '../../components/Booking'
 import Link from 'next/link'
 import Image from 'next/image'
+import WaveDivider from '../../components/WaveDivider'
 
 export default function NutritionMealPlanning() {
   const { openBooking } = useBooking()
@@ -27,6 +28,8 @@ export default function NutritionMealPlanning() {
           </div>
         ))}
       </div>
+
+      <WaveDivider tone="petal" />
 
       <div className="prose max-w-none organic-card p-8">
         <h2 className="text-2xl font-bold mt-8 mb-4">What You Get</h2>

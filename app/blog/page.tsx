@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
+import WaveDivider from '../components/WaveDivider'
 
 interface BlogPost {
   slug: string
@@ -63,6 +64,8 @@ export default function BlogPage(){
           </div>
         ))}
       </div>
+
+      <WaveDivider tone="mint" />
 
       {error && (
         <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900">

@@ -3,6 +3,7 @@
 import React from 'react'
 import { useLocale } from '../components/LocaleProvider'
 import Image from 'next/image'
+import WaveDivider from '../components/WaveDivider'
 
 export default function About() {
   const { t } = useLocale()
@@ -48,6 +49,8 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      <WaveDivider tone="mint" />
 
       <div className="organic-card p-8">
         <h2 className="text-2xl font-bold mb-4 text-slate-900">What Makes Her Different</h2>

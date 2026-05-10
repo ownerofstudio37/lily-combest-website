@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useLocale } from '../../components/LocaleProvider'
+import WaveDivider from '../../components/WaveDivider'
 
 interface BlogPost {
   slug: string
@@ -59,6 +60,8 @@ export default function BlogPost({ params }: { params: { slug: string } }){
       <p className="text-gray-600 mb-8">
         By {post.author} • {new Date(post.date).toLocaleDateString()} • {post.readingTime} min read
       </p>
+
+      <WaveDivider tone="petal" />
 
       <div 
         className="prose prose-lg max-w-none mb-12 text-gray-700 organic-card p-8"

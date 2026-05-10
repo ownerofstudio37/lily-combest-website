@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import WaveDivider from '../components/WaveDivider'
 
 export default function Styleguide(){
   const options = [
@@ -20,6 +21,8 @@ export default function Styleguide(){
     <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
       <h1 className="text-3xl font-bold mb-6">Styleguide & Logo Variants</h1>
       <p className="mb-6 text-gray-700">Choose a logo variant to preview and set as the site logo (selection persists in your browser).</p>
+
+      <WaveDivider tone="cream" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {options.map(o => (
