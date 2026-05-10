@@ -26,7 +26,7 @@
 - Required for boot/runtime: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (missing values throw during import in `lib/supabaseAdmin.ts`).
 - Required for AI routes: `GEMINI_API_KEY`.
 - Required for email routes: `RESEND_API_KEY`.
-- Optional UX integration: `NEXT_PUBLIC_CALENDLY_URL` (controls Booking modal fallback behavior in `app/components/Booking.tsx`).
+- Consultation requests are handled via `/contact` form/email flow (`app/components/Booking.tsx` routes CTAs there).
 
 ## Code patterns to follow
 - Use `@/*` import alias from `tsconfig.json`.

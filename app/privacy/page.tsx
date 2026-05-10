@@ -46,7 +46,7 @@ export default function PrivacyPage() {
               We do not sell, trade, or rent users' personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners and service providers.
             </p>
             <p>
-              We may use third-party service providers to assist us in operating our website and conducting our business, including email services (Resend), booking services (Calendly), and hosting services (Netlify).
+              We may use third-party service providers to assist us in operating our website and conducting our business, including email services (Resend) and hosting services (Netlify).
             </p>
           </section>
 

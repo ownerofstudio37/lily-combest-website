@@ -102,8 +102,8 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="font-semibold mb-2">Book a Free Consult</h3>
-              <p className="text-sm text-gray-600">We'll talk about your goals, challenges, and what you're looking for in a wellness coach.</p>
+              <h3 className="font-semibold mb-2">Request a Free Consult</h3>
+              <p className="text-sm text-gray-600">Send your preferred dates and goals, and Lilly will confirm the best consultation time.</p>
             </div>
             
             <div className="text-center">
@@ -211,8 +211,8 @@ export default function HomePage() {
       <section className="py-16">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
-          <p className="text-gray-700 mb-8">Schedule a free introductory consult with me to talk about your wellness goals and how I can help you reach them. No pressure, no sales pitch — just an honest conversation about your health.</p>
-          <a href="/contact" className="inline-block bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:shadow-xl transition">Book Your Free Consult</a>
+          <p className="text-gray-700 mb-8">Request a free introductory consult to talk about your wellness goals and how I can help you reach them. No pressure, no sales pitch — just an honest conversation about your health.</p>
+          <a href="/contact#consultation-request" className="inline-block bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:shadow-xl transition">Request Your Free Consult</a>
           <p className="text-sm text-gray-500 mt-4">📍 Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
         </div>
       </section>

@@ -85,9 +85,9 @@ export default function Services() {
 
       <div className="bg-gray-50 rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
-        <p className="text-gray-700 mb-6">Schedule a free 30-minute introductory call to discuss your wellness goals and how Lilly can help.</p>
+        <p className="text-gray-700 mb-6">Request a free 30-minute introductory call and Lilly will confirm a time that works for both of you.</p>
         <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
-          {t('section.book') || 'Book a free consult'}
+          {t('section.book') || 'Request a free consult'}
         </button>
       </div>
 

@@ -39,7 +39,7 @@ export default function NutritionMealPlanning() {
           <h2 className="text-2xl font-bold mb-4">Ready to transform your nutrition?</h2>
           <p className="text-gray-700 mb-6">Let's talk about your goals and create a meal plan that actually works for you.</p>
           <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
-            Book Free Consultation
+            Request Free Consultation
           </button>
         </div>
       </div>

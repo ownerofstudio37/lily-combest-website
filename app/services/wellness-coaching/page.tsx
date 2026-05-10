@@ -29,7 +29,7 @@ export default function WellnessCoaching() {
 
         <h2 className="text-2xl font-bold mt-8 mb-4">How It Works</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-2 mb-8">
-          <li>Book a free introductory consultation to discuss your goals</li>
+          <li>Request a free introductory consultation to discuss your goals</li>
           <li>Lilly creates a personalized plan based on your needs and lifestyle</li>
           <li>Weekly check-ins to track progress, celebrate wins, and adjust as needed</li>
           <li>Ongoing support via email and messaging between sessions</li>
@@ -37,9 +37,9 @@ export default function WellnessCoaching() {
 
         <div className="bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to start your wellness journey?</h2>
-          <p className="text-gray-700 mb-6">Schedule a free 30-minute call to learn more and see if we're a good fit.</p>
+          <p className="text-gray-700 mb-6">Request a free 30-minute call to learn more and see if we're a good fit.</p>
           <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
-            Book Free Consultation
+            Request Free Consultation
           </button>
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function VirtualWorkshops() {
           <h2 className="text-2xl font-bold mb-4">Interested in a workshop?</h2>
           <p className="text-gray-700 mb-6">Let's discuss your group's needs and create a workshop that delivers real value.</p>
           <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
-            Schedule a Consultation
+            Request a Consultation
           </button>
         </div>
       </div>

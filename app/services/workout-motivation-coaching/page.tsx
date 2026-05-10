@@ -38,9 +38,9 @@ export default function WorkoutMotivationCoaching() {
 
         <div className="bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to get moving?</h2>
-          <p className="text-gray-700 mb-6">Schedule a free call to discuss your fitness goals and create a custom plan.</p>
+          <p className="text-gray-700 mb-6">Request a free call to discuss your fitness goals and create a custom plan.</p>
           <button onClick={openBooking} className="bg-[rgb(var(--color-primary))] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition">
-            Book Free Consultation
+            Request Free Consultation
           </button>
         </div>
       </div>

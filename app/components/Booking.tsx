@@ -1,20 +1,29 @@
 "use client"
 
-import React, { createContext, useState, useContext, ReactNode } from 'react'
+import React, { createContext, useContext, ReactNode } from 'react'
 
 interface BookingContextType {
-  isOpen: boolean
   openBooking: () => void
-  closeBooking: () => void
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined)
 
 export function BookingProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const openBooking = () => {
+    if (typeof window === 'undefined') return
+
+    const formAnchor = document.getElementById('consultation-request')
+    if (formAnchor) {
+      formAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.history.replaceState(null, '', '#consultation-request')
+      return
+    }
+
+    window.location.href = '/contact#consultation-request'
+  }
   
   return (
-    <BookingContext.Provider value={{ isOpen, openBooking: () => setIsOpen(true), closeBooking: () => setIsOpen(false) }}>
+    <BookingContext.Provider value={{ openBooking }}>
       {children}
       <BookingModal />
     </BookingContext.Provider>
@@ -28,37 +37,14 @@ export function useBooking() {
 }
 
 export function BookingModal() {
-  const { isOpen, closeBooking } = useBooking()
-  const CAL_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || ''
-
-  if (!isOpen || !CAL_URL) return null
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white rounded-lg w-full max-w-3xl overflow-hidden">
-        <div className="flex items-center justify-between p-3 border-b">
-          <div className="font-semibold">Schedule a consultation</div>
-          <button onClick={closeBooking} aria-label="Close" className="px-3 py-1">✕</button>
-        </div>
-        <div style={{height: '72vh'}}>
-          <iframe src={CAL_URL} title="Calendly" width="100%" height="100%" frameBorder={0} allowFullScreen />
-        </div>
-      </div>
-    </div>
-  )
+  // Calendly modal removed. Consultations are now requested through the contact form.
+  return null
 }
 
 export default function Booking(){
   const { openBooking } = useBooking()
-  const CAL_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || ''
-
-  if (!CAL_URL) {
-    return (
-      <a href={`mailto:lilly@lillycombest.com`} className="inline-block bg-[rgb(var(--color-primary))] text-white px-5 py-2 rounded-md">Book a free consult</a>
-    )
-  }
 
   return (
-    <button onClick={openBooking} className="inline-block bg-[rgb(var(--color-primary))] text-white px-5 py-2 rounded-md">Book a free consult</button>
+    <button onClick={openBooking} className="inline-block bg-[rgb(var(--color-primary))] text-white px-5 py-2 rounded-md">Request a consultation date</button>
   )
 }

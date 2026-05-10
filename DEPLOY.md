@@ -14,10 +14,12 @@ Welcome! This document walks you through final setup steps, DNS configuration, a
 - [ ] Add testimonials or case studies (optional — can add later)
 
 ### Integrations
-- [ ] **Booking**: Connect Calendly account
-  - Get your Calendly public scheduling URL (e.g., `https://calendly.com/lillycombest/30min`)
-  - In Netlify: Site settings > Build & deploy > Environment > add `NEXT_PUBLIC_CALENDLY_URL` with your Calendly link
-  - Redeploy site after adding env var
+
+- [ ] **Consultation Requests**: Confirm contact flow is active
+   - Verify `/contact` form submits successfully
+   - Confirm email notifications are received at `lilly@lillycombest.com`
+   - Ensure CTA buttons route to `/contact#consultation-request`
+
 - [ ] **Email**: Verify Resend domain
   - In Resend dashboard, add DNS records to verify `hello.lillycombest.com` (or your domain)
   - Once verified, contact form emails will send from your domain
@@ -29,7 +31,7 @@ Welcome! This document walks you through final setup steps, DNS configuration, a
 ### Technical Checks
 - [ ] Run local build: `npm run build` — ensure no errors
 - [ ] Test contact form submission (on deployed site once DNS is set)
-- [ ] Test booking button (click opens Calendly modal)
+- [ ] Test consult CTA buttons (click routes to consultation request form)
 - [ ] Test language toggle (EN/ES switch persists)
 - [ ] Check responsive layout on mobile (iPhone, Android)
 - [ ] Verify images load fast (Cloudinary transformations working)
@@ -102,7 +104,7 @@ Welcome! This document walks you through final setup steps, DNS configuration, a
 1. [ ] Site loads without errors
 2. [ ] All links work (navigation, CTAs, footer)
 3. [ ] Contact form sends successfully
-4. [ ] Booking button opens Calendly
+4. [ ] Consultation CTA routes to contact request form
 5. [ ] Mobile responsive (test on phone)
 6. [ ] Blog posts display correctly
 
@@ -193,10 +195,12 @@ git push  # Netlify auto-deploys
 - [ ] Check Resend Logs tab for errors
 - [ ] Try submitting form again (may be rate-limited)
 
-### Booking Button Not Working
-- [ ] `NEXT_PUBLIC_CALENDLY_URL` set in Netlify env vars?
-- [ ] Redeploy site after adding env var?
-- [ ] Calendly link formatted correctly?
+
+### Consultation CTA Not Working
+
+- [ ] CTA links point to `/contact#consultation-request`?
+- [ ] Contact page loads and shows the request form?
+- [ ] JavaScript errors in browser console?
 
 ### Images Not Loading
 - [ ] Cloudinary domain added to `next.config.js` remotePatterns? ✅ (Already done)

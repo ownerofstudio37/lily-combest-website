@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
       </head>
       <body>
-        {/* Booking provider manages booking modal state globally */}
+        {/* Booking provider routes CTA actions to contact request flow */}
         <BookingProvider>
           {/* Locale provider wraps site to provide translations */}
           <LocaleProvider>
