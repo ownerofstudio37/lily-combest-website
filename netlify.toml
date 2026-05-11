@@ -4,7 +4,7 @@
   # Cache buster: 2025-01-09
 
 [build.environment]
-  NEXT_PUBLIC_SITE_URL = "https://lilycombest.com"
+  NEXT_PUBLIC_SITE_URL = "https://lillycombest.com"
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "true"
   NODE_VERSION = "20"
 

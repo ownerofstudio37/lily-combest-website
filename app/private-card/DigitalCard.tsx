@@ -57,7 +57,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
             <div className="mt-6 space-y-2 text-gray-700">
               <p><span className="font-semibold">Email:</span> <a className="text-[rgb(var(--color-primary))]" href="mailto:lilly@lillycombest.com">lilly@lillycombest.com</a></p>
-              <p><span className="font-semibold">Site:</span> <a className="text-[rgb(var(--color-primary))]" href="https://lilycombest.com" target="_blank" rel="noreferrer noopener">lilycombest.com</a></p>
+              <p><span className="font-semibold">Site:</span> <a className="text-[rgb(var(--color-primary))]" href="https://lillycombest.com" target="_blank" rel="noreferrer noopener">lillycombest.com</a></p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">

@@ -13,4 +13,4 @@ Allow: /about/
 Allow: /services/
 
 # Sitemap
-Sitemap: https://lilycombest.com/sitemap.xml
+Sitemap: https://lillycombest.com/sitemap.xml

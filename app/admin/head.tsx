@@ -3,7 +3,7 @@ export default function Head() {
     <>
       <title>Admin Dashboard | Lilly Combest</title>
       <meta name="robots" content="noindex,nofollow" />
-      <link rel="canonical" href="https://lilycombest.com/admin" />
+      <link rel="canonical" href="https://lillycombest.com/admin" />
     </>
   )
 }
