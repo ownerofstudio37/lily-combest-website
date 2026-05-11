@@ -21,6 +21,22 @@ function Wave({ fill, flip }: { fill: string; flip?: boolean }) {
 export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
   const [showQr, setShowQr] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [saved, setSaved] = useState(false)
+
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'N:Combest;Lilly;;;',
+    'FN:Lilly Combest',
+    'ORG:Lilly Combest Wellness',
+    'TITLE:Wellness Coach',
+    'TEL;TYPE=CELL,VOICE,PREF:832-257-9197',
+    'EMAIL;TYPE=INTERNET,PREF:lilly@lillycombest.com',
+    'URL:https://lillycombest.com',
+    'ADR;TYPE=WORK:;;Pinehurst, TX;;;;USA',
+    'NOTE:Personalized wellness coaching in Pinehurst, TX and Greater Houston.',
+    'END:VCARD',
+  ].join('\n')
 
   const services = [
     {
@@ -52,6 +68,38 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
       setTimeout(() => setCopied(false), 1800)
     } catch {
       setCopied(false)
+    }
+  }
+
+  async function saveContact() {
+    try {
+      if (typeof window !== 'undefined' && 'File' in window && navigator.share && navigator.canShare) {
+        const file = new File([vcard], 'lilly-combest-contact.vcf', { type: 'text/vcard' })
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: 'Lilly Combest Contact',
+            text: 'Save Lilly Combest to your contacts.',
+          })
+          setSaved(true)
+          setTimeout(() => setSaved(false), 1800)
+          return
+        }
+      }
+
+      const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'lilly-combest-contact.vcf'
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(url)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 1800)
+    } catch {
+      setSaved(false)
     }
   }
 
@@ -122,18 +170,26 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
             </p>
 
             <div className="mt-6 space-y-2 text-gray-700 text-sm md:text-base">
+              <p><span className="font-semibold">Phone:</span> <a className="text-[rgb(var(--color-primary))]" href="tel:8322579197">832-257-9197</a></p>
               <p><span className="font-semibold">Email:</span> <a className="text-[rgb(var(--color-primary))]" href="mailto:lilly@lillycombest.com">lilly@lillycombest.com</a></p>
               <p><span className="font-semibold">Site:</span> <a className="text-[rgb(var(--color-primary))]" href="https://lillycombest.com" target="_blank" rel="noreferrer noopener">lillycombest.com</a></p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="/lilly-combest-contact.vcf"
-                download
+              <button
+                type="button"
+                onClick={saveContact}
                 className="inline-flex items-center gap-2 rounded-full bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))] px-5 py-3 font-semibold hover:brightness-110 transition"
               >
                 <UserRoundPlus size={18} />
-                Add to Contacts
+                {saved ? 'Contact Ready' : 'Save Contact'}
+              </button>
+
+              <a
+                href="tel:8322579197"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,93,63,0.25)] bg-white/70 text-[rgb(var(--color-primary-dark))] px-5 py-3 font-semibold hover:bg-white transition"
+              >
+                Call 832-257-9197
               </a>
 
               <button
@@ -158,7 +214,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
           <article className="organic-card p-6 md:p-8 bg-[linear-gradient(180deg,rgba(244,232,237,0.78)_0%,rgba(245,241,232,0.98)_100%)]">
             <h3 className="text-xl font-semibold text-[rgb(var(--color-ink))]">Scan to Open Card</h3>
-            <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly.</p>
+            <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly. On most phones, Save Contact will open a native share or import flow.</p>
 
             {showQr ? (
               <div className="mt-5 rounded-2xl bg-white p-4 border border-[rgba(74,93,63,0.12)] max-w-[340px]">
