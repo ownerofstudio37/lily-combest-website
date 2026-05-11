@@ -192,6 +192,13 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
                 Call 832-257-9197
               </a>
 
+              <a
+                href="sms:8322579197"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,93,63,0.25)] bg-white/70 text-[rgb(var(--color-primary-dark))] px-5 py-3 font-semibold hover:bg-white transition"
+              >
+                Text Lilly
+              </a>
+
               <button
                 type="button"
                 onClick={() => setShowQr((s) => !s)}
