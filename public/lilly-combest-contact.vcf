@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Combest;Lilly;;;
+FN:Lilly Combest
+ORG:Lilly Combest Wellness
+TITLE:Wellness Coach
+EMAIL;TYPE=INTERNET,PREF:lilly@lillycombest.com
+URL:https://lilycombest.com
+ADR;TYPE=WORK:;;Pinehurst, TX;;;;USA
+NOTE:Personalized wellness coaching in Pinehurst, TX and Greater Houston.
+END:VCARD
