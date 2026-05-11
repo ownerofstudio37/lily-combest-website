@@ -73,6 +73,16 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
   async function saveContact() {
     try {
+      const ua = typeof navigator !== 'undefined' ? navigator.userAgent : ''
+      const isAppleMobile = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && typeof document !== 'undefined' && 'ontouchend' in document)
+
+      if (isAppleMobile) {
+        window.location.href = '/lilly-combest-contact.vcf'
+        setSaved(true)
+        setTimeout(() => setSaved(false), 1800)
+        return
+      }
+
       if (typeof window !== 'undefined' && 'File' in window && navigator.share && navigator.canShare) {
         const file = new File([vcard], 'lilly-combest-contact.vcf', { type: 'text/vcard' })
         if (navigator.canShare({ files: [file] })) {
@@ -221,7 +231,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
           <article className="organic-card p-6 md:p-8 bg-[linear-gradient(180deg,rgba(244,232,237,0.78)_0%,rgba(245,241,232,0.98)_100%)]">
             <h3 className="text-xl font-semibold text-[rgb(var(--color-ink))]">Scan to Open Card</h3>
-            <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly. On most phones, Save Contact will open a native share or import flow.</p>
+            <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly. On Apple devices, Save Contact now opens the contact file directly for easier import.</p>
 
             {showQr ? (
               <div className="mt-5 rounded-2xl bg-white p-4 border border-[rgba(74,93,63,0.12)] max-w-[340px]">
