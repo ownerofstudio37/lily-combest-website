@@ -4,11 +4,12 @@ import React from 'react'
 import WaveDivider from '../components/WaveDivider'
 
 export default function Styleguide(){
+  const version = 'green-v2'
   const options = [
-    { id: 'logo', src: '/logo.svg', name: 'Primary Mark (Rounded Square)' },
-    { id: 'logo-badge', src: '/logo-badge.svg', name: 'Circular Badge' },
-    { id: 'logo-badge-word', src: '/logo-badge-word.svg', name: 'Badge + Wordmark' },
-    { id: 'logo-wordmark', src: '/logo-wordmark.svg', name: 'Full Wordmark Lockup' },
+    { id: 'logo', src: `/logo.svg?v=${version}`, name: 'Primary Mark (Rounded Square)' },
+    { id: 'logo-badge', src: `/logo-badge.svg?v=${version}`, name: 'Circular Badge' },
+    { id: 'logo-badge-word', src: `/logo-badge-word.svg?v=${version}`, name: 'Badge + Wordmark' },
+    { id: 'logo-wordmark', src: `/logo-wordmark.svg?v=${version}`, name: 'Full Wordmark Lockup' },
   ]
 
   const setLogo = (src: string) => {

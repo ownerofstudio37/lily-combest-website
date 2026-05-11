@@ -3,8 +3,25 @@
 import React, { useEffect, useState } from 'react'
 
 const LOGO_KEY = 'brandLogo'
-const DEFAULT_MARK = '/logo.svg'
-const DEFAULT_WORDMARK = '/logo-wordmark.svg'
+const LOGO_VERSION = 'green-v2'
+const DEFAULT_MARK = `/logo.svg?v=${LOGO_VERSION}`
+const DEFAULT_WORDMARK = `/logo-wordmark.svg?v=${LOGO_VERSION}`
+
+function normalizeLogoSrc(src: string | null, variant: LogoVariant): string {
+  if (variant === 'wordmark') return DEFAULT_WORDMARK
+  if (!src) return DEFAULT_MARK
+
+  const clean = src.split('?')[0]
+  const allowed = new Set([
+    '/logo.svg',
+    '/logo-badge.svg',
+    '/logo-badge-word.svg',
+    '/logo-wordmark.svg',
+  ])
+
+  if (!allowed.has(clean)) return DEFAULT_MARK
+  return `${clean}?v=${LOGO_VERSION}`
+}
 
 type LogoVariant = 'mark' | 'wordmark'
 
@@ -22,13 +39,13 @@ export default function BrandLogo({
   const [src, setSrc] = useState<string>(variant === 'wordmark' ? DEFAULT_WORDMARK : DEFAULT_MARK)
 
   useEffect(() => {
-    if (variant === 'wordmark') {
-      setSrc(DEFAULT_WORDMARK)
-      return
-    }
     const stored = typeof window !== 'undefined' ? localStorage.getItem(LOGO_KEY) : null
-    if (stored) setSrc(stored)
-    else setSrc(DEFAULT_MARK)
+    const normalized = normalizeLogoSrc(stored, variant)
+    setSrc(normalized)
+
+    if (typeof window !== 'undefined' && variant === 'mark') {
+      localStorage.setItem(LOGO_KEY, normalized)
+    }
   }, [variant])
 
   return (
