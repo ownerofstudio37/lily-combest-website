@@ -22,6 +22,11 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
   const [showQr, setShowQr] = useState(false)
   const [copied, setCopied] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [leadName, setLeadName] = useState('')
+  const [leadEmail, setLeadEmail] = useState('')
+  const [leadPhone, setLeadPhone] = useState('')
+  const [leadGoal, setLeadGoal] = useState('')
+  const [leadStatus, setLeadStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const vcard = [
     'BEGIN:VCARD',
@@ -110,6 +115,40 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
       setTimeout(() => setSaved(false), 1800)
     } catch {
       setSaved(false)
+    }
+  }
+
+  async function submitLead(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setLeadStatus('sending')
+
+    try {
+      const message = [
+        'Digital card lead submission',
+        leadPhone ? `Phone: ${leadPhone}` : 'Phone: not provided',
+        leadGoal ? `Goal: ${leadGoal}` : 'Goal: requested contact',
+      ].join('\n')
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: leadName,
+          email: leadEmail,
+          message,
+        }),
+      })
+
+      if (!res.ok) throw new Error('Lead form failed')
+
+      setLeadStatus('success')
+      setLeadName('')
+      setLeadEmail('')
+      setLeadPhone('')
+      setLeadGoal('')
+      setTimeout(() => setLeadStatus('idle'), 3000)
+    } catch {
+      setLeadStatus('error')
     }
   }
 
@@ -229,29 +268,80 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
             </div>
           </article>
 
-          <article className="organic-card p-6 md:p-8 bg-[linear-gradient(180deg,rgba(244,232,237,0.78)_0%,rgba(245,241,232,0.98)_100%)]">
-            <h3 className="text-xl font-semibold text-[rgb(var(--color-ink))]">Scan to Open Card</h3>
-            <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly. On Apple devices, Save Contact now opens the contact file directly for easier import.</p>
+          <div className="space-y-5">
+            <article className="organic-card p-6 md:p-8 bg-[linear-gradient(180deg,rgba(244,232,237,0.78)_0%,rgba(245,241,232,0.98)_100%)]">
+              <h3 className="text-xl font-semibold text-[rgb(var(--color-ink))]">Scan to Open Card</h3>
+              <p className="text-gray-600 mt-2 text-sm">Open this page on another phone instantly. On Apple devices, Save Contact now opens the contact file directly for easier import.</p>
 
-            {showQr ? (
-              <div className="mt-5 rounded-2xl bg-white p-4 border border-[rgba(74,93,63,0.12)] max-w-[340px]">
-                <Image
-                  src={qrSrc}
-                  alt="QR code linking to Lilly Combest digital card"
-                  width={320}
-                  height={320}
-                  className="w-full h-auto rounded-lg"
-                  unoptimized
+              {showQr ? (
+                <div className="mt-5 rounded-2xl bg-white p-4 border border-[rgba(74,93,63,0.12)] max-w-[340px]">
+                  <Image
+                    src={qrSrc}
+                    alt="QR code linking to Lilly Combest digital card"
+                    width={320}
+                    height={320}
+                    className="w-full h-auto rounded-lg"
+                    unoptimized
+                  />
+                </div>
+              ) : (
+                <div className="mt-5 rounded-2xl border border-dashed border-[rgba(74,93,63,0.28)] bg-white/60 p-8 text-center text-gray-600">
+                  Tap “Show QR” to display a scannable code.
+                </div>
+              )}
+
+              <p className="mt-5 text-xs text-gray-500 break-all">{cardUrl}</p>
+            </article>
+
+            <article className="organic-card p-5 md:p-6">
+              <p className="text-xs uppercase tracking-[0.16em] text-[rgba(47,60,41,0.56)] mb-2">Quick Inquiry</p>
+              <h3 className="text-lg font-semibold text-[rgb(var(--color-ink))]">Request a call back</h3>
+              <p className="mt-2 text-sm text-gray-600">Leave your info and Lilly can follow up personally.</p>
+
+              <form className="mt-4 space-y-3" onSubmit={submitLead}>
+                <input
+                  value={leadName}
+                  onChange={(e) => setLeadName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full rounded-xl border border-[rgba(74,93,63,0.18)] bg-white px-4 py-3 text-sm text-[rgb(var(--color-ink))] outline-none focus:border-[rgb(var(--color-primary))]"
+                  required
                 />
-              </div>
-            ) : (
-              <div className="mt-5 rounded-2xl border border-dashed border-[rgba(74,93,63,0.28)] bg-white/60 p-8 text-center text-gray-600">
-                Tap “Show QR” to display a scannable code.
-              </div>
-            )}
+                <input
+                  type="email"
+                  value={leadEmail}
+                  onChange={(e) => setLeadEmail(e.target.value)}
+                  placeholder="Email"
+                  className="w-full rounded-xl border border-[rgba(74,93,63,0.18)] bg-white px-4 py-3 text-sm text-[rgb(var(--color-ink))] outline-none focus:border-[rgb(var(--color-primary))]"
+                  required
+                />
+                <input
+                  type="tel"
+                  value={leadPhone}
+                  onChange={(e) => setLeadPhone(e.target.value)}
+                  placeholder="Phone"
+                  className="w-full rounded-xl border border-[rgba(74,93,63,0.18)] bg-white px-4 py-3 text-sm text-[rgb(var(--color-ink))] outline-none focus:border-[rgb(var(--color-primary))]"
+                />
+                <textarea
+                  value={leadGoal}
+                  onChange={(e) => setLeadGoal(e.target.value)}
+                  placeholder="What do you want help with?"
+                  rows={3}
+                  className="w-full rounded-xl border border-[rgba(74,93,63,0.18)] bg-white px-4 py-3 text-sm text-[rgb(var(--color-ink))] outline-none focus:border-[rgb(var(--color-primary))]"
+                />
 
-            <p className="mt-5 text-xs text-gray-500 break-all">{cardUrl}</p>
-          </article>
+                <button
+                  type="submit"
+                  disabled={leadStatus === 'sending'}
+                  className="w-full rounded-full bg-[rgb(var(--color-primary-dark))] px-5 py-3 text-sm font-semibold text-[rgb(var(--color-secondary-light))] transition hover:brightness-110 disabled:opacity-70"
+                >
+                  {leadStatus === 'sending' ? 'Sending…' : 'Send Request'}
+                </button>
+
+                {leadStatus === 'success' && <p className="text-sm text-green-700">Thanks — Lilly will be in touch soon.</p>}
+                {leadStatus === 'error' && <p className="text-sm text-red-600">Something went wrong. Try calling or texting instead.</p>}
+              </form>
+            </article>
+          </div>
         </div>
 
         <Wave fill="rgb(244,232,237)" flip />
