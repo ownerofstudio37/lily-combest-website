@@ -20,6 +20,8 @@ Last updated: 2026-07-27
 - [x] Refreshed service detail pages with a shared polished homepage-style template.
 - [x] Reduced service detail wave divider noise by replacing repeated dividers with clean visual bands.
 - [x] Improved English/Español toggle clarity, persistence, accessibility state, and document language updates.
+- [x] Replaced the one-on-one wellness coaching service card stock image with a cleaner coaching-session image.
+- [x] Polished About, Contact, Blog article, Privacy, Private Card, and Services hub pages toward the homepage/service-detail visual system.
 
 ## Critical / High Priority
 

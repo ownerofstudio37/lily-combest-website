@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useLocale } from '../../components/LocaleProvider'
-import WaveDivider from '../../components/WaveDivider'
 
 interface BlogPost {
   slug: string
@@ -16,7 +14,6 @@ interface BlogPost {
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }){
-  const { t } = useLocale()
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -49,28 +46,23 @@ export default function BlogPost({ params }: { params: { slug: string } }){
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-4 section-petal rounded-[2rem]">
-      {post.featured_image && (
-        <div className="mb-8 rounded-2xl overflow-hidden organic-ring">
-          <Image src={post.featured_image} alt={post.title} width={800} height={400} className="object-cover w-full h-96" />
+    <main className="bg-[rgb(var(--color-cream))]">
+      <section className="relative min-h-[54vh] bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
+        {post.featured_image && <Image src={post.featured_image} alt={post.title} fill priority className="object-cover opacity-50" />}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.86),rgba(20,28,19,0.48),rgba(20,28,19,0.72))]" />
+        <div className="relative z-10 mx-auto flex min-h-[54vh] max-w-4xl flex-col justify-end px-4 py-14">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Wellness Notes</p>
+          <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-5xl">{post.title}</h1>
+          <p className="mt-4 text-[rgba(244,232,237,0.82)]">By {post.author} • {new Date(post.date).toLocaleDateString()} • {post.readingTime} min read</p>
         </div>
-      )}
-
-      <h1 className="text-4xl font-bold mb-4 text-slate-900">{post.title}</h1>
-      <p className="text-gray-600 mb-8">
-        By {post.author} • {new Date(post.date).toLocaleDateString()} • {post.readingTime} min read
-      </p>
-
-      <WaveDivider tone="petal" />
-
-      <div 
-        className="prose prose-lg max-w-none mb-12 text-gray-700 organic-card p-8"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
-
-      <div className="border-t border-[rgba(167,146,117,0.35)] pt-8">
-        <p className="text-sm text-gray-700">Have questions? <a href="/contact#consultation-request" className="text-[rgb(var(--color-primary))] font-semibold">Request a consultation</a></p>
-      </div>
-    </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-4 py-14">
+        <div className="prose prose-lg max-w-none mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
+          <p className="text-lg font-semibold">Have questions about your own routine?</p>
+          <a href="/contact#consultation-request" className="btn-secondary mt-4">Request a consultation</a>
+        </div>
+      </section>
+    </main>
   )
 }

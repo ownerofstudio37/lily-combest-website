@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import WaveDivider from '../components/WaveDivider'
 
 export const metadata = {
   title: 'Privacy Policy | Lilly Combest',
@@ -9,24 +7,15 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="pt-32 pb-20 px-4 section-cream">
-      <div className="container mx-auto max-w-4xl section-petal rounded-[2rem] p-6 md:p-10">
-        <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {[
-            'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg',
-            'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
-            'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
-            'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
-          ].map((src, i) => (
-            <div key={i} className="rounded-2xl overflow-hidden organic-ring">
-              <Image src={src} alt={`Wellness photo ${i + 1}`} width={500} height={360} className="h-24 md:h-28 w-full object-cover" />
-            </div>
-          ))}
+    <main className="bg-[rgb(var(--color-cream))]">
+      <section className="bg-[rgb(var(--color-primary-dark))] px-4 py-20 text-[rgb(var(--color-secondary-light))]">
+        <div className="mx-auto max-w-4xl pt-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Privacy</p>
+          <h1 className="mt-3 text-4xl font-bold sm:text-5xl">Privacy Policy</h1>
+          <p className="mt-4 max-w-2xl text-[rgba(244,232,237,0.82)]">How contact details and website information are handled for Lilly Combest wellness coaching.</p>
         </div>
-
-        <WaveDivider tone="mint" />
+      </section>
+      <div className="container mx-auto max-w-4xl px-4 py-16">
         
         <div className="prose prose-lg max-w-none space-y-6 text-gray-700 organic-card p-8">
           <section>

@@ -166,7 +166,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 pt-28 pb-32 md:pt-36 md:pb-36">
           <p className="text-xs uppercase tracking-[0.18em] text-[rgba(244,232,237,0.72)] mb-3">Digital Business Card</p>
-          <h1 className="text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] tracking-tight max-w-3xl">
+          <h1 className="max-w-3xl text-5xl leading-[0.95] tracking-normal sm:text-6xl lg:text-7xl">
             Lilly Combest
             <span className="block font-serif italic text-[rgba(247,236,241,0.94)]">wellness coaching</span>
           </h1>
@@ -228,7 +228,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
               <button
                 type="button"
                 onClick={saveContact}
-                className="inline-flex items-center gap-2 rounded-full bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))] px-5 py-3 font-semibold hover:brightness-110 transition"
+                className="btn-primary gap-2"
               >
                 <UserRoundPlus size={18} />
                 {saved ? 'Contact Ready' : 'Save Contact'}
@@ -236,14 +236,14 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
 
               <a
                 href="tel:8322579197"
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,93,63,0.25)] bg-white/70 text-[rgb(var(--color-primary-dark))] px-5 py-3 font-semibold hover:bg-white transition"
+                className="btn-quiet gap-2"
               >
                 Call 832-257-9197
               </a>
 
               <a
                 href="sms:8322579197"
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,93,63,0.25)] bg-white/70 text-[rgb(var(--color-primary-dark))] px-5 py-3 font-semibold hover:bg-white transition"
+                className="btn-quiet gap-2"
               >
                 Text Lilly
               </a>
@@ -251,7 +251,7 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
               <button
                 type="button"
                 onClick={() => setShowQr((s) => !s)}
-                className="inline-flex items-center gap-2 rounded-full bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-primary-dark))] px-5 py-3 font-semibold hover:brightness-105 transition"
+                className="btn-secondary gap-2"
               >
                 <QrCode size={18} />
                 {showQr ? 'Hide QR' : 'Show QR'}

@@ -4,20 +4,6 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
 
-function Wave({ fill, flip }: { fill: string; flip?: boolean }) {
-  return (
-    <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none" aria-hidden="true">
-      <svg
-        viewBox="0 0 1440 72"
-        preserveAspectRatio="none"
-        className={`block w-full h-[72px]${flip ? ' scale-x-[-1]' : ''}`}
-      >
-        <path d="M0,36 C320,72 640,0 960,36 C1120,54 1300,20 1440,40 L1440,72 L0,72 Z" fill={fill} />
-      </svg>
-    </div>
-  )
-}
-
 export default function Contact(){
   const { t } = useLocale()
   const [name, setName] = useState('')
@@ -44,18 +30,17 @@ export default function Contact(){
 
   return (
     <main className="overflow-x-hidden">
-
-      {/* ── DARK GREEN: Page Header ──────────────────────────────────── */}
-      <section className="relative bg-[rgb(47,60,41)] text-[rgb(244,232,237)] pt-28 pb-32">
-        <div className="max-w-5xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">{t('contact.title') || 'Contact'}</h1>
-          <p className="text-[rgba(244,232,237,0.8)] text-lg max-w-xl">Let&apos;s talk about your wellness goals. No pressure, just an honest conversation.</p>
+      <section className="relative min-h-[48vh] bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
+        <Image src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg" alt="Lilly Combest wellness portrait" fill priority className="object-cover opacity-45" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.84),rgba(20,28,19,0.48),rgba(20,28,19,0.72))]" />
+        <div className="relative z-10 mx-auto flex min-h-[48vh] max-w-5xl flex-col justify-end px-4 py-14">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Contact</p>
+          <h1 className="mt-3 text-4xl md:text-5xl font-bold">{t('contact.title') || 'Contact'}</h1>
+          <p className="mt-4 text-[rgba(244,232,237,0.84)] text-lg max-w-xl">Let&apos;s talk about your wellness goals. No pressure, just an honest conversation.</p>
         </div>
-        <Wave fill="rgb(244,232,237)" />
       </section>
 
-      {/* ── PETAL PINK: Form + Images ──────────────────────────────── */}
-      <section className="relative bg-[rgb(244,232,237)] py-20 pb-28">
+      <section className="bg-[rgb(244,232,237)] py-16">
         <div className="max-w-5xl mx-auto px-4">
 
           <div className="mb-8 organic-card p-5">
@@ -98,11 +83,8 @@ export default function Contact(){
           </div>
         </div>
 
-        {/* Wave out → dark green */}
-        <Wave fill="rgb(47,60,41)" flip />
       </section>
 
-      {/* ── DARK GREEN: Footer CTA ─────────────────────────────────────── */}
       <section className="bg-[rgb(47,60,41)] text-[rgb(244,232,237)] py-16 text-center">
         <div className="max-w-xl mx-auto px-4">
           <p className="text-lg text-[rgba(244,232,237,0.75)]">Based in Pinehurst, TX 77362 &mdash; serving The Woodlands, Tomball, Magnolia, Spring & Greater Houston.</p>
