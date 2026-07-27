@@ -17,6 +17,9 @@ Last updated: 2026-07-27
 - [x] Improved blog index layout with category chips, featured post treatment, and stronger empty/error states.
 - [x] Added clearer post-submit next-step messaging on the contact form.
 - [x] Replaced hard-coded placeholder analytics/settings values with honest setup and status panels.
+- [x] Refreshed service detail pages with a shared polished homepage-style template.
+- [x] Reduced service detail wave divider noise by replacing repeated dividers with clean visual bands.
+- [x] Improved English/Español toggle clarity, persistence, accessibility state, and document language updates.
 
 ## Critical / High Priority
 
@@ -61,8 +64,8 @@ Last updated: 2026-07-27
 ## UX / UI Facelift
 
 - [x] Make admin navigation responsive; current sidebar is desktop-first and can crowd smaller screens.
-- [ ] Refresh public service detail pages so they match the homepage's richer section rhythm instead of feeling like framed article cards.
-- [ ] Reduce repeated wave dividers where they create visual noise on long pages.
+- [x] Refresh public service detail pages so they match the homepage's richer section rhythm instead of feeling like framed article cards.
+- [x] Reduce repeated wave dividers where they create visual noise on long pages.
 - [x] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
 - [x] Add visible focus states for all nav links, buttons, forms, and admin actions.
 - [ ] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.

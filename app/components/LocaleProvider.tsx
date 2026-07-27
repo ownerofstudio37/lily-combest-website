@@ -23,7 +23,10 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined') localStorage.setItem('locale', locale)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('locale', locale)
+      document.documentElement.lang = locale
+    }
   }, [locale])
 
   const t = (path: string) => {
