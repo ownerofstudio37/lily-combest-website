@@ -36,10 +36,10 @@ export default function ServiceDetailPage({
 
   return (
     <main className="overflow-x-hidden">
-      <section className="relative min-h-[62vh] bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
+      <section className="relative min-h-[62vh] overflow-hidden bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
         <Image src={heroImage} alt={`${title} with Lilly Combest`} fill priority className="object-cover opacity-55" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.82),rgba(20,28,19,0.46),rgba(20,28,19,0.72))]" />
-        <div className="relative z-10 mx-auto flex min-h-[62vh] max-w-6xl flex-col justify-end px-4 py-14">
+        <div className="relative z-10 mx-auto flex min-h-[62vh] max-w-6xl flex-col justify-end px-4 pb-24 pt-14">
           <Link href="/services" className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-white/12 px-4 py-2 text-sm font-semibold text-white backdrop-blur hover:bg-white/18">
             <ArrowLeft size={16} />
             Back to Services
@@ -52,6 +52,9 @@ export default function ServiceDetailPage({
             <Link href="/contact#consultation-request" className="btn-quiet bg-white/90">Ask a Question</Link>
           </div>
         </div>
+        <svg className="hero-wave z-10" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,64 C180,112 360,112 540,82 C720,52 900,8 1080,30 C1230,48 1320,88 1440,100 L1440,120 L0,120 Z" fill="currentColor" />
+        </svg>
       </section>
 
       <section className="bg-[rgb(var(--color-cream))] py-14">

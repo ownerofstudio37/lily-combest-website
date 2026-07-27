@@ -22,6 +22,7 @@ Last updated: 2026-07-27
 - [x] Improved English/Español toggle clarity, persistence, accessibility state, and document language updates.
 - [x] Replaced the one-on-one wellness coaching service card stock image with a cleaner coaching-session image.
 - [x] Polished About, Contact, Blog article, Privacy, Private Card, and Services hub pages toward the homepage/service-detail visual system.
+- [x] Restored homepage-style wave transitions on service detail pages and upgraded the Services hub hero to match the homepage polish.
 
 ## Critical / High Priority
 

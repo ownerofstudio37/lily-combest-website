@@ -7,6 +7,14 @@ import { useBooking } from '../components/Booking'
 import Image from 'next/image'
 import FaqSchema from '../components/FaqSchema'
 
+function Wave({ fill, flip = false }: { fill: string; flip?: boolean }) {
+  return (
+    <svg className={`pointer-events-none absolute bottom-[-1px] left-0 right-0 z-10 h-20 w-full ${flip ? '-scale-x-100' : ''}`} viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,64 C180,112 360,112 540,82 C720,52 900,8 1080,30 C1230,48 1320,88 1440,100 L1440,120 L0,120 Z" fill={fill} />
+    </svg>
+  )
+}
+
 export default function Services() {
   const { t } = useLocale()
   const { openBooking } = useBooking()
@@ -35,23 +43,34 @@ export default function Services() {
   return (
     <main className="overflow-x-hidden">
 
-      {/* ── DARK GREEN: Page Header + Photo Strip ───────────────────── */}
-      <section className="relative bg-[rgb(47,60,41)] text-[rgb(244,232,237)] pt-28 pb-20">
-        <div className="max-w-5xl mx-auto px-4 mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">{t('services.title') || 'Services'}</h1>
-          <p className="text-[rgba(244,232,237,0.8)] text-lg max-w-xl">{t('services.desc') || 'Support that meets you where you are — clear, practical, and sustainable.'}</p>
-        </div>
-        <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-3">
-          {featuredPhotos.map((src, i) => (
-            <div key={i} className="rounded-2xl overflow-hidden">
-              <Image src={src} alt={`Holistic coaching highlight ${i + 1}`} width={500} height={420} className="h-28 md:h-36 w-full object-cover" />
+      {/* ── HERO: Page Header + Photo Strip ───────────────────── */}
+      <section className="relative min-h-[72vh] overflow-hidden bg-[rgb(47,60,41)] pb-28 pt-28 text-[rgb(244,232,237)]">
+        <Image src={featuredPhotos[2]} alt="" fill priority className="object-cover opacity-45" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.88),rgba(20,28,19,0.58),rgba(20,28,19,0.78))]" />
+        <div className="relative z-20 mx-auto max-w-6xl px-4">
+          <div className="max-w-3xl">
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-[rgb(var(--color-primary-light))]">Wellness Services</p>
+            <h1 className="text-5xl font-bold leading-tight sm:text-6xl lg:text-7xl">{t('services.title') || 'Services'}</h1>
+            <p className="mt-6 max-w-2xl text-xl leading-9 text-[rgba(244,232,237,0.84)]">{t('services.desc') || 'Support that meets you where you are — clear, practical, and sustainable.'}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button onClick={openBooking} className="btn-secondary">Request a Clarity Call</button>
+              <Link href="#service-options" className="btn-quiet bg-white/90">Explore Services</Link>
             </div>
-          ))}
+          </div>
+
+          <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4">
+            {featuredPhotos.map((src, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl organic-ring bg-white/10">
+                <Image src={src} alt={`Holistic coaching highlight ${i + 1}`} width={500} height={420} className="h-28 w-full object-cover md:h-36" />
+              </div>
+            ))}
+          </div>
         </div>
+        <Wave fill="rgb(245,241,232)" />
       </section>
 
       {/* ── CREAM: Service Cards ─────────────────────────────────────────────── */}
-      <section className="relative bg-[rgb(245,241,232)] py-16">
+      <section id="service-options" className="relative bg-[rgb(245,241,232)] pb-28 pt-16">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-6">
             {services.map((service, idx) => (
@@ -68,10 +87,11 @@ export default function Services() {
             ))}
           </div>
         </div>
+        <Wave fill="rgb(244,232,237)" flip />
       </section>
 
       {/* ── PETAL PINK: CTA ───────────────────────────────────────────────────── */}
-      <section className="relative bg-[rgb(244,232,237)] py-16">
+      <section className="relative bg-[rgb(244,232,237)] pb-28 pt-16">
         <div className="max-w-xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4 text-[rgb(var(--color-ink))]">Ready to get started?</h2>
           <p className="text-gray-700 mb-6">Request a free 30-minute introductory call and Lilly will confirm a time that works for both of you.</p>
@@ -79,6 +99,7 @@ export default function Services() {
             {t('section.book') || 'Request a free consult'}
           </button>
         </div>
+        <Wave fill="rgb(220,232,199)" />
       </section>
 
       {/* ── MINT GREEN: FAQ ─────────────────────────────────────────────────────── */}
