@@ -27,10 +27,10 @@ export default function Services() {
   ]
 
   const services = [
-    { title: 'One-on-One Wellness Coaching', description: 'Personalized guidance to help you build sustainable habits. Perfect for clients who want customized support for their unique lifestyle and goals.', href: '/services/wellness-coaching', image: 'https://images.pexels.com/photos/7176292/pexels-photo-7176292.jpeg?auto=compress&cs=tinysrgb&w=1600' },
-    { title: 'Nutrition & Meal Planning', description: 'Evidence-based nutrition strategies without the complexity. Lilly helps you create a realistic eating plan that fits your schedule and preferences.', href: '/services/nutrition-meal-planning', image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600' },
-    { title: 'Workout & Motivation Coaching', description: 'Custom workout plans tailored to your goals and fitness level. Includes weekly accountability calls to keep you motivated and on track.', href: '/services/workout-motivation-coaching', image: 'https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=1600' },
-    { title: 'Virtual Workshops', description: 'Group workshops on topics like meal prep, sleep optimization, and stress management. Great for teams, offices, or community groups.', href: '/services/virtual-workshops', image: 'https://images.pexels.com/photos/1181408/pexels-photo-1181408.jpeg?auto=compress&cs=tinysrgb&w=1600' },
+    { title: 'One-on-One Wellness Coaching', description: 'Personalized wellness coaching for energy, routines, sleep, stress, and sustainable habits. Best for clients who want customized support and accountability.', href: '/services/wellness-coaching', image: 'https://images.pexels.com/photos/7176292/pexels-photo-7176292.jpeg?auto=compress&cs=tinysrgb&w=1600', tags: ['Habit support', 'Accountability', 'Pinehurst TX'] },
+    { title: 'Nutrition & Meal Planning', description: 'Simple nutrition coaching and meal planning for busy weeks, balanced meals, grocery rhythm, and realistic eating habits without restrictive dieting.', href: '/services/nutrition-meal-planning', image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600', tags: ['Meal prep', 'Nutrition habits', 'Family-friendly'] },
+    { title: 'Workout & Motivation Coaching', description: 'Flexible movement planning and motivation coaching for people restarting, building consistency, or needing a doable home or gym routine.', href: '/services/workout-motivation-coaching', image: 'https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=1600', tags: ['Movement', 'Motivation', 'Consistency'] },
+    { title: 'Virtual Workshops', description: 'Practical wellness workshops for teams, groups, and community organizations covering meal prep, stress, sleep, and healthy routines.', href: '/services/virtual-workshops', image: 'https://images.pexels.com/photos/1181408/pexels-photo-1181408.jpeg?auto=compress&cs=tinysrgb&w=1600', tags: ['Teams', 'Groups', 'Virtual'] },
   ]
 
   const faqItems = [
@@ -52,6 +52,7 @@ export default function Services() {
             <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-[rgb(var(--color-primary-light))]">Wellness Services</p>
             <h1 className="text-5xl font-bold leading-tight sm:text-6xl lg:text-7xl">{t('services.title') || 'Services'}</h1>
             <p className="mt-6 max-w-2xl text-xl leading-9 text-[rgba(244,232,237,0.84)]">{t('services.desc') || 'Support that meets you where you are — clear, practical, and sustainable.'}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[rgba(244,232,237,0.72)]">Serving Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, North Houston, and virtual clients across Texas.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button onClick={openBooking} className="btn-secondary">Request a Clarity Call</button>
               <Link href="#service-options" className="btn-quiet bg-white/90">Explore Services</Link>
@@ -81,6 +82,13 @@ export default function Services() {
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-2 text-slate-900">{service.title}</h2>
                   <p className="text-gray-700 mb-3">{service.description}</p>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {service.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-[rgba(var(--color-primary-light),0.58)] px-3 py-1 text-xs font-semibold text-[rgb(var(--color-primary-dark))]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <span className="text-[rgb(var(--color-primary))] font-medium text-sm">Learn more →</span>
                 </div>
               </Link>

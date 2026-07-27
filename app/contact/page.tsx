@@ -45,9 +45,17 @@ export default function Contact(){
       <section className="relative bg-[rgb(244,232,237)] pb-28 pt-16">
         <div className="max-w-5xl mx-auto px-4">
 
-          <div className="mb-8 organic-card p-5">
-            <p className="text-slate-800 font-medium">Prefer email?</p>
-            <p className="text-gray-700 mt-1">Send your preferred dates and goals to <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))] font-medium">lilly@lillycombest.com</a>.</p>
+          <div className="mb-8 grid gap-4 md:grid-cols-3">
+            {[
+              { title: 'Share Your Goals', text: 'Tell Lilly what you want help with and what has felt hard to maintain.' },
+              { title: 'Get a Personal Reply', text: 'Lilly will review your note and respond with a practical next step.' },
+              { title: 'Choose a Consultation Time', text: 'If it feels aligned, you can schedule a free introductory conversation.' },
+            ].map((item) => (
+              <div key={item.title} className="organic-card p-5">
+                <p className="font-semibold text-slate-900">{item.title}</p>
+                <p className="mt-2 text-sm leading-6 text-gray-700">{item.text}</p>
+              </div>
+            ))}
           </div>
 
           <div className="grid lg:grid-cols-5 gap-8 items-start">
@@ -75,6 +83,12 @@ export default function Contact(){
             </form>
 
             <div className="lg:col-span-2 grid grid-cols-2 lg:grid-cols-1 gap-4">
+              <div className="organic-card col-span-2 p-5 lg:col-span-1">
+                <p className="text-slate-800 font-semibold">Prefer email?</p>
+                <p className="mt-2 text-sm leading-6 text-gray-700">Send preferred dates and goals to <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))] font-semibold">lilly@lillycombest.com</a>.</p>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--color-primary))]">Pinehurst, TX 77362</p>
+                <p className="mt-1 text-sm text-gray-700">Serving The Woodlands, Tomball, Magnolia, Spring, Conroe, North Houston, and virtual clients across Texas.</p>
+              </div>
               <div className="rounded-2xl overflow-hidden">
                 <Image src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg" alt="Lilly Combest wellness portrait" width={600} height={700} className="h-44 lg:h-60 w-full object-cover" />
               </div>

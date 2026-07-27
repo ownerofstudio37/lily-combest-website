@@ -29,6 +29,7 @@ Last updated: 2026-07-27
 - [x] Generated `package-lock.json` and ran `npm audit`; current high-severity findings are in `next`, bundled `postcss`, and `resend`'s email-rendering dependency chain.
 - [x] Upgraded to Next 16, React 19, Resend 6, and Lucide 1; production build and local public smoke checks pass.
 - [x] Tested ESLint setup after Next 16; deferred full ESLint baseline because the available config added vulnerable dependencies and exposed pre-existing lint debt.
+- [x] Polished public SEO/design pass: stronger structured data, improved Open Graph tags, trustworthy homepage proof section, richer services cards, and clearer contact conversion steps.
 
 ## Critical / High Priority
 

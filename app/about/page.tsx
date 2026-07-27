@@ -63,7 +63,11 @@ export default function About() {
 
       <section className="relative bg-[rgb(var(--color-primary-light))] pb-28 pt-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-8 text-[rgb(var(--color-ink))]">What Makes Her Different</h2>
+          <div className="mb-8 max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[rgb(var(--color-primary))]">Approach</p>
+            <h2 className="mt-2 text-3xl font-bold text-[rgb(var(--color-ink))]">What Makes Her Different</h2>
+            <p className="mt-3 leading-7 text-gray-700">Lilly&apos;s coaching style is built for people who need wellness to feel clear, doable, and steady, not overwhelming.</p>
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               'Real-world strategies for busy lifestyles',

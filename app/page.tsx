@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import Image from 'next/image'
-import { CheckCircle, Star } from 'lucide-react'
+import { CheckCircle, MapPin, ShieldCheck, Sparkles } from 'lucide-react'
 
 // Wave sits absolutely at bottom of its parent `relative` section.
 // `fill` should match the NEXT section's background color.
@@ -156,28 +156,35 @@ export default function HomePage() {
         <Wave fill="rgb(245,241,232)" flip />
       </section>
 
-      {/* ── CREAM: Testimonials ───────────────────────────────────────────────── */}
+      {/* ── CREAM: Trust + Client Fit ─────────────────────────────────────────── */}
       <section className="relative bg-[rgb(245,241,232)] py-20 pb-28">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-[rgb(var(--color-ink))]">Client Success Stories</h2>
-            <p className="text-gray-700">See what people are saying about working with me.</p>
+            <h2 className="text-3xl font-bold mb-4 text-[rgb(var(--color-ink))]">A Good Fit If You Want Realistic Support</h2>
+            <p className="mx-auto max-w-2xl text-gray-700">This is for people who want steady guidance, clear next steps, and habits that can survive a normal week.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { quote: 'Lilly helped me completely transform my relationship with food and exercise. I\'ve lost 30 pounds and feel better than I have in years!', name: 'Sarah M.', city: 'Pinehurst, TX' },
-              { quote: 'As a busy mom, I thought I\'d never have time for myself. Lilly showed me how to prioritize my health without sacrificing family time.', name: 'Jennifer L.', city: 'The Woodlands, TX' },
-              { quote: 'Working with Lilly has been life-changing. My energy is up, my stress is down, and I finally feel like I\'m in control of my health.', name: 'Michael T.', city: 'Houston, TX' },
-            ].map((r) => (
-              <div key={r.name} className="organic-card p-6">
-                <div className="flex mb-4">
-                  {[1,2,3,4,5].map(n => <Star key={n} className="text-[rgb(var(--color-secondary-dark))] fill-[rgb(var(--color-secondary-dark))]" size={18} />)}
+              { icon: Sparkles, title: 'You are tired of all-or-nothing plans', text: 'Coaching focuses on practical food, movement, sleep, and stress routines you can repeat.' },
+              { icon: ShieldCheck, title: 'You want support, not pressure', text: 'Sessions are built around accountability, honest check-ins, and adjustments when life gets full.' },
+              { icon: MapPin, title: 'You want local Texas context', text: 'Support is designed for Pinehurst, The Woodlands, North Houston, and virtual clients across Texas.' },
+            ].map((item) => {
+              const Icon = item.icon
+              return (
+              <div key={item.title} className="organic-card p-6">
+                <div className="mb-5 inline-flex rounded-2xl bg-[rgba(var(--color-secondary-light),0.82)] p-3 text-[rgb(var(--color-primary-dark))]">
+                  <Icon size={22} />
                 </div>
-                <p className="text-gray-700 mb-4">&ldquo;{r.quote}&rdquo;</p>
-                <p className="font-semibold text-[rgb(var(--color-ink))]">— {r.name}</p>
-                <p className="text-sm text-gray-500">{r.city}</p>
+                <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">{item.title}</h3>
+                <p className="mt-3 leading-7 text-gray-700">{item.text}</p>
               </div>
-            ))}
+              )
+            })}
+          </div>
+          <div className="mt-8 rounded-[2rem] border border-[rgba(74,93,63,0.14)] bg-white/70 p-6 text-center shadow-sm">
+            <p className="mx-auto max-w-3xl text-sm leading-7 text-gray-700">
+              Wellness coaching is educational and supportive. It is not emergency care, diagnosis, medical treatment, or a replacement for licensed healthcare.
+            </p>
           </div>
         </div>
 
