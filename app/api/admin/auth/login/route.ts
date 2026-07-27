@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
-import { adminSessionCookie, createAdminSessionToken } from '@/lib/adminAuth'
-
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123"
+import { adminSessionCookie, createAdminSessionToken, getConfiguredAdminPassword } from '@/lib/adminAuth'
 
 export async function POST(request: NextRequest) {
   const { password } = await request.json()
+  const adminPassword = getConfiguredAdminPassword()
 
-  if (password === ADMIN_PASSWORD) {
+  if (!adminPassword) {
+    return NextResponse.json(
+      { message: "Admin password is not configured" },
+      { status: 500 }
+    )
+  }
+
+  if (password === adminPassword) {
     const response = NextResponse.json({ success: true })
     response.cookies.set(adminSessionCookie.name, createAdminSessionToken(), {
       httpOnly: true,

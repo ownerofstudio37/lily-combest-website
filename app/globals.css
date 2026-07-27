@@ -29,6 +29,26 @@
     background: rgb(var(--color-cream));
     color: rgb(var(--color-ink));
   }
+
+  ::selection {
+    background: rgba(var(--color-secondary), 0.58);
+    color: rgb(var(--color-primary-dark));
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(var(--color-accent), 0.92);
+    outline-offset: 3px;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform, filter;
+    transition-duration: 160ms;
+    transition-timing-function: ease;
+  }
 }
 
 @layer components {

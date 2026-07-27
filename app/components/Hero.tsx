@@ -34,7 +34,7 @@ export default function Hero() {
 
       <div className="relative z-10 flex h-full min-h-[78vh] flex-col justify-end px-6 py-8 md:px-12 md:py-12">
         <div className="pb-8 md:pb-14">
-          <h1 className="text-[clamp(2.6rem,9vw,7.5rem)] leading-[0.95] tracking-tight text-[rgb(var(--color-primary-light))]">
+          <h1 className="max-w-5xl text-5xl leading-[0.95] tracking-normal text-[rgb(var(--color-primary-light))] sm:text-6xl md:text-7xl lg:text-8xl">
             eat well.
             <span className="ml-2 font-serif italic text-[rgba(247,236,241,0.95)]">feel alive.</span>
           </h1>

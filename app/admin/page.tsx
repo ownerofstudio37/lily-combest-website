@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Users, MessageSquare, BookOpen, TrendingUp } from "lucide-react"
+import { Users, MessageSquare, BookOpen, TrendingUp, Search } from "lucide-react"
 import Link from "next/link"
 
 interface DashboardStats {
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow p-8">
         <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <Link
             href="/admin/contacts"
             className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-6 hover:shadow-lg transition"
@@ -128,6 +128,15 @@ export default function AdminDashboard() {
             <BookOpen className="text-green-600 mb-3" size={24} />
             <h3 className="font-semibold text-gray-900">Create Meal Plans</h3>
             <p className="text-sm text-gray-600 mt-1">Generate personalized nutrition</p>
+          </Link>
+
+          <Link
+            href="/admin/seo"
+            className="bg-gradient-to-br from-emerald-50 to-lime-100 rounded-lg p-6 hover:shadow-lg transition"
+          >
+            <Search className="text-emerald-700 mb-3" size={24} />
+            <h3 className="font-semibold text-gray-900">Run SEO Audit</h3>
+            <p className="text-sm text-gray-600 mt-1">Check metadata, blog depth, and local SEO gaps</p>
           </Link>
         </div>
       </div>

@@ -1,0 +1,76 @@
+# Lilly Combest Website TODO
+
+Last updated: 2026-07-27
+
+## Completed In This Audit Pass
+
+- [x] Confirmed active project is `lily-combest-website`; do not modify sibling `websitefors37`.
+- [x] Added an authenticated admin SEO audit tool at `/admin/seo`.
+- [x] Added `/api/admin/seo/audit` for route, blog, robots, schema, and local SEO checks.
+- [x] Added SEO Audit links to the admin sidebar and dashboard.
+- [x] Hardened admin session cookies so the cookie stores an HMAC signature instead of the raw admin secret.
+- [x] Changed production admin login behavior so a missing `ADMIN_PASSWORD` fails closed instead of falling back to `admin123`.
+- [x] Started a small UI facelift by aligning admin chrome with the Lilly wellness palette and replacing viewport-scaled hero typography.
+
+## Critical / High Priority
+
+- [ ] Add real production `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` in Netlify.
+- [ ] Add `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, and `GEMINI_API_KEY` in production and verify every admin/API route.
+- [ ] Move the project folder or build through a path without an apostrophe; local `next build` fails under `Momma's New Website` because Next's generated metadata loader does not escape that path.
+- [ ] Initialize ESLint non-interactively and add a clean `npm run lint` baseline.
+- [ ] Decide whether public blog source of truth is Supabase or markdown; right now public APIs use Supabase with markdown fallback, while the sitemap reads markdown only.
+- [ ] Convert `/blog/[slug]` from a client-only page to a server-rendered page with `generateMetadata` for per-post title, description, canonical, Open Graph, and Article schema.
+- [ ] Sanitize or strictly validate generated/stored blog HTML before rendering with `dangerouslySetInnerHTML`.
+- [ ] Add rate limiting and basic spam protection to `/api/contact` and admin login.
+- [ ] Remove or hide `/api/test-gemini` from production, or require admin authentication.
+
+## SEO / Blog Tooling
+
+- [ ] Add a real blog editor for title, slug, excerpt, content, featured image, publish state, canonical URL, tags, and meta description.
+- [ ] Add an SEO score/checklist to the blog writer before saving: title length, slug quality, excerpt/meta length, H2 usage, internal links, local relevance, CTA, and image alt text.
+- [ ] Add duplicate slug handling in `/api/admin/blog/save`.
+- [ ] Add post preview before publish and draft edit/update flows from `/admin/blog`.
+- [ ] Add BlogPosting structured data for each article.
+- [ ] Add FAQ schema where blog posts answer common wellness questions.
+- [ ] Add an internal-link suggestion tool for service pages, blog posts, and contact CTAs.
+- [ ] Add an image picker/uploader workflow for featured blog images.
+- [ ] Add Search Console launch checklist into `/admin/seo`: verify property, submit sitemap, inspect homepage, inspect top service pages, inspect newest posts.
+- [ ] Track blog post freshness and flag posts older than 6-12 months for review.
+
+## SEO Content / Local SEO
+
+- [ ] Add Lilly's real credentials, certifications, professional background, and scope-of-practice language to `/about`.
+- [ ] Add a wellness disclaimer clarifying coaching is not emergency, diagnostic, or medical treatment.
+- [ ] Add phone number or remove empty telephone schema until the phone number is public.
+- [ ] Add sameAs links to verified social profiles and Google Business Profile once available.
+- [ ] Expand local content for Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, and North Houston.
+- [ ] Create dedicated local landing pages only where there is useful, unique local content.
+- [ ] Expand thin starter blog posts with specific examples, Lilly's perspective, FAQs, and consult CTAs.
+- [ ] Add service-specific FAQs to every service detail page.
+- [ ] Add stronger homepage proof: credentials, testimonials, client-fit criteria, and a short process section above the long visual gallery.
+- [ ] Submit `https://lillycombest.com/sitemap.xml` in Google Search Console after launch.
+
+## UX / UI Facelift
+
+- [ ] Make admin navigation responsive; current sidebar is desktop-first and can crowd smaller screens.
+- [ ] Refresh public service detail pages so they match the homepage's richer section rhythm instead of feeling like framed article cards.
+- [ ] Reduce repeated wave dividers where they create visual noise on long pages.
+- [ ] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
+- [ ] Add visible focus states for all nav links, buttons, forms, and admin actions.
+- [ ] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.
+- [ ] Improve blog index layout with category filters, featured post treatment, and stronger empty/error states.
+- [ ] Replace stock-like imagery over time with real Lilly photos and branded wellness assets.
+- [ ] Add clearer "what happens next" messaging after contact form submission.
+- [ ] Remove hard-coded placeholder analytics/settings values or replace them with environment/status checks.
+
+## Technical / Launch
+
+- [ ] Add `.env.example` with all required variables and safe placeholders.
+- [ ] Configure `next-env.d.ts` and required Next TypeScript settings intentionally rather than through the interactive lint prompt.
+- [ ] Add a basic smoke script for homepage, services, blog, contact, login, admin auth check, and SEO audit API.
+- [ ] Add sitemap coverage for all service pages and future Supabase-published blog posts.
+- [ ] Remove `Disallow: /_next/` from `robots.txt` so crawlers can fetch rendering assets.
+- [ ] Run `npm audit` and plan dependency upgrades for the current high-severity findings.
+- [ ] Verify Netlify build with production env vars.
+- [ ] Test contact email delivery in Resend logs after domain verification.
+- [ ] Verify Core Web Vitals after the final image/content pass.
