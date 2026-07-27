@@ -2,21 +2,23 @@
 
 import React from 'react'
 import Image from 'next/image'
+import WaveDivider from '../components/WaveDivider'
 
 export default function About() {
   return (
     <main className="overflow-x-hidden">
-      <section className="relative min-h-[58vh] bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
+      <section className="relative min-h-[58vh] overflow-hidden bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
         <Image src="https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness coaching session focused on nutrition and healthy habits" fill priority className="object-cover opacity-50" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.82),rgba(20,28,19,0.42),rgba(20,28,19,0.72))]" />
-        <div className="relative z-10 mx-auto flex min-h-[58vh] max-w-6xl flex-col justify-end px-4 py-14">
+        <div className="relative z-10 mx-auto flex min-h-[58vh] max-w-6xl flex-col justify-end px-4 pb-24 pt-14">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">About Lilly</p>
           <h1 className="mt-3 max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">Wellness coaching for real life.</h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[rgba(244,232,237,0.86)]">Serving Pinehurst, The Woodlands, and Greater Houston with practical support for nutrition, movement, sleep, and sustainable habits.</p>
         </div>
+        <WaveDivider tone="cream" className="absolute bottom-[-1px] left-0 right-0 z-10 h-20" />
       </section>
 
-      <section className="bg-[rgb(var(--color-secondary-light))] py-16">
+      <section className="relative bg-[rgb(var(--color-secondary-light))] pb-28 pt-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div className="organic-card p-6 sm:p-8">
@@ -56,10 +58,10 @@ export default function About() {
             </div>
           </div>
         </div>
-
+        <WaveDivider tone="mint" className="absolute bottom-[-1px] left-0 right-0 h-20" />
       </section>
 
-      <section className="bg-[rgb(var(--color-primary-light))] py-16">
+      <section className="relative bg-[rgb(var(--color-primary-light))] pb-28 pt-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8 text-[rgb(var(--color-ink))]">What Makes Her Different</h2>
           <div className="grid sm:grid-cols-2 gap-4">
@@ -76,7 +78,7 @@ export default function About() {
             ))}
           </div>
         </div>
-
+        <WaveDivider tone="dark" className="absolute bottom-[-1px] left-0 right-0 h-20" />
       </section>
 
       <section className="bg-[rgb(47,60,41)] text-[rgb(244,232,237)] py-20 text-center">

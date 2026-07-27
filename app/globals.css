@@ -143,4 +143,8 @@
   .wave-divider--mint {
     color: rgba(var(--color-primary-light), 0.72);
   }
+
+  .wave-divider--dark {
+    color: rgb(var(--color-primary-dark));
+  }
 }

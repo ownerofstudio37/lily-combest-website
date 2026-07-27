@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
+import WaveDivider from '../components/WaveDivider'
 
 interface BlogPost {
   slug: string
@@ -46,12 +47,12 @@ export default function BlogPage(){
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16">
+      <main className="mx-auto max-w-5xl px-4 py-16">
         <div className="section-cream rounded-[2rem] p-8">
           <h1 className="text-3xl font-bold mb-4">{t('blog.title') || 'Blog'}</h1>
           <p className="text-gray-700">Loading wellness notes...</p>
         </div>
-      </div>
+      </main>
     )
   }
 
@@ -59,11 +60,23 @@ export default function BlogPage(){
   const remainingPosts = posts.slice(1)
 
   return (
+    <main className="overflow-x-hidden bg-[rgb(var(--color-cream))]">
+      <section className="relative min-h-[52vh] overflow-hidden bg-[rgb(var(--color-primary-dark))] px-4 pb-24 pt-28 text-[rgb(var(--color-secondary-light))]">
+        <Image src={moodImages[0]} alt="" fill priority className="object-cover opacity-45" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.86),rgba(20,28,19,0.5),rgba(20,28,19,0.74))]" />
+        <div className="relative z-10 mx-auto flex min-h-[36vh] max-w-6xl flex-col justify-end">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Wellness Notes</p>
+          <h1 className="mt-3 max-w-4xl text-5xl font-bold leading-tight sm:text-6xl lg:text-7xl">{t('blog.title') || 'Blog'}</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[rgba(244,232,237,0.86)]">{t('blog.description') || 'Helpful tips and articles.'}</p>
+        </div>
+        <WaveDivider tone="cream" className="absolute bottom-[-1px] left-0 right-0 z-10 h-20" />
+      </section>
+
     <div className="mx-auto max-w-6xl px-4 py-16">
       <section className="section-petal rounded-[2rem] px-5 py-10 sm:px-8">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[rgb(var(--color-primary))]">Wellness Notes</p>
-        <h1 className="mt-2 text-4xl font-bold text-[rgb(var(--color-ink))]">{t('blog.title') || 'Blog'}</h1>
-        <p className="mt-3 max-w-2xl text-gray-700">{t('blog.description') || 'Helpful tips and articles.'}</p>
+        <h2 className="mt-2 text-4xl font-bold text-[rgb(var(--color-ink))]">Explore by Topic</h2>
+        <p className="mt-3 max-w-2xl text-gray-700">Browse nutrition, sleep, stress, habits, and local wellness guidance.</p>
 
         <div className="mt-8 flex flex-wrap gap-2 text-sm">
           {['Nutrition', 'Sleep', 'Stress', 'Habits', 'Local Wellness'].map((label) => (
@@ -138,5 +151,6 @@ export default function BlogPage(){
         ))}
       </div>
     </div>
+    </main>
   )
 }

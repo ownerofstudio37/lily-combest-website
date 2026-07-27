@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
+import WaveDivider from '../components/WaveDivider'
 
 export default function Contact(){
   const { t } = useLocale()
@@ -30,17 +31,18 @@ export default function Contact(){
 
   return (
     <main className="overflow-x-hidden">
-      <section className="relative min-h-[48vh] bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
+      <section className="relative min-h-[48vh] overflow-hidden bg-[rgb(var(--color-primary-dark))] text-[rgb(var(--color-secondary-light))]">
         <Image src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg" alt="Lilly Combest wellness portrait" fill priority className="object-cover opacity-45" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.84),rgba(20,28,19,0.48),rgba(20,28,19,0.72))]" />
-        <div className="relative z-10 mx-auto flex min-h-[48vh] max-w-5xl flex-col justify-end px-4 py-14">
+        <div className="relative z-10 mx-auto flex min-h-[48vh] max-w-5xl flex-col justify-end px-4 pb-24 pt-14">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Contact</p>
           <h1 className="mt-3 text-4xl md:text-5xl font-bold">{t('contact.title') || 'Contact'}</h1>
           <p className="mt-4 text-[rgba(244,232,237,0.84)] text-lg max-w-xl">Let&apos;s talk about your wellness goals. No pressure, just an honest conversation.</p>
         </div>
+        <WaveDivider tone="petal" className="absolute bottom-[-1px] left-0 right-0 z-10 h-20" />
       </section>
 
-      <section className="bg-[rgb(244,232,237)] py-16">
+      <section className="relative bg-[rgb(244,232,237)] pb-28 pt-16">
         <div className="max-w-5xl mx-auto px-4">
 
           <div className="mb-8 organic-card p-5">
@@ -82,7 +84,7 @@ export default function Contact(){
             </div>
           </div>
         </div>
-
+        <WaveDivider tone="dark" className="absolute bottom-[-1px] left-0 right-0 h-20" />
       </section>
 
       <section className="bg-[rgb(47,60,41)] text-[rgb(244,232,237)] py-16 text-center">

@@ -1,4 +1,5 @@
 import React from 'react'
+import WaveDivider from '../components/WaveDivider'
 
 export const metadata = {
   title: 'Privacy Policy | Lilly Combest',
@@ -8,12 +9,13 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <main className="bg-[rgb(var(--color-cream))]">
-      <section className="bg-[rgb(var(--color-primary-dark))] px-4 py-20 text-[rgb(var(--color-secondary-light))]">
-        <div className="mx-auto max-w-4xl pt-8">
+      <section className="relative overflow-hidden bg-[rgb(var(--color-primary-dark))] px-4 pb-24 pt-20 text-[rgb(var(--color-secondary-light))]">
+        <div className="relative z-10 mx-auto max-w-4xl pt-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Privacy</p>
           <h1 className="mt-3 text-4xl font-bold sm:text-5xl">Privacy Policy</h1>
           <p className="mt-4 max-w-2xl text-[rgba(244,232,237,0.82)]">How contact details and website information are handled for Lilly Combest wellness coaching.</p>
         </div>
+        <WaveDivider tone="cream" className="absolute bottom-[-1px] left-0 right-0 z-10 h-20" />
       </section>
       <div className="container mx-auto max-w-4xl px-4 py-16">
         
