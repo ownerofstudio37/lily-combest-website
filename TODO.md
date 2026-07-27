@@ -31,6 +31,7 @@ Last updated: 2026-07-27
 - [x] Tested ESLint setup after Next 16; deferred full ESLint baseline because the available config added vulnerable dependencies and exposed pre-existing lint debt.
 - [x] Polished public SEO/design pass: stronger structured data, improved Open Graph tags, trustworthy homepage proof section, richer services cards, and clearer contact conversion steps.
 - [x] Completed responsive visual QA pass with Playwright screenshots, added reusable visual QA script, improved blog article readability/FAQ schema, service-detail local/related sections, homepage first-30-days section, and stronger image alt text.
+- [x] Improved admin content tooling with blog freshness flags, internal link suggestions, curated image picker, FAQ editor/schema workflow, and persistent Search Console checklist.
 
 ## Critical / High Priority
 
@@ -53,11 +54,11 @@ Last updated: 2026-07-27
 - [x] Add duplicate slug handling in `/api/admin/blog/save`.
 - [x] Add post preview before publish and draft edit/update flows from `/admin/blog`.
 - [x] Add BlogPosting structured data for each article.
-- [ ] Add FAQ schema where blog posts answer common wellness questions.
-- [ ] Add an internal-link suggestion tool for service pages, blog posts, and contact CTAs.
-- [ ] Add an image picker/uploader workflow for featured blog images.
+- [x] Add FAQ schema where blog posts answer common wellness questions.
+- [x] Add an internal-link suggestion tool for service pages, blog posts, and contact CTAs.
+- [x] Add an image picker/uploader workflow for featured blog images.
 - [x] Add Search Console launch checklist into `/admin/seo`: verify property, submit sitemap, inspect homepage, inspect top service pages, inspect newest posts.
-- [ ] Track blog post freshness and flag posts older than 6-12 months for review.
+- [x] Track blog post freshness and flag posts older than 6-12 months for review.
 
 ## SEO Content / Local SEO
 

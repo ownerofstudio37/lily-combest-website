@@ -18,6 +18,21 @@ interface BlogPost {
   updated_at: string
 }
 
+function getFreshness(post: BlogPost) {
+  const referenceDate = new Date(post.published_at || post.updated_at || post.created_at)
+  const ageDays = Math.floor((Date.now() - referenceDate.getTime()) / (1000 * 60 * 60 * 24))
+
+  if (ageDays >= 365) {
+    return { label: 'Needs refresh', className: 'bg-red-100 text-red-800', note: `${ageDays} days old` }
+  }
+
+  if (ageDays >= 180) {
+    return { label: 'Review soon', className: 'bg-amber-100 text-amber-800', note: `${ageDays} days old` }
+  }
+
+  return { label: 'Fresh', className: 'bg-green-100 text-green-800', note: `${ageDays} days old` }
+}
+
 export default async function BlogManagement({ searchParams }: { searchParams?: { edit?: string } }) {
   let posts: BlogPost[] = []
   let error: string | null = null
@@ -75,8 +90,9 @@ export default async function BlogManagement({ searchParams }: { searchParams?: 
                     <h3 className="text-lg font-semibold text-gray-900">{post.title}</h3>
                     <p className="text-sm text-gray-600 mt-1">/blog/{post.slug}</p>
                     {post.excerpt && <p className="text-sm text-gray-600 mt-2 line-clamp-2">{post.excerpt}</p>}
-                    <div className="flex gap-4 mt-3 text-sm text-gray-500">
+                    <div className="flex flex-wrap gap-3 mt-3 text-sm text-gray-500">
                       <span>Published: {new Date(post.published_at || post.created_at).toLocaleDateString()}</span>
+                      <span className={`rounded-full px-2 py-1 text-xs font-bold ${getFreshness(post).className}`}>{getFreshness(post).label} · {getFreshness(post).note}</span>
                       {post.keywords && post.keywords.length > 0 && (
                         <span>Keywords: {post.keywords.join(', ')}</span>
                       )}

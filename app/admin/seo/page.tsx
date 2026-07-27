@@ -36,10 +36,22 @@ const severityStyles: Record<Severity, string> = {
   low: 'bg-slate-100 text-slate-700 border-slate-200',
 }
 
+const searchConsoleItems = [
+  'Verify the lillycombest.com property in Google Search Console.',
+  'Submit https://lillycombest.com/sitemap.xml.',
+  'Inspect and request indexing for the homepage.',
+  'Inspect Services and all service detail pages.',
+  'Inspect the newest published blog posts.',
+  'Review Coverage, Page Experience, and Enhancement reports after Google recrawls.',
+]
+
+const checklistStorageKey = 'lilly-search-console-checklist'
+
 export default function AdminSeoAudit() {
   const [audit, setAudit] = useState<SeoAudit | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({})
 
   const loadAudit = async () => {
     setLoading(true)
@@ -59,6 +71,23 @@ export default function AdminSeoAudit() {
   useEffect(() => {
     loadAudit()
   }, [])
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(checklistStorageKey)
+      if (stored) setCheckedItems(JSON.parse(stored))
+    } catch {
+      setCheckedItems({})
+    }
+  }, [])
+
+  function toggleChecklistItem(item: string) {
+    setCheckedItems((current) => {
+      const next = { ...current, [item]: !current[item] }
+      localStorage.setItem(checklistStorageKey, JSON.stringify(next))
+      return next
+    })
+  }
 
   return (
     <div className="space-y-8">
@@ -142,17 +171,11 @@ export default function AdminSeoAudit() {
 
           <div className="rounded-2xl bg-white p-6 shadow-sm">
             <h2 className="text-lg font-bold text-gray-950">Search Console Launch Checklist</h2>
+            <p className="mt-1 text-sm text-gray-600">Saved in this browser so you can come back after each indexing step.</p>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {[
-                'Verify the lillycombest.com property in Google Search Console.',
-                'Submit https://lillycombest.com/sitemap.xml.',
-                'Inspect and request indexing for the homepage.',
-                'Inspect Services and all service detail pages.',
-                'Inspect the newest published blog posts.',
-                'Review Coverage, Page Experience, and Enhancement reports after Google recrawls.',
-              ].map((item) => (
+              {searchConsoleItems.map((item) => (
                 <label key={item} className="flex gap-3 rounded-xl border border-gray-100 bg-[rgb(var(--color-cream))] p-4 text-sm text-gray-800">
-                  <input type="checkbox" className="mt-1 h-4 w-4 rounded border-gray-300" />
+                  <input type="checkbox" checked={Boolean(checkedItems[item])} onChange={() => toggleChecklistItem(item)} className="mt-1 h-4 w-4 rounded border-gray-300" />
                   <span>{item}</span>
                 </label>
               ))}

@@ -22,6 +22,53 @@ function countH2(content: string) {
   return (content.match(/<h2|^## /gim) || []).length
 }
 
+const curatedImages = [
+  { label: 'Fresh meals', url: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg' },
+  { label: 'Lilly portrait', url: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg' },
+  { label: 'Mindful movement', url: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600' },
+  { label: 'Wellness routine', url: 'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600' },
+  { label: 'Meal planning', url: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1600' },
+  { label: 'Recovery', url: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg' },
+]
+
+const linkSuggestions = [
+  { terms: ['sleep', 'stress', 'routine', 'habit'], label: 'Wellness Coaching', href: '/services/wellness-coaching' },
+  { terms: ['meal', 'nutrition', 'food', 'prep', 'grocery'], label: 'Nutrition & Meal Planning', href: '/services/nutrition-meal-planning' },
+  { terms: ['workout', 'movement', 'fitness', 'motivation'], label: 'Workout & Motivation Coaching', href: '/services/workout-motivation-coaching' },
+  { terms: ['team', 'group', 'workshop', 'office'], label: 'Virtual Wellness Workshops', href: '/services/virtual-workshops' },
+  { terms: ['consult', 'call', 'start'], label: 'Request a Consultation', href: '/contact#consultation-request' },
+]
+
+function getSuggestedLinks(content: string, title: string) {
+  const haystack = `${title} ${content}`.toLowerCase()
+  return linkSuggestions.filter((suggestion) =>
+    suggestion.terms.some((term) => haystack.includes(term)) && !content.includes(suggestion.href),
+  )
+}
+
+function parseFaqPairs(content: string) {
+  const faqStart = content.search(/^## Quick FAQ\s*$/im)
+  if (faqStart === -1) return [{ question: '', answer: '' }]
+  const faqBlock = content.slice(faqStart)
+  const pairs = [...faqBlock.matchAll(/\*\*(.+?\?)\*\*\s*\n+([\s\S]*?)(?=\n+\*\*.+?\?\*\*|\n+## |\s*$)/g)]
+    .map((match) => ({ question: match[1].trim(), answer: match[2].trim() }))
+    .filter((item) => item.question || item.answer)
+  return pairs.length ? pairs : [{ question: '', answer: '' }]
+}
+
+function applyFaqBlock(content: string, faqs: Array<{ question: string; answer: string }>) {
+  const cleanContent = content.replace(/\n*## Quick FAQ[\s\S]*?(?=\n## |\s*$)/i, '').trim()
+  const validFaqs = faqs.filter((item) => item.question.trim() && item.answer.trim())
+  if (!validFaqs.length) return cleanContent
+
+  const faqBlock = [
+    '## Quick FAQ',
+    ...validFaqs.flatMap((item) => [`**${item.question.trim()}**`, item.answer.trim()]),
+  ].join('\n\n')
+
+  return `${cleanContent}\n\n${faqBlock}`.trim()
+}
+
 export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
   const [title, setTitle] = useState(post?.title || '')
   const [slug, setSlug] = useState(post?.slug || '')
@@ -31,6 +78,7 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
   const [metaDescription, setMetaDescription] = useState(post?.meta_description || '')
   const [keywords, setKeywords] = useState(post?.keywords?.join(', ') || '')
   const [published, setPublished] = useState(post?.published || false)
+  const [faqs, setFaqs] = useState(() => parseFaqPairs(post?.content || ''))
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
   const [preview, setPreview] = useState(false)
@@ -44,7 +92,18 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
     { label: 'Content includes at least two H2 sections', pass: countH2(content) >= 2 },
     { label: 'Content links to consultation or services', pass: /\/contact|\/services/i.test(content) },
     { label: 'Local relevance is included', pass: /pinehurst|woodlands|magnolia|tomball|spring|conroe|houston/i.test(content) },
-  ], [title, slug, excerpt, metaDescription, featuredImage, content])
+    { label: 'FAQ section is included', pass: faqs.some((item) => item.question.trim() && item.answer.trim()) },
+  ], [title, slug, excerpt, metaDescription, featuredImage, content, faqs])
+
+  const suggestedLinks = useMemo(() => getSuggestedLinks(content, title), [content, title])
+
+  function insertLink(label: string, href: string) {
+    setContent((current) => `${current.trim()}\n\nLearn more: [${label}](${href})`.trim())
+  }
+
+  function updateFaq(index: number, field: 'question' | 'answer', value: string) {
+    setFaqs((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, [field]: value } : item))
+  }
 
   async function save(nextPublished = published) {
     setSaving(true)
@@ -58,7 +117,7 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
           title,
           slug,
           excerpt,
-          content,
+          content: applyFaqBlock(content, faqs),
           featured_image: featuredImage,
           meta_description: metaDescription,
           keywords,
@@ -109,8 +168,39 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
             <textarea value={excerpt} onChange={(event) => setExcerpt(event.target.value)} placeholder="Excerpt" rows={3} className="w-full rounded-xl border border-gray-200 px-4 py-3" />
             <input value={metaDescription} onChange={(event) => setMetaDescription(event.target.value)} placeholder="Meta description" className="w-full rounded-xl border border-gray-200 px-4 py-3" />
             <input value={featuredImage} onChange={(event) => setFeaturedImage(event.target.value)} placeholder="Featured image URL" className="w-full rounded-xl border border-gray-200 px-4 py-3" />
+            <div className="rounded-2xl border border-gray-100 bg-[rgb(var(--color-cream))] p-4">
+              <p className="text-sm font-bold text-gray-950">Approved Image Picker</p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {curatedImages.map((image) => (
+                  <button
+                    key={image.url}
+                    type="button"
+                    onClick={() => setFeaturedImage(image.url)}
+                    className={`rounded-xl border px-3 py-2 text-left text-sm font-semibold ${featuredImage === image.url ? 'border-[rgb(var(--color-primary))] bg-white text-[rgb(var(--color-primary))]' : 'border-gray-200 bg-white/70 text-gray-700'}`}
+                  >
+                    {image.label}
+                  </button>
+                ))}
+              </div>
+            </div>
             <input value={keywords} onChange={(event) => setKeywords(event.target.value)} placeholder="Keywords, comma separated" className="w-full rounded-xl border border-gray-200 px-4 py-3" />
             <textarea value={content} onChange={(event) => setContent(event.target.value)} placeholder="HTML or markdown content" rows={16} className="w-full rounded-xl border border-gray-200 px-4 py-3 font-mono text-sm" />
+            <div className="rounded-2xl border border-gray-100 bg-white p-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-bold text-gray-950">Blog FAQs</p>
+                <button type="button" onClick={() => setFaqs((current) => [...current, { question: '', answer: '' }])} className="rounded-lg bg-[rgb(var(--color-primary))] px-3 py-2 text-xs font-bold text-white">
+                  Add FAQ
+                </button>
+              </div>
+              <div className="mt-3 space-y-3">
+                {faqs.map((item, index) => (
+                  <div key={index} className="grid gap-2 rounded-xl bg-[rgb(var(--color-cream))] p-3">
+                    <input value={item.question} onChange={(event) => updateFaq(index, 'question', event.target.value)} placeholder="Question, ending with ?" className="rounded-lg border border-gray-200 px-3 py-2 text-sm" />
+                    <textarea value={item.answer} onChange={(event) => updateFaq(index, 'answer', event.target.value)} placeholder="Short, helpful answer" rows={2} className="rounded-lg border border-gray-200 px-3 py-2 text-sm" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -137,6 +227,23 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
               <span className="text-gray-700">{check.label}</span>
             </div>
           ))}
+        </div>
+        <div className="mt-6 border-t border-gray-100 pt-5">
+          <h3 className="font-bold text-gray-950">Internal Link Suggestions</h3>
+          <div className="mt-3 space-y-2">
+            {suggestedLinks.length === 0 ? (
+              <p className="text-sm text-gray-600">Relevant service links are already included or no strong match yet.</p>
+            ) : suggestedLinks.map((suggestion) => (
+              <button
+                key={suggestion.href}
+                type="button"
+                onClick={() => insertLink(suggestion.label, suggestion.href)}
+                className="w-full rounded-xl border border-gray-200 px-3 py-2 text-left text-sm font-semibold text-[rgb(var(--color-primary))] hover:bg-[rgb(var(--color-cream))]"
+              >
+                Add {suggestion.label}
+              </button>
+            ))}
+          </div>
         </div>
       </aside>
     </div>
