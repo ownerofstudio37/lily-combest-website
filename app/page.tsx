@@ -93,6 +93,21 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <div className="mt-10 rounded-[2rem] border border-[rgba(244,232,237,0.16)] bg-[rgba(244,232,237,0.08)] p-6 sm:p-8">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[rgb(var(--color-primary-light))]">First 30 Days</p>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              {[
+                { title: 'Clarify', text: 'Identify the routines, stress points, food patterns, and schedule realities affecting your consistency.' },
+                { title: 'Simplify', text: 'Choose a few high-impact habits instead of trying to overhaul everything at once.' },
+                { title: 'Adjust', text: 'Review what worked, remove friction, and build a rhythm that can keep going.' },
+              ].map((item) => (
+                <div key={item.title}>
+                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[rgba(244,232,237,0.82)]">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Wave out → petal pink */}
@@ -209,7 +224,7 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
           <p className="text-[rgba(244,232,237,0.85)] mb-8">Request a free introductory consult. No pressure, no sales pitch — just an honest conversation about your health.</p>
           <a href="/contact#consultation-request" className="inline-block bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-primary-dark))] font-bold px-8 py-4 rounded-full text-base hover:brightness-105 transition">Request Your Free Consult</a>
-          <p className="text-sm text-[rgba(244,232,237,0.65)] mt-5">📍 Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
+          <p className="text-sm text-[rgba(244,232,237,0.65)] mt-5">Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
         </div>
       </section>
     </main>

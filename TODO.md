@@ -30,6 +30,7 @@ Last updated: 2026-07-27
 - [x] Upgraded to Next 16, React 19, Resend 6, and Lucide 1; production build and local public smoke checks pass.
 - [x] Tested ESLint setup after Next 16; deferred full ESLint baseline because the available config added vulnerable dependencies and exposed pre-existing lint debt.
 - [x] Polished public SEO/design pass: stronger structured data, improved Open Graph tags, trustworthy homepage proof section, richer services cards, and clearer contact conversion steps.
+- [x] Completed responsive visual QA pass with Playwright screenshots, added reusable visual QA script, improved blog article readability/FAQ schema, service-detail local/related sections, homepage first-30-days section, and stronger image alt text.
 
 ## Critical / High Priority
 

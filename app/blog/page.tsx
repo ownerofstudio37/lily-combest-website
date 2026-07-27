@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 }
 
 const moodImages = [
-  'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg',
-  'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+  { src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg', alt: 'Fresh balanced meal inspiration for nutrition coaching' },
+  { src: 'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600', alt: 'Wellness routine and mindful movement inspiration' },
+  { src: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600', alt: 'Yoga and stress support for sustainable wellness habits' },
+  { src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg', alt: 'Restorative recovery and sleep habit support' },
 ]
 
 export default async function BlogPage() {
@@ -27,7 +27,7 @@ export default async function BlogPage() {
   return (
     <main className="overflow-x-hidden bg-[rgb(var(--color-cream))]">
       <section className="relative min-h-[52vh] overflow-hidden bg-[rgb(var(--color-primary-dark))] px-4 pb-24 pt-28 text-[rgb(var(--color-secondary-light))]">
-        <Image src={moodImages[0]} alt="" fill priority className="object-cover opacity-45" />
+        <Image src={moodImages[0].src} alt="" fill priority className="object-cover opacity-45" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.86),rgba(20,28,19,0.5),rgba(20,28,19,0.74))]" />
         <div className="relative z-10 mx-auto flex min-h-[36vh] max-w-6xl flex-col justify-end">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary-light))]">Wellness Notes</p>
@@ -52,9 +52,9 @@ export default async function BlogPage() {
           </div>
 
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {moodImages.map((src, i) => (
-              <div key={src} className="rounded-2xl overflow-hidden organic-ring">
-                <Image src={src} alt={`Blog wellness mood image ${i + 1}`} width={500} height={400} className="h-24 md:h-32 w-full object-cover" />
+            {moodImages.map((photo) => (
+              <div key={photo.src} className="rounded-2xl overflow-hidden organic-ring">
+                <Image src={photo.src} alt={photo.alt} width={500} height={400} className="h-24 md:h-32 w-full object-cover" />
               </div>
             ))}
           </div>

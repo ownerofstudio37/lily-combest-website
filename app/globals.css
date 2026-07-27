@@ -147,4 +147,42 @@
   .wave-divider--dark {
     color: rgb(var(--color-primary-dark));
   }
+
+  .article-content {
+    line-height: 1.8;
+  }
+
+  .article-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.55rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: rgb(var(--color-ink));
+  }
+
+  .article-content p {
+    margin-top: 1rem;
+  }
+
+  .article-content ul {
+    margin-top: 1rem;
+    margin-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .article-content li {
+    margin-top: 0.45rem;
+  }
+
+  .article-content strong {
+    color: rgb(var(--color-primary-dark));
+  }
+
+  .article-content a {
+    color: rgb(var(--color-primary));
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
 }

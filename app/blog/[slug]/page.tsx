@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import WaveDivider from '../../components/WaveDivider'
 import { siteConfig } from '@/lib/siteConfig'
 import { contentToHtml } from '@/lib/markdownHtml'
+import { extractBlogFaqs } from '@/lib/blogSeo'
 import { getPublicPost, getPublicPosts } from '@/lib/publicBlog'
 
 export async function generateStaticParams() {
@@ -48,6 +49,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound()
 
   const url = `${siteConfig.url.replace(/\/$/, '')}/blog/${post.slug}`
+  const faqs = extractBlogFaqs(post.content)
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -70,6 +72,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
     mainEntityOfPage: url,
   }
+  const faqSchema = faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  } : null
 
   return (
     <main className="bg-[rgb(var(--color-cream))]">
@@ -85,14 +99,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       <section className="relative mx-auto max-w-4xl px-4 pb-28 pt-14">
-        <div className="prose prose-lg max-w-none mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }} />
-        <div className="rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
-          <p className="text-lg font-semibold">Have questions about your own routine?</p>
-          <a href="/contact#consultation-request" className="btn-secondary mt-4">Request a consultation</a>
+        <div className="article-content mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }} />
+        <div className="grid gap-5 lg:grid-cols-[1fr_0.85fr]">
+          <div className="rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
+            <p className="text-2xl font-bold">Have questions about your own routine?</p>
+            <p className="mt-3 leading-7 text-[rgba(244,232,237,0.82)]">Bring your goals, schedule, and sticking points. Lilly can help you choose a realistic next step.</p>
+            <a href="/contact#consultation-request" className="btn-secondary mt-5">Request a consultation</a>
+          </div>
+          <aside className="organic-card p-6">
+            <h2 className="text-xl font-bold text-[rgb(var(--color-ink))]">Related Support</h2>
+            <div className="mt-4 grid gap-3 text-sm font-semibold text-[rgb(var(--color-primary))]">
+              <a href="/services/wellness-coaching">One-on-one Wellness Coaching</a>
+              <a href="/services/nutrition-meal-planning">Nutrition & Meal Planning</a>
+              <a href="/services/workout-motivation-coaching">Workout & Motivation Coaching</a>
+            </div>
+          </aside>
         </div>
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
     </main>
   )
 }

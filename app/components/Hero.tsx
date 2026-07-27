@@ -24,7 +24,7 @@ export default function Hero() {
     <section className="relative min-h-[78vh] overflow-hidden">
       <Image
         src={images[idx]}
-        alt="Holistic wellness hero"
+        alt="Lilly Combest wellness coaching with nutrition, movement, and mindful routine support"
         width={1920}
         height={1200}
         className="absolute inset-0 h-full w-full object-cover"

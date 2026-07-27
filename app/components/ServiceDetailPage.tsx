@@ -67,7 +67,7 @@ export default function ServiceDetailPage({
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 md:grid-cols-4">
           {gallery.map((src, i) => (
             <div key={src} className="overflow-hidden rounded-2xl organic-ring">
-              <Image src={src} alt={`${title} detail ${i + 1}`} width={640} height={500} className="h-32 w-full object-cover md:h-44" />
+              <Image src={src} alt={`${title} wellness coaching support visual ${i + 1}`} width={640} height={500} className="h-32 w-full object-cover md:h-44" />
             </div>
           ))}
         </div>
@@ -112,6 +112,29 @@ export default function ServiceDetailPage({
               <button onClick={openBooking} className="btn-secondary mt-6 w-full">Request Free Consultation</button>
             </div>
           </aside>
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-6xl gap-5 px-4 lg:grid-cols-3">
+          <article className="organic-card p-6">
+            <h2 className="text-xl font-bold text-[rgb(var(--color-ink))]">Who This Helps</h2>
+            <p className="mt-3 leading-7 text-gray-700">
+              This service is designed for clients who want practical support, simple decisions, and a plan that can flex around work, family, stress, and real-life routines.
+            </p>
+          </article>
+          <article className="organic-card p-6">
+            <h2 className="text-xl font-bold text-[rgb(var(--color-ink))]">Local Availability</h2>
+            <p className="mt-3 leading-7 text-gray-700">
+              Lilly supports clients in Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, North Houston, and virtual clients across Texas.
+            </p>
+          </article>
+          <article className="organic-card p-6">
+            <h2 className="text-xl font-bold text-[rgb(var(--color-ink))]">Related Support</h2>
+            <div className="mt-4 grid gap-2 text-sm font-semibold text-[rgb(var(--color-primary))]">
+              <Link href="/services/nutrition-meal-planning">Nutrition & Meal Planning</Link>
+              <Link href="/services/workout-motivation-coaching">Workout & Motivation Coaching</Link>
+              <Link href="/services/virtual-workshops">Virtual Wellness Workshops</Link>
+            </div>
+          </article>
         </div>
 
         {faqs.length > 0 && (

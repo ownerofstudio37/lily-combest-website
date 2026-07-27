@@ -20,10 +20,10 @@ export default function Services() {
   const { openBooking } = useBooking()
 
   const featuredPhotos = [
-    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg',
-    'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg',
+    { src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg', alt: 'Lilly Combest one-on-one wellness coaching portrait' },
+    { src: 'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600', alt: 'Mindful movement and stress support for wellness coaching' },
+    { src: 'https://images.pexels.com/photos/8436463/pexels-photo-8436463.jpeg?auto=compress&cs=tinysrgb&w=1600', alt: 'Nutrition and wellness routine support for active clients' },
+    { src: 'https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077375/54708498315_242445c364_k_q9qsvb.jpg', alt: 'Restorative sleep and recovery support for healthy habits' },
   ]
 
   const services = [
@@ -45,7 +45,7 @@ export default function Services() {
 
       {/* ── HERO: Page Header + Photo Strip ───────────────────── */}
       <section className="relative min-h-[72vh] overflow-hidden bg-[rgb(47,60,41)] pb-28 pt-28 text-[rgb(244,232,237)]">
-        <Image src={featuredPhotos[2]} alt="" fill priority className="object-cover opacity-45" />
+        <Image src={featuredPhotos[2].src} alt="" fill priority className="object-cover opacity-45" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,28,19,0.88),rgba(20,28,19,0.58),rgba(20,28,19,0.78))]" />
         <div className="relative z-20 mx-auto max-w-6xl px-4">
           <div className="max-w-3xl">
@@ -60,9 +60,9 @@ export default function Services() {
           </div>
 
           <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {featuredPhotos.map((src, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl organic-ring bg-white/10">
-                <Image src={src} alt={`Holistic coaching highlight ${i + 1}`} width={500} height={420} className="h-28 w-full object-cover md:h-36" />
+            {featuredPhotos.map((photo) => (
+              <div key={photo.src} className="overflow-hidden rounded-2xl organic-ring bg-white/10">
+                <Image src={photo.src} alt={photo.alt} width={500} height={420} className="h-28 w-full object-cover md:h-36" />
               </div>
             ))}
           </div>
