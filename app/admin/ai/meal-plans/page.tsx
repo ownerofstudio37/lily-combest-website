@@ -2,14 +2,35 @@
 
 import { useState } from "react"
 import { Loader2, Plus, X } from "lucide-react"
+import { PlanSection, PlanShell } from "../components/PlanFormatter"
 
 interface MealPlan {
   title: string
   duration: string
   calories: string
-  meals: string[]
-  shoppingList: string[]
-  notes: string
+  meals: unknown
+  shoppingList: unknown
+  notes: unknown
+}
+
+function toArray(value: unknown): string[] {
+  if (!value) return []
+  if (Array.isArray(value)) return value.map((item) => typeof item === 'string' ? item : JSON.stringify(item))
+  if (typeof value === 'object') {
+    return Object.entries(value as Record<string, unknown>).map(([key, item]) => `${key}: ${typeof item === 'string' ? item : JSON.stringify(item)}`)
+  }
+  return String(value).split(/\n|;\s*/).map((item) => item.trim()).filter(Boolean)
+}
+
+function parseMeal(meal: string) {
+  const cleaned = meal.replace(/^[-*•]\s+/, '').trim()
+  const match = cleaned.match(/^(Day\s+\d+)?\s*([^:]+):\s*(.+)$/i)
+  if (!match) return { day: '', mealType: '', description: cleaned }
+  return {
+    day: match[1]?.trim() || '',
+    mealType: match[2]?.trim() || '',
+    description: match[3]?.trim() || cleaned,
+  }
 }
 
 export default function MealPlansGenerator() {
@@ -244,39 +265,42 @@ export default function MealPlansGenerator() {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-2xl font-bold text-gray-900">{generatedPlan.title}</h2>
-                <p className="text-gray-600 mt-2">
-                  {generatedPlan.duration} | {generatedPlan.calories} calories/day
-                </p>
-              </div>
+              <PlanShell
+                title={generatedPlan.title || `Meal Plan for ${clientName}`}
+                subtitle={`${generatedPlan.duration || `${duration} days`} | ${generatedPlan.calories || calorieTarget} calories/day`}
+              >
+                <section className="rounded-2xl border border-[rgba(74,93,63,0.1)] bg-white/82 p-5 shadow-sm">
+                  <h3 className="text-base font-bold text-gray-950">Meals</h3>
+                  <div className="mt-4 grid gap-3 md:grid-cols-2">
+                    {toArray(generatedPlan.meals).map((meal, idx) => {
+                      const parsed = parseMeal(meal)
+                      return (
+                        <article key={idx} className="rounded-2xl bg-[rgba(var(--color-primary-light),0.32)] p-4">
+                          {(parsed.day || parsed.mealType) && (
+                            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[rgb(var(--color-primary))]">
+                              {[parsed.day, parsed.mealType].filter(Boolean).join(' · ')}
+                            </p>
+                          )}
+                          <p className="mt-2 text-sm leading-6 text-gray-700">{parsed.description}</p>
+                        </article>
+                      )
+                    })}
+                  </div>
+                </section>
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Meals</h3>
-                <div className="space-y-3">
-                  {generatedPlan.meals.map((meal, idx) => (
-                    <div key={idx} className="border-l-4 border-pink-500 pl-4 py-2">
-                      {meal}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                <section className="rounded-2xl border border-[rgba(74,93,63,0.1)] bg-white/82 p-5 shadow-sm">
+                  <h3 className="text-base font-bold text-gray-950">Shopping List</h3>
+                  <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {toArray(generatedPlan.shoppingList).map((item, idx) => (
+                      <li key={idx} className="rounded-xl bg-[rgba(var(--color-primary-light),0.32)] px-3 py-2 text-sm text-gray-700">
+                        ☐ {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Shopping List</h3>
-                <ul className="grid grid-cols-2 gap-2">
-                  {generatedPlan.shoppingList.map((item, idx) => (
-                    <li key={idx} className="text-gray-700">
-                      ☐ {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Notes</h3>
-                <p className="text-gray-800 text-sm">{generatedPlan.notes}</p>
-              </div>
+                <PlanSection title="Notes" value={generatedPlan.notes as any} />
+              </PlanShell>
 
               <div className="flex gap-4">
                 <button 

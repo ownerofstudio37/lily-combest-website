@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Plus, Loader2, Copy, Check } from "lucide-react"
+import { PlanSection, PlanShell } from "../components/PlanFormatter"
 
 export default function WorkoutsGenerator() {
   const [clientName, setClientName] = useState("")
@@ -120,12 +121,13 @@ export default function WorkoutsGenerator() {
         {/* Results */}
         {result && (
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">{result.title}</h2>
+            <PlanShell
+              title={result.title || `Personalized Workout Plan for ${clientName}`}
+              subtitle={result.level ? `${String(result.level)} level` : "Formatted for client review and easy copying."}
+              actions={
                 <button
                   onClick={copyToClipboard}
-                  className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-white"
                 >
                   {copied ? (
                     <>
@@ -139,41 +141,19 @@ export default function WorkoutsGenerator() {
                     </>
                   )}
                 </button>
-              </div>
-
-              <div className="space-y-4 max-h-96 overflow-y-auto text-sm text-gray-700">
-                {result.level && <div><strong>Level:</strong> {String(result.level)}</div>}
-                {result.assessment && <div><h3 className="font-semibold text-gray-900 mb-1">Assessment:</h3><p>{typeof result.assessment === 'string' ? result.assessment : JSON.stringify(result.assessment)}</p></div>}
-                {result.weeklySchedule && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Weekly Schedule:</h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.weeklySchedule) ? result.weeklySchedule.map((day: string, i: number) => (
-                        <li key={i}>{day}</li>
-                      )) : <li>{String(result.weeklySchedule)}</li>}
-                    </ul>
-                  </div>
-                )}
-                {result.exercises && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Exercises:</h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.exercises) ? result.exercises.map((ex: string, i: number) => (
-                        <li key={i}>{ex}</li>
-                      )) : <li>{String(result.exercises)}</li>}
-                    </ul>
-                  </div>
-                )}
-                {result.warmUp && <div><h3 className="font-semibold text-gray-900 mb-1">Warm-Up:</h3><p>{typeof result.warmUp === 'string' ? result.warmUp : JSON.stringify(result.warmUp)}</p></div>}
-                {result.coolDown && <div><h3 className="font-semibold text-gray-900 mb-1">Cool-Down:</h3><p>{typeof result.coolDown === 'string' ? result.coolDown : JSON.stringify(result.coolDown)}</p></div>}
-                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{typeof result.nutrition === 'string' ? result.nutrition : JSON.stringify(result.nutrition)}</p></div>}
-                {result.recovery && <div><h3 className="font-semibold text-gray-900 mb-1">Recovery:</h3><p>{typeof result.recovery === 'string' ? result.recovery : JSON.stringify(result.recovery)}</p></div>}
-                {result.tracking && <div><h3 className="font-semibold text-gray-900 mb-1">Progress Tracking:</h3><p>{typeof result.tracking === 'string' ? result.tracking : JSON.stringify(result.tracking)}</p></div>}
-                {result.motivation && <div><h3 className="font-semibold text-gray-900 mb-1">Motivation:</h3><p>{typeof result.motivation === 'string' ? result.motivation : JSON.stringify(result.motivation)}</p></div>}
-                {result.progression && <div><h3 className="font-semibold text-gray-900 mb-1">Progression:</h3><p>{typeof result.progression === 'string' ? result.progression : JSON.stringify(result.progression)}</p></div>}
-                {result.notes && <div><h3 className="font-semibold text-gray-900 mb-1">Additional Notes:</h3><p>{typeof result.notes === 'string' ? result.notes : JSON.stringify(result.notes)}</p></div>}
-              </div>
-
+              }
+            >
+              <PlanSection title="Assessment" value={result.assessment} />
+              <PlanSection title="Weekly Schedule" value={result.weeklySchedule} />
+              <PlanSection title="Exercises" value={result.exercises} />
+              <PlanSection title="Warm-Up" value={result.warmUp} />
+              <PlanSection title="Cool-Down" value={result.coolDown} />
+              <PlanSection title="Nutrition" value={result.nutrition} />
+              <PlanSection title="Recovery" value={result.recovery} />
+              <PlanSection title="Progress Tracking" value={result.tracking} />
+              <PlanSection title="Motivation" value={result.motivation} />
+              <PlanSection title="Progression" value={result.progression} />
+              <PlanSection title="Additional Notes" value={result.notes} />
               <div className="mt-4 space-y-2 flex gap-2">
                 <button className="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 text-sm font-semibold">
                   Save as Draft
@@ -182,7 +162,7 @@ export default function WorkoutsGenerator() {
                   Publish
                 </button>
               </div>
-            </div>
+            </PlanShell>
           </div>
         )}
       </div>

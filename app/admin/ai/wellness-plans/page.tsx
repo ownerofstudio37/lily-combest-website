@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Loader2, Plus, Copy, Check } from "lucide-react"
+import { PlanSection, PlanShell } from "../components/PlanFormatter"
 
 export default function WellnessPlansGenerator() {
   const [clientName, setClientName] = useState("")
@@ -118,12 +119,13 @@ export default function WellnessPlansGenerator() {
         {/* Results */}
         {result && (
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">{result.title}</h2>
+            <PlanShell
+              title={result.title || `Personalized Wellness Plan for ${clientName}`}
+              subtitle="Formatted for client review and easy copying."
+              actions={
                 <button
                   onClick={copyToClipboard}
-                  className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-white"
                 >
                   {copied ? (
                     <>
@@ -137,39 +139,18 @@ export default function WellnessPlansGenerator() {
                     </>
                   )}
                 </button>
-              </div>
-
-              <div className="space-y-4 max-h-96 overflow-y-auto text-sm text-gray-700">
-                {result.goals && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Health Goals:</h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.goals) ? result.goals.map((goal: string, i: number) => (
-                        <li key={i}>{goal}</li>
-                      )) : <li>{String(result.goals)}</li>}
-                    </ul>
-                  </div>
-                )}
-                {result.dailyHabits && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Daily Habits:</h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {Array.isArray(result.dailyHabits) ? result.dailyHabits.map((habit: string, i: number) => (
-                        <li key={i}>{habit}</li>
-                      )) : <li>{String(result.dailyHabits)}</li>}
-                    </ul>
-                  </div>
-                )}
-                {result.nutrition && <div><h3 className="font-semibold text-gray-900 mb-1">Nutrition:</h3><p>{typeof result.nutrition === 'string' ? result.nutrition : JSON.stringify(result.nutrition)}</p></div>}
-                {result.sleep && <div><h3 className="font-semibold text-gray-900 mb-1">Sleep Optimization:</h3><p>{typeof result.sleep === 'string' ? result.sleep : JSON.stringify(result.sleep)}</p></div>}
-                {result.stress && <div><h3 className="font-semibold text-gray-900 mb-1">Stress Management:</h3><p>{typeof result.stress === 'string' ? result.stress : JSON.stringify(result.stress)}</p></div>}
-                {result.exercise && <div><h3 className="font-semibold text-gray-900 mb-1">Exercise:</h3><p>{typeof result.exercise === 'string' ? result.exercise : JSON.stringify(result.exercise)}</p></div>}
-                {result.tracking && <div><h3 className="font-semibold text-gray-900 mb-1">Progress Tracking:</h3><p>{typeof result.tracking === 'string' ? result.tracking : JSON.stringify(result.tracking)}</p></div>}
-                {result.weeklyAccountability && <div><h3 className="font-semibold text-gray-900 mb-1">Weekly Accountability:</h3><p>{typeof result.weeklyAccountability === 'string' ? result.weeklyAccountability : JSON.stringify(result.weeklyAccountability)}</p></div>}
-                {result.actionPlan && <div><h3 className="font-semibold text-gray-900 mb-1">30-Day Action Plan:</h3><p>{typeof result.actionPlan === 'string' ? result.actionPlan : JSON.stringify(result.actionPlan)}</p></div>}
-                {result.notes && <div><h3 className="font-semibold text-gray-900 mb-1">Additional Notes:</h3><p>{typeof result.notes === 'string' ? result.notes : JSON.stringify(result.notes)}</p></div>}
-              </div>
-
+              }
+            >
+              <PlanSection title="Health Goals" value={result.goals} />
+              <PlanSection title="Daily Habits" value={result.dailyHabits} />
+              <PlanSection title="Nutrition" value={result.nutrition} />
+              <PlanSection title="Sleep Optimization" value={result.sleep} />
+              <PlanSection title="Stress Management" value={result.stress} />
+              <PlanSection title="Exercise" value={result.exercise} />
+              <PlanSection title="Progress Tracking" value={result.tracking} />
+              <PlanSection title="Weekly Accountability" value={result.weeklyAccountability} />
+              <PlanSection title="30-Day Action Plan" value={result.actionPlan} />
+              <PlanSection title="Additional Notes" value={result.notes} />
               <div className="mt-4 space-y-2 flex gap-2">
                 <button className="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 text-sm font-semibold">
                   Save as Draft
@@ -178,7 +159,7 @@ export default function WellnessPlansGenerator() {
                   Publish
                 </button>
               </div>
-            </div>
+            </PlanShell>
           </div>
         )}
       </div>
