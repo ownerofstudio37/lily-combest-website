@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isSupabaseAdminConfigured, supabaseAdmin } from '@/lib/supabaseAdmin'
 import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export async function GET(request: NextRequest) {
@@ -8,6 +8,16 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    if (!isSupabaseAdminConfigured) {
+      return NextResponse.json({
+        totalContacts: 0,
+        recentContacts: 0,
+        totalBookings: 0,
+        blogPosts: 0,
+        warning: 'Supabase is not configured.',
+      })
+    }
+
     // Get total contacts count
     const { count: totalContacts } = await supabaseAdmin
       .from('contacts')

@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isSupabaseAdminConfigured, supabaseAdmin } from '@/lib/supabaseAdmin'
 import BlogEditor from './BlogEditor'
 
 export const dynamic = 'force-dynamic'
@@ -35,9 +35,12 @@ function getFreshness(post: BlogPost) {
 
 export default async function BlogManagement({ searchParams }: { searchParams?: { edit?: string } }) {
   let posts: BlogPost[] = []
-  let error: string | null = null
+  let warning: string | null = null
 
   try {
+    if (!isSupabaseAdminConfigured) {
+      warning = 'Supabase is not configured. Blog editor is available, but saved posts cannot be loaded until environment variables are set.'
+    } else {
     const { data, error: fetchError } = await supabaseAdmin
       .from('blog_posts')
       .select('*')
@@ -45,9 +48,10 @@ export default async function BlogManagement({ searchParams }: { searchParams?: 
 
     if (fetchError) throw fetchError
     posts = data || []
+    }
   } catch (err: any) {
     console.error('Error loading posts:', err)
-    error = err.message || 'Failed to load blog posts'
+    warning = err.message ? `Blog table is not reachable: ${err.message}` : 'Failed to load blog posts'
   }
 
   const publishedPosts = posts.filter(p => p.published)
@@ -61,13 +65,13 @@ export default async function BlogManagement({ searchParams }: { searchParams?: 
         <p className="text-gray-600 mt-2">Manage blog content directly or use the AI Blog Writer to generate SEO-optimized posts</p>
       </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          {error}
+      {warning && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-800">
+          {warning}
         </div>
       )}
 
-      <BlogEditor post={selectedPost} />
+      <BlogEditor key={selectedPost?.id || 'new'} post={selectedPost} />
 
       {/* Published Posts */}
       <div className="bg-white rounded-lg shadow overflow-hidden">

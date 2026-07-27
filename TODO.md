@@ -32,6 +32,7 @@ Last updated: 2026-07-27
 - [x] Polished public SEO/design pass: stronger structured data, improved Open Graph tags, trustworthy homepage proof section, richer services cards, and clearer contact conversion steps.
 - [x] Completed responsive visual QA pass with Playwright screenshots, added reusable visual QA script, improved blog article readability/FAQ schema, service-detail local/related sections, homepage first-30-days section, and stronger image alt text.
 - [x] Improved admin content tooling with blog freshness flags, internal link suggestions, curated image picker, FAQ editor/schema workflow, and persistent Search Console checklist.
+- [x] Added admin reliability pass: health status API/panels, production QA checklist, graceful Supabase fallbacks, and blog editor autosave/local draft recovery.
 
 ## Critical / High Priority
 

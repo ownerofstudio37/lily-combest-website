@@ -19,6 +19,7 @@ export default function SavedMealPlans() {
   const [mealPlans, setMealPlans] = useState<MealPlan[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const [warning, setWarning] = useState("")
   const [selectedPlan, setSelectedPlan] = useState<MealPlan | null>(null)
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function SavedMealPlans() {
       }
       
       setMealPlans(data.mealPlans || [])
+      setWarning(data.warning || "")
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -66,6 +68,12 @@ export default function SavedMealPlans() {
         <h1 className="text-3xl font-bold text-gray-900">Saved Meal Plans</h1>
         <p className="text-gray-600 mt-2">View and manage all client meal plans</p>
       </div>
+
+      {warning && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-800">
+          {warning}
+        </div>
+      )}
 
       {mealPlans.length === 0 ? (
         <div className="bg-white rounded-lg shadow p-8 text-center text-gray-500">

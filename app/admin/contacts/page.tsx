@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Mail, Phone, Calendar } from "lucide-react"
+import { Mail } from "lucide-react"
 
 interface Contact {
   id: string
@@ -16,6 +16,7 @@ export default function Contacts() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [warning, setWarning] = useState<string | null>(null)
 
   useEffect(() => {
     fetchContacts()
@@ -26,8 +27,8 @@ export default function Contacts() {
       const response = await fetch('/api/admin/contacts')
       if (response.ok) {
         const data = await response.json()
-        console.log('Fetched contacts:', data)
-        setContacts(data)
+        setContacts(Array.isArray(data) ? data : data.contacts || [])
+        setWarning(data.warning || null)
       } else {
         const errorText = await response.text()
         console.error('Error response:', errorText)
@@ -47,6 +48,17 @@ export default function Contacts() {
         <h1 className="text-3xl font-bold text-gray-900">Contact Submissions</h1>
         <p className="text-gray-600 mt-2">View and manage all contact form submissions from your website</p>
       </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+          {error}
+        </div>
+      )}
+      {warning && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-amber-800">
+          {warning}
+        </div>
+      )}
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="p-6 border-b border-gray-200">

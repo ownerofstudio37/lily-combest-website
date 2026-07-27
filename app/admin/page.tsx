@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { Users, MessageSquare, BookOpen, TrendingUp, Search } from "lucide-react"
 import Link from "next/link"
+import AdminHealthPanel from "./components/AdminHealthPanel"
 
 interface DashboardStats {
   totalContacts: number
@@ -61,6 +62,8 @@ export default function AdminDashboard() {
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-600 mt-1">Welcome back! Here's your wellness coaching business overview.</p>
       </div>
+
+      <AdminHealthPanel compact />
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { LogOut, Settings, BarChart3, MessageSquare, BookOpen, Zap, FileText, Search } from "lucide-react"
+import { LogOut, Settings, BarChart3, MessageSquare, BookOpen, Zap, FileText, Search, ClipboardCheck } from "lucide-react"
 
 interface AdminUser {
   email: string
@@ -179,6 +179,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 <Search size={16} />
                 SEO Audit
+              </Link>
+              <Link
+                href="/admin/qa"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700"
+              >
+                <ClipboardCheck size={16} />
+                QA Checklist
               </Link>
               <Link
                 href="/admin/settings"

@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 interface BlogEditorPost {
   id?: string
@@ -70,6 +70,7 @@ function applyFaqBlock(content: string, faqs: Array<{ question: string; answer: 
 }
 
 export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
+  const draftKey = `lilly-blog-editor-draft-${post?.id || 'new'}`
   const [title, setTitle] = useState(post?.title || '')
   const [slug, setSlug] = useState(post?.slug || '')
   const [excerpt, setExcerpt] = useState(post?.excerpt || '')
@@ -82,6 +83,7 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
   const [preview, setPreview] = useState(false)
+  const [recoverableDraft, setRecoverableDraft] = useState<any>(null)
 
   const checks = useMemo(() => [
     { label: 'Title is 35-65 characters', pass: title.length >= 35 && title.length <= 65 },
@@ -96,6 +98,53 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
   ], [title, slug, excerpt, metaDescription, featuredImage, content, faqs])
 
   const suggestedLinks = useMemo(() => getSuggestedLinks(content, title), [content, title])
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(draftKey)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed.updatedAt && parsed.content !== post?.content) setRecoverableDraft(parsed)
+      }
+    } catch {
+      setRecoverableDraft(null)
+    }
+  }, [draftKey, post?.content])
+
+  useEffect(() => {
+    const payload = {
+      title,
+      slug,
+      excerpt,
+      content,
+      featuredImage,
+      metaDescription,
+      keywords,
+      faqs,
+      updatedAt: new Date().toISOString(),
+    }
+    localStorage.setItem(draftKey, JSON.stringify(payload))
+  }, [draftKey, title, slug, excerpt, content, featuredImage, metaDescription, keywords, faqs])
+
+  function restoreDraft() {
+    if (!recoverableDraft) return
+    setTitle(recoverableDraft.title || '')
+    setSlug(recoverableDraft.slug || '')
+    setExcerpt(recoverableDraft.excerpt || '')
+    setContent(recoverableDraft.content || '')
+    setFeaturedImage(recoverableDraft.featuredImage || '')
+    setMetaDescription(recoverableDraft.metaDescription || '')
+    setKeywords(recoverableDraft.keywords || '')
+    setFaqs(recoverableDraft.faqs || [{ question: '', answer: '' }])
+    setRecoverableDraft(null)
+    setMessage('Recovered local draft.')
+  }
+
+  function discardDraft() {
+    localStorage.removeItem(draftKey)
+    setRecoverableDraft(null)
+    setMessage('Local draft discarded.')
+  }
 
   function insertLink(label: string, href: string) {
     setContent((current) => `${current.trim()}\n\nLearn more: [${label}](${href})`.trim())
@@ -126,6 +175,7 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
       })
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'Failed to save post')
+      localStorage.removeItem(draftKey)
       setMessage(nextPublished ? 'Post published.' : 'Draft saved.')
       setPublished(Boolean(data.post?.published))
       if (!post?.id && data.post?.id) {
@@ -150,6 +200,17 @@ export default function BlogEditor({ post }: { post?: BlogEditorPost | null }) {
             {preview ? 'Edit' : 'Preview'}
           </button>
         </div>
+
+        {recoverableDraft && (
+          <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+            <p className="font-bold">Recovered unsaved work is available.</p>
+            <p className="mt-1">Last local save: {new Date(recoverableDraft.updatedAt).toLocaleString()}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button type="button" onClick={restoreDraft} className="rounded-lg bg-amber-700 px-3 py-2 text-xs font-bold text-white">Restore Draft</button>
+              <button type="button" onClick={discardDraft} className="rounded-lg border border-amber-300 px-3 py-2 text-xs font-bold text-amber-900">Discard</button>
+            </div>
+          </div>
+        )}
 
         {preview ? (
           <article className="prose prose-sm mt-6 max-w-none rounded-2xl border border-gray-100 bg-[rgb(var(--color-cream))] p-5">

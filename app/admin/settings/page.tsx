@@ -1,6 +1,7 @@
 "use client"
 
 import { BarChart3, CheckCircle2, KeyRound, Settings } from "lucide-react"
+import AdminHealthPanel from "../components/AdminHealthPanel"
 
 const requiredEnv = [
   'ADMIN_PASSWORD',
@@ -20,6 +21,8 @@ export default function AdminSettings() {
         <h1 className="mt-2 text-3xl font-bold text-gray-950">Advanced Settings</h1>
         <p className="mt-2 max-w-2xl text-gray-600">Launch configuration and technical checks without fake performance or deployment data.</p>
       </div>
+
+      <AdminHealthPanel />
 
       <div className="grid gap-6 xl:grid-cols-3">
         <section className="organic-card p-6">

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isSupabaseAdminConfigured, supabaseAdmin } from '@/lib/supabaseAdmin'
 import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export const dynamic = 'force-dynamic'
@@ -10,6 +10,13 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    if (!isSupabaseAdminConfigured) {
+      return NextResponse.json(
+        { error: 'Supabase is not configured. Add Supabase environment variables before saving blog posts.' },
+        { status: 503 },
+      )
+    }
+
     const body = await request.json()
     const { id, title, excerpt, content, featured_image, meta_description, keywords, published } = body
     const slug = String(body.slug || '')

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { isSupabaseAdminConfigured, supabaseAdmin } from '@/lib/supabaseAdmin'
 import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export async function GET(request: NextRequest) {
@@ -8,6 +8,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    if (!isSupabaseAdminConfigured) {
+      return NextResponse.json({ contacts: [], warning: 'Supabase is not configured.' })
+    }
+
     const { data: contacts, error } = await supabaseAdmin
       .from('contacts')
       .select('*')
@@ -15,12 +19,12 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('Error fetching contacts:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ contacts: [], warning: `Contacts table is not reachable: ${error.message}` })
     }
 
-    return NextResponse.json(contacts || [])
+    return NextResponse.json({ contacts: contacts || [] })
   } catch (error: any) {
     console.error('Contacts API error:', error)
-    return NextResponse.json({ error: error.message || 'Failed to fetch contacts' }, { status: 500 })
+    return NextResponse.json({ contacts: [], warning: error.message || 'Failed to fetch contacts' })
   }
 }
