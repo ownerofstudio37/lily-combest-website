@@ -27,6 +27,8 @@ Last updated: 2026-07-27
 - [x] Added local SEO content, wellness scope language, service FAQs/schema, expanded starter blog content, service sitemap coverage, and robots.txt crawl fix.
 - [x] Added launch fundamentals: `.env.example`, smoke script, contact/admin-login rate limiting, duplicate blog slug handling, server-rendered blog pages, BlogPosting schema, basic blog HTML sanitization, and admin blog editor/preview workflow.
 - [x] Generated `package-lock.json` and ran `npm audit`; current high-severity findings are in `next`, bundled `postcss`, and `resend`'s email-rendering dependency chain.
+- [x] Upgraded to Next 16, React 19, Resend 6, and Lucide 1; production build and local public smoke checks pass.
+- [x] Tested ESLint setup after Next 16; deferred full ESLint baseline because the available config added vulnerable dependencies and exposed pre-existing lint debt.
 
 ## Critical / High Priority
 
@@ -34,7 +36,7 @@ Last updated: 2026-07-27
 - [x] Add `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `RESEND_API_KEY`, `GEMINI_API_KEY`, and `NEXT_PUBLIC_CALENDLY_URL` in production.
 - [ ] Add optional `ADMIN_SESSION_SECRET` in Netlify so session signing can rotate independently from the login password.
 - [ ] Verify every production admin/API route with the configured Netlify environment variables.
-- [ ] Move the project folder or build through a path without an apostrophe; local `next build` fails under `Momma's New Website` because Next's generated metadata loader does not escape that path.
+- [x] Move the project folder or build through a path without an apostrophe; local `next build` now passes in the current folder after the Next 16 migration.
 - [ ] Initialize ESLint non-interactively and add a clean `npm run lint` baseline.
 - [x] Decide whether public blog source of truth is Supabase or markdown; public pages, APIs, and sitemap now use Supabase with markdown fallback.
 - [x] Convert `/blog/[slug]` from a client-only page to a server-rendered page with `generateMetadata` for per-post title, description, canonical, Open Graph, and Article schema.
@@ -90,8 +92,10 @@ Last updated: 2026-07-27
 - [x] Add sitemap coverage for future Supabase-published blog posts.
 - [x] Remove `Disallow: /_next/` from `robots.txt` so crawlers can fetch rendering assets.
 - [x] Run `npm audit` and plan dependency upgrades for the current high-severity findings.
-- [ ] Upgrade Next.js/PostCSS after compatibility testing; `npm audit fix --force` wants a breaking Next major upgrade.
-- [ ] Upgrade Resend after checking the current API surface; `npm audit fix --force` wants a breaking Resend major upgrade.
+- [x] Upgrade Next.js/PostCSS after compatibility testing; `npm audit fix --force` wants a breaking Next major upgrade.
+- [x] Upgrade Resend after checking the current API surface; `npm audit fix --force` wants a breaking Resend major upgrade.
+- [ ] Monitor remaining upstream Next bundled `postcss` and `sharp` advisories; `npm audit fix --force` currently suggests an invalid downgrade to Next 9.
+- [x] Verify local production build after dependency upgrades.
 - [ ] Verify Netlify build with production env vars.
 - [ ] Test contact email delivery in Resend logs after domain verification.
 - [ ] Verify Core Web Vitals after the final image/content pass.

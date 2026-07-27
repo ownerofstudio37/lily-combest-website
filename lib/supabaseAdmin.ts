@@ -3,11 +3,12 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase credentials in environment variables')
-}
+export const isSupabaseAdminConfigured = Boolean(supabaseUrl && supabaseServiceKey)
 
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+export const supabaseAdmin = createClient(
+  supabaseUrl || 'https://example.supabase.co',
+  supabaseServiceKey || 'missing-service-role-key',
+{
   auth: {
     autoRefreshToken: false,
     persistSession: false,

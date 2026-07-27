@@ -12,8 +12,9 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getPublicPost(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await getPublicPost(slug)
   if (!post) return {}
 
   const url = `${siteConfig.url.replace(/\/$/, '')}/blog/${post.slug}`
@@ -41,8 +42,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getPublicPost(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getPublicPost(slug)
   if (!post) notFound()
 
   const url = `${siteConfig.url.replace(/\/$/, '')}/blog/${post.slug}`

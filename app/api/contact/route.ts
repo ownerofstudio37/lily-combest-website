@@ -3,8 +3,6 @@ import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { NextRequest } from 'next/server'
 import { checkRateLimit } from '@/lib/rateLimit'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, '&amp;')
@@ -23,6 +21,11 @@ export async function POST(req: NextRequest) {
   if (limited) return limited
 
   try {
+    if (!process.env.RESEND_API_KEY) {
+      return new Response(JSON.stringify({ error: 'Email service is not configured' }), { status: 500 })
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const body = await req.json()
     const name = String(body.name || '').trim()
     const email = String(body.email || '').trim()
@@ -58,7 +61,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: 'hello@hello.lillycombest.com',
       to: 'lilly@lillycombest.com',
-      reply_to: email,
+      replyTo: email,
       subject: `New contact from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
