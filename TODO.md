@@ -36,6 +36,7 @@ Last updated: 2026-07-27
 - [x] Cleaned up the admin SEO audit endpoint so production builds do not import filesystem code through the API route.
 - [x] Added an admin Supabase schema setup guide in Advanced Settings.
 - [x] Polished the admin dashboard UI and added a protected admin visual QA screenshot script.
+- [x] Audited and upgraded micro-interactions across the public site: shared motion utilities, card lift, image zoom, nav underline states, button press states, and reduced-motion support.
 
 ## Critical / High Priority
 
@@ -85,6 +86,7 @@ Last updated: 2026-07-27
 - [x] Reduce repeated wave dividers where they create visual noise on long pages.
 - [x] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
 - [x] Add visible focus states for all nav links, buttons, forms, and admin actions.
+- [x] Add consistent micro-interactions for hover, active, image, card, and navigation states while respecting reduced-motion preferences.
 - [x] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.
 - [x] Improve blog index layout with category filters, featured post treatment, and stronger empty/error states.
 - [ ] Replace stock-like imagery over time with real Lilly photos and branded wellness assets.

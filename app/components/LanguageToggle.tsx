@@ -15,7 +15,7 @@ export default function LanguageToggle() {
         aria-label="Switch to English"
         aria-pressed={!isEs}
         onClick={() => setLocale('en')}
-        className={`min-h-9 rounded-full px-3 text-sm font-bold ${isEs ? 'text-[rgb(var(--color-primary-dark))] hover:bg-[rgba(var(--color-primary-light),0.5)]' : 'bg-[rgb(var(--color-primary))] text-white shadow-sm'}`}
+        className={`soft-press min-h-9 rounded-full px-3 text-sm font-bold ${isEs ? 'text-[rgb(var(--color-primary-dark))] hover:bg-[rgba(var(--color-primary-light),0.5)]' : 'bg-[rgb(var(--color-primary))] text-white shadow-sm'}`}
       >
         English
       </button>
@@ -24,7 +24,7 @@ export default function LanguageToggle() {
         aria-label="Cambiar a Español"
         aria-pressed={isEs}
         onClick={() => setLocale('es')}
-        className={`min-h-9 rounded-full px-3 text-sm font-bold ${isEs ? 'bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-primary-dark))] shadow-sm' : 'text-[rgb(var(--color-primary-dark))] hover:bg-[rgba(var(--color-primary-light),0.5)]'}`}
+        className={`soft-press min-h-9 rounded-full px-3 text-sm font-bold ${isEs ? 'bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-primary-dark))] shadow-sm' : 'text-[rgb(var(--color-primary-dark))] hover:bg-[rgba(var(--color-primary-light),0.5)]'}`}
       >
         Español
       </button>

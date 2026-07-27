@@ -17,6 +17,8 @@
 
   --color-cream: 245, 241, 232;
   --color-ink: 37, 42, 34;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -46,8 +48,8 @@
   textarea,
   select {
     transition-property: color, background-color, border-color, box-shadow, opacity, transform, filter;
-    transition-duration: 160ms;
-    transition-timing-function: ease;
+    transition-duration: 180ms;
+    transition-timing-function: var(--motion-ease);
   }
 }
 
@@ -58,6 +60,67 @@
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0 10px 28px rgba(47, 60, 41, 0.09);
     backdrop-filter: blur(6px);
+    transition: transform 220ms var(--motion-ease), box-shadow 220ms var(--motion-ease), border-color 220ms var(--motion-ease), background-color 220ms var(--motion-ease);
+  }
+
+  .lift-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(74, 93, 63, 0.18);
+    box-shadow: 0 18px 42px rgba(47, 60, 41, 0.13);
+  }
+
+  .lift-card:active {
+    transform: translateY(-1px);
+  }
+
+  .media-zoom img {
+    transition: transform 700ms var(--motion-ease-soft), filter 700ms var(--motion-ease-soft);
+    will-change: transform;
+  }
+
+  .media-zoom:hover img {
+    transform: scale(1.045);
+    filter: saturate(1.04) contrast(1.02);
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.25rem;
+  }
+
+  .nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: -0.25rem;
+    left: 0;
+    height: 2px;
+    content: '';
+    background: rgb(var(--color-primary));
+    border-radius: 9999px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 220ms var(--motion-ease);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[data-active='true']::after {
+    transform: scaleX(1);
+  }
+
+  .soft-press:active {
+    transform: scale(0.98);
+  }
+
+  .arrow-nudge {
+    display: inline-block;
+    transition: transform 180ms var(--motion-ease);
+  }
+
+  .group:hover .arrow-nudge,
+  a:hover .arrow-nudge {
+    transform: translateX(0.25rem);
   }
 
   .btn-primary {
@@ -69,10 +132,18 @@
     color: rgb(var(--color-secondary-light));
     font-weight: 700;
     padding: 0.8rem 1.35rem;
+    box-shadow: 0 10px 22px rgba(47, 60, 41, 0.16);
+    transition: transform 180ms var(--motion-ease), box-shadow 180ms var(--motion-ease), filter 180ms var(--motion-ease);
   }
 
   .btn-primary:hover {
     filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(47, 60, 41, 0.22);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .btn-secondary {
@@ -84,6 +155,18 @@
     color: rgb(var(--color-primary-dark));
     font-weight: 700;
     padding: 0.8rem 1.35rem;
+    box-shadow: 0 10px 22px rgba(158, 122, 135, 0.18);
+    transition: transform 180ms var(--motion-ease), box-shadow 180ms var(--motion-ease), filter 180ms var(--motion-ease);
+  }
+
+  .btn-secondary:hover {
+    filter: brightness(1.04);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(158, 122, 135, 0.24);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
   }
 
   .btn-quiet {
@@ -96,6 +179,18 @@
     color: rgb(var(--color-primary-dark));
     font-weight: 700;
     padding: 0.75rem 1.2rem;
+    transition: transform 180ms var(--motion-ease), box-shadow 180ms var(--motion-ease), background-color 180ms var(--motion-ease), border-color 180ms var(--motion-ease);
+  }
+
+  .btn-quiet:hover {
+    border-color: rgba(var(--color-primary), 0.3);
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(47, 60, 41, 0.11);
+  }
+
+  .btn-quiet:active {
+    transform: translateY(0);
   }
 
   .section-cream {
@@ -184,5 +279,24 @@
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 0.2em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lift-card:hover,
+    .media-zoom:hover img,
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-quiet:hover {
+      transform: none;
+    }
   }
 }

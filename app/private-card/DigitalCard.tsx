@@ -361,8 +361,8 @@ export default function DigitalCard({ cardUrl }: { cardUrl: string }) {
             {services.map((service) => {
               const Icon = service.icon
               return (
-                <article key={service.title} className="organic-card p-5 hover:shadow-md transition">
-                  <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.78)] p-2 text-[rgb(var(--color-primary-dark))]">
+                <article key={service.title} className="organic-card lift-card group p-5">
+                  <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.78)] p-2 text-[rgb(var(--color-primary-dark))] transition group-hover:-translate-y-0.5 group-hover:bg-[rgba(var(--color-primary-light),0.72)]">
                     <Icon size={20} />
                   </div>
                   <h3 className="font-semibold mb-2 text-slate-900">{service.title}</h3>

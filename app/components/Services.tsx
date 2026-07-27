@@ -50,8 +50,8 @@ export default function Services(){
           {cards.map((card) => {
             const Icon = card.icon
             return (
-            <div key={card.title} className="p-6 organic-card hover:shadow-md transition">
-              <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.78)] p-2 text-[rgb(var(--color-primary-dark))]">
+            <div key={card.title} className="organic-card lift-card group p-6">
+              <div className="mb-4 inline-flex rounded-xl bg-[rgba(var(--color-secondary-light),0.78)] p-2 text-[rgb(var(--color-primary-dark))] transition group-hover:-translate-y-0.5 group-hover:bg-[rgba(var(--color-primary-light),0.72)]">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold mb-2 text-slate-900">{card.title}</h3>

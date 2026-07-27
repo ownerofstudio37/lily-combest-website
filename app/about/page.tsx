@@ -21,14 +21,14 @@ export default function About() {
       <section className="relative bg-[rgb(var(--color-secondary-light))] pb-28 pt-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="organic-card p-6 sm:p-8">
+            <div className="organic-card lift-card p-6 sm:p-8">
               <p className="text-gray-700 mb-5 text-lg leading-relaxed">As a passionate Wellness Consultant serving Pinehurst, The Woodlands, and Greater Houston, Lilly Combest helps clients build healthy routines that feel realistic and sustainable.</p>
               <p className="text-gray-700 mb-5 leading-relaxed">Her approach blends nutrition, movement, sleep, and stress support into one personalized strategy. No extreme plans. No all-or-nothing mindset. Just practical changes that fit your real life.</p>
               <p className="text-gray-700 leading-relaxed">If you&apos;re looking for a local wellness coach in Texas who focuses on long-term progress, Lilly can guide you with accountability and support at each step.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-lg col-span-2">
+              <div className="media-zoom rounded-2xl overflow-hidden shadow-lg col-span-2">
                 <Image
                   src="https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt="Wellness coaching session focused on nutrition and healthy habits"
@@ -37,7 +37,7 @@ export default function About() {
                   className="h-64 w-full object-cover"
                 />
               </div>
-              <div className="rounded-xl overflow-hidden shadow-sm">
+              <div className="media-zoom rounded-xl overflow-hidden shadow-sm">
                 <Image
                   src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg"
                   alt="Lilly Combest coaching portrait"
@@ -46,7 +46,7 @@ export default function About() {
                   className="h-40 w-full object-cover"
                 />
               </div>
-              <div className="rounded-xl overflow-hidden shadow-sm">
+              <div className="media-zoom rounded-xl overflow-hidden shadow-sm">
                 <Image
                   src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1756077261/54707332078_c4a60a9e45_k_per4mx.jpg"
                   alt="Fresh healthy ingredients"
@@ -75,7 +75,7 @@ export default function About() {
               'Sustainable, long-term habit building',
               'Personalized support tailored to your goals',
             ].map((item) => (
-              <div key={item} className="organic-card p-5 flex items-start gap-3">
+              <div key={item} className="organic-card lift-card p-5 flex items-start gap-3">
                 <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-[rgb(var(--color-primary))] text-white flex items-center justify-center text-xs">✓</span>
                 <span className="text-gray-700">{item}</span>
               </div>
@@ -83,11 +83,11 @@ export default function About() {
           </div>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
-            <div className="organic-card p-6">
+            <div className="organic-card lift-card p-6">
               <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">Local Wellness Support</h3>
               <p className="mt-3 leading-7 text-gray-700">Lilly works with clients in Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, North Houston, and the greater Houston area. Sessions can focus on steady nutrition, movement, sleep, stress, and realistic routines for Texas families and professionals.</p>
             </div>
-            <div className="organic-card p-6">
+            <div className="organic-card lift-card p-6">
               <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">Scope of Practice</h3>
               <p className="mt-3 leading-7 text-gray-700">Wellness coaching is educational and supportive. It is not emergency care, diagnosis, medical treatment, nutrition therapy for a medical condition, or a replacement for your physician, registered dietitian, therapist, or other licensed provider.</p>
             </div>

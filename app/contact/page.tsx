@@ -51,7 +51,7 @@ export default function Contact(){
               { title: 'Get a Personal Reply', text: 'Lilly will review your note and respond with a practical next step.' },
               { title: 'Choose a Consultation Time', text: 'If it feels aligned, you can schedule a free introductory conversation.' },
             ].map((item) => (
-              <div key={item.title} className="organic-card p-5">
+              <div key={item.title} className="organic-card lift-card p-5">
                 <p className="font-semibold text-slate-900">{item.title}</p>
                 <p className="mt-2 text-sm leading-6 text-gray-700">{item.text}</p>
               </div>
@@ -59,7 +59,7 @@ export default function Contact(){
           </div>
 
           <div className="grid lg:grid-cols-5 gap-8 items-start">
-            <form id="consultation-request" name="contact" method="POST" onSubmit={handleSubmit} className="lg:col-span-3 organic-card p-6">
+            <form id="consultation-request" name="contact" method="POST" onSubmit={handleSubmit} className="organic-card lg:col-span-3 p-6">
               <label htmlFor="contact-name" className="block mb-2 text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.name') || 'Your name'}</label>
               <input id="contact-name" title="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="w-full border border-[rgba(74,93,63,0.2)] rounded-lg px-3 py-2 mb-4 bg-white/70 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))]" name="name" autoComplete="name" required />
 
@@ -83,16 +83,16 @@ export default function Contact(){
             </form>
 
             <div className="lg:col-span-2 grid grid-cols-2 lg:grid-cols-1 gap-4">
-              <div className="organic-card col-span-2 p-5 lg:col-span-1">
+              <div className="organic-card lift-card col-span-2 p-5 lg:col-span-1">
                 <p className="text-slate-800 font-semibold">Prefer email?</p>
                 <p className="mt-2 text-sm leading-6 text-gray-700">Send preferred dates and goals to <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))] font-semibold">lilly@lillycombest.com</a>.</p>
                 <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[rgb(var(--color-primary))]">Pinehurst, TX 77362</p>
                 <p className="mt-1 text-sm text-gray-700">Serving The Woodlands, Tomball, Magnolia, Spring, Conroe, North Houston, and virtual clients across Texas.</p>
               </div>
-              <div className="rounded-2xl overflow-hidden">
+              <div className="media-zoom rounded-2xl overflow-hidden">
                 <Image src="https://res.cloudinary.com/dmjxho2rl/image/upload/v1774335295/LillyHeadshot-37_1_djbfa5.jpg" alt="Lilly Combest wellness portrait" width={600} height={700} className="h-44 lg:h-60 w-full object-cover" />
               </div>
-              <div className="rounded-2xl overflow-hidden">
+              <div className="media-zoom rounded-2xl overflow-hidden">
                 <Image src="https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Yoga and mindful movement" width={600} height={700} className="h-44 lg:h-60 w-full object-cover" />
               </div>
             </div>

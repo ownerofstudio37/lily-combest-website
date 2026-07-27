@@ -99,19 +99,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       <section className="relative mx-auto max-w-4xl px-4 pb-28 pt-14">
-        <div className="article-content mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }} />
+        <div className="article-content organic-card mb-10 p-6 text-gray-700 sm:p-8" dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }} />
         <div className="grid gap-5 lg:grid-cols-[1fr_0.85fr]">
-          <div className="rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
+          <div className="lift-card rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
             <p className="text-2xl font-bold">Have questions about your own routine?</p>
             <p className="mt-3 leading-7 text-[rgba(244,232,237,0.82)]">Bring your goals, schedule, and sticking points. Lilly can help you choose a realistic next step.</p>
             <a href="/contact#consultation-request" className="btn-secondary mt-5">Request a consultation</a>
           </div>
-          <aside className="organic-card p-6">
+          <aside className="organic-card lift-card p-6">
             <h2 className="text-xl font-bold text-[rgb(var(--color-ink))]">Related Support</h2>
             <div className="mt-4 grid gap-3 text-sm font-semibold text-[rgb(var(--color-primary))]">
-              <a href="/services/wellness-coaching">One-on-one Wellness Coaching</a>
-              <a href="/services/nutrition-meal-planning">Nutrition & Meal Planning</a>
-              <a href="/services/workout-motivation-coaching">Workout & Motivation Coaching</a>
+              <a href="/services/wellness-coaching" className="inline-block hover:translate-x-1">One-on-one Wellness Coaching</a>
+              <a href="/services/nutrition-meal-planning" className="inline-block hover:translate-x-1">Nutrition & Meal Planning</a>
+              <a href="/services/workout-motivation-coaching" className="inline-block hover:translate-x-1">Workout & Motivation Coaching</a>
             </div>
           </aside>
         </div>

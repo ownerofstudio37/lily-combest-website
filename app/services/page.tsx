@@ -61,7 +61,7 @@ export default function Services() {
 
           <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4">
             {featuredPhotos.map((photo) => (
-              <div key={photo.src} className="overflow-hidden rounded-2xl organic-ring bg-white/10">
+              <div key={photo.src} className="media-zoom overflow-hidden rounded-2xl organic-ring bg-white/10">
                 <Image src={photo.src} alt={photo.alt} width={500} height={420} className="h-28 w-full object-cover md:h-36" />
               </div>
             ))}
@@ -75,9 +75,9 @@ export default function Services() {
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-6">
             {services.map((service, idx) => (
-              <Link key={idx} href={service.href} className="organic-card overflow-hidden hover:shadow-lg transition block">
-                <div className="h-64 overflow-hidden">
-                  <Image src={service.image} alt={`${service.title} service`} width={1000} height={700} className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+              <Link key={idx} href={service.href} className="organic-card lift-card group block overflow-hidden">
+                <div className="media-zoom h-64 overflow-hidden">
+                  <Image src={service.image} alt={`${service.title} service`} width={1000} height={700} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-2 text-slate-900">{service.title}</h2>
@@ -89,7 +89,7 @@ export default function Services() {
                       </span>
                     ))}
                   </div>
-                  <span className="text-[rgb(var(--color-primary))] font-medium text-sm">Learn more →</span>
+                  <span className="text-[rgb(var(--color-primary))] font-medium text-sm">Learn more <span className="arrow-nudge">→</span></span>
                 </div>
               </Link>
             ))}
@@ -116,7 +116,7 @@ export default function Services() {
           <h2 className="text-2xl font-bold mb-8 text-[rgb(var(--color-ink))]">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {faqItems.map((item) => (
-              <details key={item.question} className="organic-card p-4">
+              <details key={item.question} className="organic-card lift-card p-4">
                 <summary className="cursor-pointer font-semibold text-slate-900">{item.question}</summary>
                 <p className="mt-2 text-gray-700">{item.answer}</p>
               </details>

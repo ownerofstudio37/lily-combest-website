@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       </section>
       <div className="container mx-auto max-w-4xl px-4 py-16">
         
-        <div className="prose prose-lg max-w-none space-y-6 text-gray-700 organic-card p-8">
+        <div className="prose prose-lg organic-card max-w-none space-y-6 p-8 text-gray-700">
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">Introduction</h2>
             <p>

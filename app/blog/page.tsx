@@ -45,7 +45,7 @@ export default async function BlogPage() {
 
           <div className="mt-8 flex flex-wrap gap-2 text-sm">
             {['Nutrition', 'Sleep', 'Stress', 'Habits', 'Local Wellness'].map((label) => (
-              <span key={label} className="rounded-full border border-[rgba(var(--color-primary),0.18)] bg-white/70 px-4 py-2 text-[rgb(var(--color-primary-dark))]">
+              <span key={label} className="soft-press rounded-full border border-[rgba(var(--color-primary),0.18)] bg-white/70 px-4 py-2 text-[rgb(var(--color-primary-dark))] hover:bg-white">
                 {label}
               </span>
             ))}
@@ -53,7 +53,7 @@ export default async function BlogPage() {
 
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
             {moodImages.map((photo) => (
-              <div key={photo.src} className="rounded-2xl overflow-hidden organic-ring">
+              <div key={photo.src} className="media-zoom rounded-2xl overflow-hidden organic-ring">
                 <Image src={photo.src} alt={photo.alt} width={500} height={400} className="h-24 md:h-32 w-full object-cover" />
               </div>
             ))}
@@ -69,10 +69,10 @@ export default async function BlogPage() {
         )}
 
         {featuredPost && (
-          <article className="organic-card mt-8 overflow-hidden">
+          <article className="organic-card lift-card mt-8 overflow-hidden">
             <div className="grid lg:grid-cols-5">
               {featuredPost.featured_image && (
-                <div className="h-64 lg:col-span-2 lg:h-auto">
+                <div className="media-zoom h-64 lg:col-span-2 lg:h-auto">
                   <Image src={featuredPost.featured_image} alt={featuredPost.title} width={800} height={640} className="h-full w-full object-cover" />
                 </div>
               )}
@@ -91,9 +91,9 @@ export default async function BlogPage() {
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {remainingPosts.map((p) => (
-            <article key={p.slug} className="organic-card overflow-hidden hover:shadow-md transition-shadow">
+            <article key={p.slug} className="organic-card lift-card group overflow-hidden">
               {p.featured_image && (
-                <div className="h-48 overflow-hidden">
+                <div className="media-zoom h-48 overflow-hidden">
                   <Image src={p.featured_image} alt={p.title} width={700} height={430} className="object-cover w-full h-full" />
                 </div>
               )}
@@ -103,7 +103,7 @@ export default async function BlogPage() {
                 </h2>
                 <p className="text-sm text-gray-500 mb-3">{new Date(p.date).toLocaleDateString()} · {p.readingTime} min read</p>
                 <p className="text-gray-700 mb-4">{p.excerpt}</p>
-                <Link href={`/blog/${p.slug}`} className="font-medium text-[rgb(var(--color-primary))] hover:underline">Read more →</Link>
+                <Link href={`/blog/${p.slug}`} className="font-medium text-[rgb(var(--color-primary))] hover:underline">Read more <span className="arrow-nudge">→</span></Link>
               </div>
             </article>
           ))}

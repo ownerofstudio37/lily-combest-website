@@ -46,8 +46,8 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {holisticGallery.map((photo) => (
-              <article key={photo.title} className="organic-card overflow-hidden hover:shadow-md transition">
-                <div className="h-48 overflow-hidden">
+              <article key={photo.title} className="organic-card lift-card overflow-hidden">
+                <div className="media-zoom h-48 overflow-hidden">
                   <Image src={photo.src} alt={photo.title} width={700} height={500} className="h-full w-full object-cover" />
                 </div>
                 <div className="p-4">
@@ -76,7 +76,7 @@ export default function HomePage() {
               { title: 'Sustainable Results', text: 'We build habits that work long-term, not short-term crash cycles.' },
               { title: 'Support + Accountability', text: 'Consistent guidance so you stay clear, consistent, and supported.' },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl bg-[rgba(244,232,237,0.1)] p-6 border border-[rgba(244,232,237,0.18)]">
+              <div key={item.title} className="lift-card rounded-2xl bg-[rgba(244,232,237,0.1)] p-6 border border-[rgba(244,232,237,0.18)]">
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                 <p className="text-[rgba(244,232,237,0.85)]">{item.text}</p>
               </div>
@@ -88,7 +88,7 @@ export default function HomePage() {
               'Helpful for busy parents, professionals, and clients restarting after burnout.',
               'Designed for Pinehurst, The Woodlands, North Houston, and virtual Texas clients.',
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[rgba(244,232,237,0.16)] bg-[rgba(244,232,237,0.08)] p-5 text-sm leading-6 text-[rgba(244,232,237,0.84)]">
+              <div key={item} className="lift-card rounded-2xl border border-[rgba(244,232,237,0.16)] bg-[rgba(244,232,237,0.08)] p-5 text-sm leading-6 text-[rgba(244,232,237,0.84)]">
                 {item}
               </div>
             ))}
@@ -159,7 +159,7 @@ export default function HomePage() {
               'Progress tracking tools',
               'Adjustments as your needs change',
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3 organic-card p-4">
+              <div key={i} className="organic-card lift-card flex items-start gap-3 p-4">
                 <CheckCircle className="text-[rgb(var(--color-primary))] flex-shrink-0 mt-1" size={20} />
                 <span className="text-gray-700">{item}</span>
               </div>
@@ -186,8 +186,8 @@ export default function HomePage() {
             ].map((item) => {
               const Icon = item.icon
               return (
-              <div key={item.title} className="organic-card p-6">
-                <div className="mb-5 inline-flex rounded-2xl bg-[rgba(var(--color-secondary-light),0.82)] p-3 text-[rgb(var(--color-primary-dark))]">
+              <div key={item.title} className="organic-card lift-card group p-6">
+                <div className="mb-5 inline-flex rounded-2xl bg-[rgba(var(--color-secondary-light),0.82)] p-3 text-[rgb(var(--color-primary-dark))] transition group-hover:-translate-y-0.5 group-hover:bg-[rgba(var(--color-primary-light),0.72)]">
                   <Icon size={22} />
                 </div>
                 <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">{item.title}</h3>
@@ -214,7 +214,7 @@ export default function HomePage() {
           <p className="text-[rgba(244,232,237,0.85)] mb-8">Personalized wellness coaching throughout the 77362 area and beyond — in-person or virtual.</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
             {['Pinehurst', 'The Woodlands', 'Tomball', 'Magnolia', 'Spring', 'Conroe', 'North Houston', 'Greater Houston'].map(city => (
-              <span key={city} className="px-4 py-2 rounded-full bg-[rgba(244,232,237,0.12)] border border-[rgba(244,232,237,0.2)] text-[rgb(244,232,237)]">{city}</span>
+              <span key={city} className="soft-press px-4 py-2 rounded-full bg-[rgba(244,232,237,0.12)] border border-[rgba(244,232,237,0.2)] text-[rgb(244,232,237)] hover:bg-[rgba(244,232,237,0.18)]">{city}</span>
             ))}
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[rgba(244,232,237,0.72)]">Wellness coaching is educational and supportive. It does not diagnose, treat, or replace medical care.</p>
@@ -223,7 +223,7 @@ export default function HomePage() {
         <div className="max-w-2xl mx-auto px-4 text-center border-t border-[rgba(244,232,237,0.15)] pt-16">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Health?</h2>
           <p className="text-[rgba(244,232,237,0.85)] mb-8">Request a free introductory consult. No pressure, no sales pitch — just an honest conversation about your health.</p>
-          <a href="/contact#consultation-request" className="inline-block bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-primary-dark))] font-bold px-8 py-4 rounded-full text-base hover:brightness-105 transition">Request Your Free Consult</a>
+          <a href="/contact#consultation-request" className="btn-secondary px-8 py-4 text-base">Request Your Free Consult</a>
           <p className="text-sm text-[rgba(244,232,237,0.65)] mt-5">Proudly serving Pinehurst, TX 77362 and surrounding areas</p>
         </div>
       </section>

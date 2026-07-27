@@ -36,7 +36,7 @@ export default function Navigation(){
     <nav className={`fixed w-full z-40 transition-all duration-300 border-b border-[rgba(74,93,63,0.08)] ${scrolled || !isHome ? 'bg-[rgba(245,241,232,0.94)] backdrop-blur-md shadow-sm' : 'bg-[rgba(245,241,232,0.72)] backdrop-blur-md'}`} aria-label="Main navigation">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3" aria-label="Lilly Combest - Home">
+          <Link href="/" className="flex items-center gap-3 soft-press" aria-label="Lilly Combest - Home">
             <div className="flex items-center gap-3">
               <BrandLogo width={42} height={42} className="h-10 w-10" />
               <div className="leading-tight">
@@ -48,11 +48,11 @@ export default function Navigation(){
 
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map(item => (
-              <Link key={item.id} href={item.href} className={`text-sm font-medium transition-colors ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : 'text-slate-700 hover:text-[rgb(var(--color-primary-dark))]'}`}>
+              <Link key={item.id} href={item.href} data-active={pathname === item.href} className={`nav-link text-sm font-medium transition-colors ${pathname === item.href ? 'text-[rgb(var(--color-primary))]' : 'text-slate-700 hover:text-[rgb(var(--color-primary-dark))]'}`}>
                 {item.label}
               </Link>
             ))}
-            <button onClick={openBooking} className="ml-2 inline-block bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary-dark))] text-white px-4 py-2 rounded-xl shadow hover:shadow-md transition">{t('nav.book') || 'Request Date'}</button>
+            <button onClick={openBooking} className="soft-press ml-2 inline-block rounded-xl bg-gradient-to-r from-[rgb(var(--color-primary))] to-[rgb(var(--color-secondary-dark))] px-4 py-2 text-white shadow hover:-translate-y-0.5 hover:shadow-md">{t('nav.book') || 'Request Date'}</button>
             {/* Language switcher */}
             <div className="ml-4">
               <LanguageToggle />
@@ -60,7 +60,7 @@ export default function Navigation(){
           </div>
 
           <button
-            className="md:hidden p-2 rounded-md text-slate-700"
+            className="soft-press md:hidden p-2 rounded-md text-slate-700 hover:bg-white/70"
             onClick={() => setIsOpen(!isOpen)}
             aria-controls="mobile-menu"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
@@ -71,12 +71,12 @@ export default function Navigation(){
       </div>
 
       {isOpen && (
-        <div id="mobile-menu" className="md:hidden bg-white/95 border-t">
+        <div id="mobile-menu" className="md:hidden bg-white/95 border-t shadow-lg">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
             {navItems.map(item => (
-              <Link key={item.id} href={item.href} className="py-2 border-b text-slate-800" onClick={() => setIsOpen(false)}>{item.label}</Link>
+              <Link key={item.id} href={item.href} className="rounded-lg border-b px-2 py-2 text-slate-800 hover:bg-[rgba(var(--color-primary-light),0.45)]" onClick={() => setIsOpen(false)}>{item.label}</Link>
             ))}
-            <button onClick={() => { openBooking(); setIsOpen(false) }} className="py-2 bg-[rgb(var(--color-primary))] text-white text-center rounded-md">{t('nav.book') || 'Request Date'}</button>
+            <button onClick={() => { openBooking(); setIsOpen(false) }} className="btn-primary py-2 text-center">{t('nav.book') || 'Request Date'}</button>
             <div className="pt-2">
               <LanguageToggle />
             </div>
