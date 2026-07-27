@@ -20,6 +20,11 @@ export default function WorkoutMotivationCoaching() {
       bestFor={['Anyone who struggles with consistency', 'Clients restarting after a long break', 'People who want flexible workout options', 'Those who need accountability more than intensity']}
       ctaTitle="Ready to get moving?"
       ctaText="Request a free call to talk through goals, barriers, and a plan that feels doable."
+      faqs={[
+        { question: 'Do I need a gym membership?', answer: 'No. Plans can be built for home, gym, walking, light equipment, or the resources you already have available.' },
+        { question: 'Can the plan be adjusted for my current fitness level?', answer: 'Yes. Movement plans start with your current capacity and can be adjusted for schedule, confidence, limitations, and recovery needs.' },
+        { question: 'Is this personal training?', answer: 'This is wellness and accountability coaching for movement consistency. It is not medical care or physical therapy, and injuries should be discussed with a licensed provider.' },
+      ]}
     />
   )
 }

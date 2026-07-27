@@ -24,6 +24,7 @@ Last updated: 2026-07-27
 - [x] Polished About, Contact, Blog article, Privacy, Private Card, and Services hub pages toward the homepage/service-detail visual system.
 - [x] Restored homepage-style wave transitions on service detail pages and upgraded the Services hub hero to match the homepage polish.
 - [x] Added wave continuity across About, Blog index, Blog article templates, Contact, and Privacy pages.
+- [x] Added local SEO content, wellness scope language, service FAQs/schema, expanded starter blog content, service sitemap coverage, and robots.txt crawl fix.
 
 ## Critical / High Priority
 
@@ -55,13 +56,13 @@ Last updated: 2026-07-27
 ## SEO Content / Local SEO
 
 - [ ] Add Lilly's real credentials, certifications, professional background, and scope-of-practice language to `/about`.
-- [ ] Add a wellness disclaimer clarifying coaching is not emergency, diagnostic, or medical treatment.
-- [ ] Add phone number or remove empty telephone schema until the phone number is public.
+- [x] Add a wellness disclaimer clarifying coaching is not emergency, diagnostic, or medical treatment.
+- [x] Add phone number or remove empty telephone schema until the phone number is public.
 - [ ] Add sameAs links to verified social profiles and Google Business Profile once available.
-- [ ] Expand local content for Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, and North Houston.
+- [x] Expand local content for Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, and North Houston.
 - [ ] Create dedicated local landing pages only where there is useful, unique local content.
-- [ ] Expand thin starter blog posts with specific examples, Lilly's perspective, FAQs, and consult CTAs.
-- [ ] Add service-specific FAQs to every service detail page.
+- [x] Expand thin starter blog posts with specific examples, Lilly's perspective, FAQs, and consult CTAs.
+- [x] Add service-specific FAQs to every service detail page.
 - [ ] Add stronger homepage proof: credentials, testimonials, client-fit criteria, and a short process section above the long visual gallery.
 - [ ] Submit `https://lillycombest.com/sitemap.xml` in Google Search Console after launch.
 
@@ -83,8 +84,9 @@ Last updated: 2026-07-27
 - [ ] Add `.env.example` with all required variables and safe placeholders.
 - [ ] Configure `next-env.d.ts` and required Next TypeScript settings intentionally rather than through the interactive lint prompt.
 - [ ] Add a basic smoke script for homepage, services, blog, contact, login, admin auth check, and SEO audit API.
-- [ ] Add sitemap coverage for all service pages and future Supabase-published blog posts.
-- [ ] Remove `Disallow: /_next/` from `robots.txt` so crawlers can fetch rendering assets.
+- [x] Add sitemap coverage for all service pages.
+- [ ] Add sitemap coverage for future Supabase-published blog posts.
+- [x] Remove `Disallow: /_next/` from `robots.txt` so crawlers can fetch rendering assets.
 - [ ] Run `npm audit` and plan dependency upgrades for the current high-severity findings.
 - [ ] Verify Netlify build with production env vars.
 - [ ] Test contact email delivery in Resend logs after domain verification.

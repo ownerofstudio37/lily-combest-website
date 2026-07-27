@@ -20,6 +20,11 @@ export default function WellnessCoaching() {
       bestFor={['Busy professionals and parents', 'Clients tired of extreme plans', 'People who want accountability without judgment', 'Anyone rebuilding energy, sleep, nutrition, or consistency']}
       ctaTitle="Ready to start your wellness journey?"
       ctaText="Request a free consultation and Lilly will help you decide whether coaching is the right next step."
+      faqs={[
+        { question: 'Do you offer wellness coaching near Pinehurst and The Woodlands?', answer: 'Yes. Lilly serves Pinehurst, The Woodlands, Tomball, Magnolia, Spring, Conroe, North Houston, and virtual clients across Texas.' },
+        { question: 'Is wellness coaching a medical service?', answer: 'No. Wellness coaching supports healthy routines, nutrition habits, movement, sleep, and accountability. It does not diagnose, treat, or replace care from a licensed medical provider.' },
+        { question: 'What happens during the first consultation?', answer: 'You will talk through your goals, current routine, stress points, schedule, and what kind of support would feel realistic before choosing a plan.' },
+      ]}
     />
   )
 }

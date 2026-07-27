@@ -79,8 +79,8 @@ export async function runSeoAudit(): Promise<SeoAuditResult> {
       severity: 'high',
       category: 'local-seo',
       status: 'open',
-      evidence: 'lib/siteConfig.ts has phone set to an empty string, and structured data outputs an empty telephone field.',
-      recommendation: 'Add Lilly’s public business phone number or intentionally remove telephone from schema until it is available.',
+      evidence: 'lib/siteConfig.ts has phone set to an empty string. Structured data intentionally omits telephone until a public number is available.',
+      recommendation: 'Add Lilly’s public business phone number to siteConfig when it is ready to publish.',
     })
   }
 

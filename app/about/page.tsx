@@ -77,6 +77,17 @@ export default function About() {
               </div>
             ))}
           </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <div className="organic-card p-6">
+              <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">Local Wellness Support</h3>
+              <p className="mt-3 leading-7 text-gray-700">Lilly works with clients in Pinehurst, The Woodlands, Magnolia, Tomball, Spring, Conroe, North Houston, and the greater Houston area. Sessions can focus on steady nutrition, movement, sleep, stress, and realistic routines for Texas families and professionals.</p>
+            </div>
+            <div className="organic-card p-6">
+              <h3 className="text-xl font-bold text-[rgb(var(--color-ink))]">Scope of Practice</h3>
+              <p className="mt-3 leading-7 text-gray-700">Wellness coaching is educational and supportive. It is not emergency care, diagnosis, medical treatment, nutrition therapy for a medical condition, or a replacement for your physician, registered dietitian, therapist, or other licensed provider.</p>
+            </div>
+          </div>
         </div>
         <WaveDivider tone="dark" className="absolute bottom-[-1px] left-0 right-0 h-20" />
       </section>

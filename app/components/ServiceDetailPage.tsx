@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, CheckCircle2 } from 'lucide-react'
 import { useBooking } from './Booking'
+import FaqSchema from './FaqSchema'
 
 interface ServiceDetailPageProps {
   eyebrow: string
@@ -19,6 +20,10 @@ interface ServiceDetailPageProps {
   bestFor: string[]
   ctaTitle: string
   ctaText: string
+  faqs?: Array<{
+    question: string
+    answer: string
+  }>
 }
 
 export default function ServiceDetailPage({
@@ -31,6 +36,7 @@ export default function ServiceDetailPage({
   bestFor,
   ctaTitle,
   ctaText,
+  faqs = [],
 }: ServiceDetailPageProps) {
   const { openBooking } = useBooking()
 
@@ -107,7 +113,22 @@ export default function ServiceDetailPage({
             </div>
           </aside>
         </div>
+
+        {faqs.length > 0 && (
+          <div className="mx-auto mt-10 max-w-4xl px-4">
+            <h2 className="text-2xl font-bold text-[rgb(var(--color-ink))]">Frequently Asked Questions</h2>
+            <div className="mt-5 space-y-3">
+              {faqs.map((item) => (
+                <details key={item.question} className="organic-card p-5">
+                  <summary className="cursor-pointer font-semibold text-slate-900">{item.question}</summary>
+                  <p className="mt-3 leading-7 text-gray-700">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
+      {faqs.length > 0 && <FaqSchema items={faqs} />}
     </main>
   )
 }

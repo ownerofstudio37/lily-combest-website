@@ -82,6 +82,17 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              'Best for clients who want practical habit support, not a rigid program.',
+              'Helpful for busy parents, professionals, and clients restarting after burnout.',
+              'Designed for Pinehurst, The Woodlands, North Houston, and virtual Texas clients.',
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-[rgba(244,232,237,0.16)] bg-[rgba(244,232,237,0.08)] p-5 text-sm leading-6 text-[rgba(244,232,237,0.84)]">
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Wave out → petal pink */}
@@ -180,10 +191,11 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold mb-4">Serving Pinehurst, The Woodlands & Greater Houston</h2>
           <p className="text-[rgba(244,232,237,0.85)] mb-8">Personalized wellness coaching throughout the 77362 area and beyond — in-person or virtual.</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
-            {['Pinehurst', 'The Woodlands', 'Tomball', 'Magnolia', 'Spring', 'Conroe', 'Houston'].map(city => (
+            {['Pinehurst', 'The Woodlands', 'Tomball', 'Magnolia', 'Spring', 'Conroe', 'North Houston', 'Greater Houston'].map(city => (
               <span key={city} className="px-4 py-2 rounded-full bg-[rgba(244,232,237,0.12)] border border-[rgba(244,232,237,0.2)] text-[rgb(244,232,237)]">{city}</span>
             ))}
           </div>
+          <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[rgba(244,232,237,0.72)]">Wellness coaching is educational and supportive. It does not diagnose, treat, or replace medical care.</p>
         </div>
 
         <div className="max-w-2xl mx-auto px-4 text-center border-t border-[rgba(244,232,237,0.15)] pt-16">

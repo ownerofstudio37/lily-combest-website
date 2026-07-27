@@ -20,6 +20,11 @@ export default function VirtualWorkshops() {
       bestFor={['Corporate wellness programs', 'Community groups and schools', 'Teams wanting practical health education', 'Organizations that need approachable wellness content']}
       ctaTitle="Interested in a workshop?"
       ctaText="Request a consultation and Lilly will help shape a topic around your group’s needs."
+      faqs={[
+        { question: 'Can workshops be customized for a local organization?', answer: 'Yes. Lilly can tailor topics for teams, schools, community groups, and offices in Pinehurst, The Woodlands, North Houston, and virtual settings.' },
+        { question: 'What topics work best for a group?', answer: 'Popular workshop topics include meal prep, stress management, sleep routines, habit building, energy, and realistic wellness for busy schedules.' },
+        { question: 'Are workshops medical training?', answer: 'No. Workshops provide wellness education and practical habit support. They are not emergency, diagnostic, or medical treatment.' },
+      ]}
     />
   )
 }

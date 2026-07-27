@@ -20,6 +20,11 @@ export default function NutritionMealPlanning() {
       bestFor={['People who want to eat better but feel stuck', 'Busy families and professionals', 'Clients wanting more steady energy', 'Anyone who dislikes restrictive dieting']}
       ctaTitle="Ready to simplify nutrition?"
       ctaText="Request a free consultation and Lilly will help map the first practical step."
+      faqs={[
+        { question: 'Are meal plans customized?', answer: 'Yes. Meal planning is built around your preferences, schedule, goals, cooking comfort, and family needs so it feels usable during a normal week.' },
+        { question: 'Do I have to follow a strict diet?', answer: 'No. The focus is sustainable structure, balanced meals, and practical choices, not restrictive dieting or all-or-nothing food rules.' },
+        { question: 'Can nutrition coaching be virtual?', answer: 'Yes. Lilly works with local clients around Pinehurst and The Woodlands as well as virtual clients who want realistic nutrition support.' },
+      ]}
     />
   )
 }

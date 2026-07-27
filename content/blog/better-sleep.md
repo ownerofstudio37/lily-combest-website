@@ -34,4 +34,23 @@ Your bedroom should be a sleep sanctuary — cool (around 65-68°F), dark, and q
 
 None of these habits are revolutionary on their own, but together they signal to your body that sleep is a priority. Start with one or two, and add more as they become automatic. Within a few weeks, you'll likely notice improved energy, mood, and focus.
 
-Sweet dreams!
+## Lilly's Coaching Perspective
+
+Most people do not need a perfect nighttime routine. They need a repeatable one. If you live in Pinehurst, The Woodlands, Spring, Tomball, Magnolia, Conroe, or North Houston, your schedule may include long drives, family activities, late dinners, and Texas heat that makes evening movement harder. A good sleep plan should account for those real-life pressures instead of pretending they do not exist.
+
+When I coach clients on sleep, we usually start with one small lever: a more consistent wake time, a calmer final 30 minutes, or a simple dinner rhythm that does not leave the body working overtime at bedtime. Once that becomes easier, we build from there.
+
+## Quick FAQ
+
+**How long does it take to improve sleep habits?**  
+Some clients notice small changes within a few nights, but sustainable sleep improvement usually comes from practicing a routine for several weeks.
+
+**Do I need supplements to sleep better?**  
+Not always. Many people benefit first from light, timing, stress, caffeine, movement, and evening routine changes. Talk with a licensed medical provider before starting supplements, especially if you take medication or have a health condition.
+
+**Can wellness coaching help with sleep?**  
+Yes, wellness coaching can help you build routines around sleep, stress, meals, movement, and accountability. It is not medical treatment for insomnia or a sleep disorder.
+
+## Need Help Building a Sleep Routine?
+
+If your sleep feels inconsistent and you want practical support, [request a consultation](/contact#consultation-request). Lilly can help you map a realistic first step for your schedule.

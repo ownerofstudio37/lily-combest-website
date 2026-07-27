@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
 
-# Disallow bot traffic to admin, api internals, etc. (customize as needed)
+# Disallow bot traffic to admin, api internals, etc. Keep Next assets crawlable for rendering.
 Disallow: /api/
-Disallow: /_next/
 Disallow: /private/
 
 # Allow crawling of blog and public pages
