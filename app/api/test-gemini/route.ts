@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
+import { isAdminAuthenticated } from "@/lib/adminAuth"
 
 export async function GET(request: NextRequest) {
-  const GEMINI_API_KEY = process.env.GEMINI_API_KEY
+  if (!isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
 
-  console.log("Test endpoint called")
-  console.log("API key exists:", !!GEMINI_API_KEY)
-  console.log("API key first 10 chars:", GEMINI_API_KEY?.substring(0, 10) + "***")
+  const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 
   if (!GEMINI_API_KEY) {
     return NextResponse.json({ error: "GEMINI_API_KEY not set" }, { status: 500 })
   }
 
   try {
-    console.log("Making test request to Gemini API...")
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
       {
@@ -35,9 +35,7 @@ export async function GET(request: NextRequest) {
       }
     )
 
-    console.log("Response status:", response.status)
     const result = await response.json()
-    console.log("Response structure:", JSON.stringify(result, null, 2))
 
     return NextResponse.json({
       status: response.status,

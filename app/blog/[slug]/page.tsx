@@ -1,49 +1,72 @@
-"use client"
-
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import type { Metadata } from 'next'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import WaveDivider from '../../components/WaveDivider'
+import { siteConfig } from '@/lib/siteConfig'
+import { contentToHtml } from '@/lib/markdownHtml'
+import { getPublicPost, getPublicPosts } from '@/lib/publicBlog'
 
-interface BlogPost {
-  slug: string
-  title: string
-  date: string
-  author: string
-  featured_image: string
-  content: string
-  readingTime: number
+export async function generateStaticParams() {
+  const posts = await getPublicPosts()
+  return posts.map((post) => ({ slug: post.slug }))
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }){
-  const [post, setPost] = useState<BlogPost | null>(null)
-  const [loading, setLoading] = useState(true)
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getPublicPost(params.slug)
+  if (!post) return {}
 
-  useEffect(() => {
-    async function loadPost() {
-      const res = await fetch(`/api/blog/${params.slug}`)
-      if (res.ok) {
-        const data = await res.json()
-        setPost(data)
-      }
-      setLoading(false)
-    }
-    loadPost()
-  }, [params.slug])
+  const url = `${siteConfig.url.replace(/\/$/, '')}/blog/${post.slug}`
+  const description = post.meta_description || post.excerpt || siteConfig.description
 
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
-        <p>Loading...</p>
-      </div>
-    )
+  return {
+    title: `${post.title} | Lilly Combest`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description,
+      url,
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      images: post.featured_image ? [{ url: post.featured_image, alt: post.title }] : [{ url: siteConfig.ogImage, alt: siteConfig.name }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [post.featured_image || siteConfig.ogImage],
+    },
   }
+}
 
-  if (!post) {
-    return (
-      <div className="max-w-4xl mx-auto py-16 px-4 section-cream rounded-[2rem]">
-        <p className="text-gray-700">Post not found</p>
-      </div>
-    )
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getPublicPost(params.slug)
+  if (!post) notFound()
+
+  const url = `${siteConfig.url.replace(/\/$/, '')}/blog/${post.slug}`
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.meta_description || post.excerpt,
+    image: post.featured_image || siteConfig.ogImage,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url.replace(/\/$/, '')}/logo.svg`,
+      },
+    },
+    mainEntityOfPage: url,
   }
 
   return (
@@ -58,13 +81,16 @@ export default function BlogPost({ params }: { params: { slug: string } }){
         </div>
         <WaveDivider tone="cream" className="absolute bottom-[-1px] left-0 right-0 z-10 h-20" />
       </section>
+
       <section className="relative mx-auto max-w-4xl px-4 pb-28 pt-14">
-        <div className="prose prose-lg max-w-none mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="prose prose-lg max-w-none mb-10 text-gray-700 organic-card p-6 sm:p-8" dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }} />
         <div className="rounded-[2rem] bg-[rgb(var(--color-primary-dark))] p-7 text-[rgb(var(--color-secondary-light))]">
           <p className="text-lg font-semibold">Have questions about your own routine?</p>
           <a href="/contact#consultation-request" className="btn-secondary mt-4">Request a consultation</a>
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
     </main>
   )
 }

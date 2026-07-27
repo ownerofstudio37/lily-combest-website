@@ -122,6 +122,17 @@ export async function runSeoAudit(): Promise<SeoAuditResult> {
         recommendation: 'Split blog article rendering into a server page with generateMetadata and a client child only where interaction is needed.',
       })
     }
+    if (!blogSlugSource.includes('BlogPosting')) {
+      addFinding(findings, {
+        id: 'blog-post-schema',
+        title: 'Blog article pages are missing BlogPosting schema',
+        severity: 'medium',
+        category: 'blog',
+        status: 'open',
+        evidence: 'app/blog/[slug]/page.tsx does not include BlogPosting structured data.',
+        recommendation: 'Add BlogPosting JSON-LD with headline, description, image, dates, author, publisher, and canonical URL.',
+      })
+    }
   }
 
   for (const post of posts) {
@@ -188,15 +199,20 @@ export async function runSeoAudit(): Promise<SeoAuditResult> {
     }
   }
 
-  addFinding(findings, {
-    id: 'search-console-workflow',
-    title: 'Search Console workflow is not visible in admin',
-    severity: 'low',
-    category: 'technical',
-    status: 'watch',
-    evidence: 'Admin analytics/settings pages are placeholders and do not show sitemap submission or indexing checks.',
-    recommendation: 'Add launch checklist items for Search Console property verification, sitemap submission, and key-page inspection.',
-  })
+  if (fileExists('app/admin/seo/page.tsx')) {
+    const adminSeoSource = fs.readFileSync(path.join(process.cwd(), 'app/admin/seo/page.tsx'), 'utf8')
+    if (!adminSeoSource.includes('Search Console Launch Checklist')) {
+      addFinding(findings, {
+        id: 'search-console-workflow',
+        title: 'Search Console workflow is not visible in admin',
+        severity: 'low',
+        category: 'technical',
+        status: 'watch',
+        evidence: 'Admin SEO page does not show sitemap submission or indexing checks.',
+        recommendation: 'Add launch checklist items for Search Console property verification, sitemap submission, and key-page inspection.',
+      })
+    }
+  }
 
   addFinding(findings, {
     id: 'eeat-content',
@@ -204,8 +220,8 @@ export async function runSeoAudit(): Promise<SeoAuditResult> {
     severity: 'medium',
     category: 'content',
     status: 'open',
-    evidence: 'About/services pages mention Lilly’s approach but do not yet show credentials, process details, citations, or clear medical disclaimers.',
-    recommendation: 'Add credentials, scope-of-practice language, client-fit guidance, and practical examples to support trust in wellness content.',
+    evidence: 'Scope-of-practice and process details are present, but Lilly’s real credentials/certifications still need to be added when available.',
+    recommendation: 'Add verified credentials, certifications, and professional background details once Lilly confirms the exact wording.',
   })
 
   const weights: Record<AuditSeverity, number> = {

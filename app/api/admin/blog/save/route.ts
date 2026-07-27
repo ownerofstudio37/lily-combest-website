@@ -11,13 +11,34 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const { id, title, slug, excerpt, content, featured_image, meta_description, keywords, published } = body
+    const { id, title, excerpt, content, featured_image, meta_description, keywords, published } = body
+    const slug = String(body.slug || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
 
     // Validate required fields
     if (!title || !slug || !content) {
       return NextResponse.json(
         { error: 'Missing required fields: title, slug, and content are required' },
         { status: 400 }
+      )
+    }
+
+    const duplicateQuery = supabaseAdmin
+      .from('blog_posts')
+      .select('id')
+      .eq('slug', slug)
+      .limit(1)
+
+    if (id) duplicateQuery.neq('id', id)
+    const { data: duplicates, error: duplicateError } = await duplicateQuery
+    if (duplicateError) throw duplicateError
+    if (duplicates?.length) {
+      return NextResponse.json(
+        { error: 'A blog post with this slug already exists. Choose a unique slug before saving.' },
+        { status: 409 },
       )
     }
 

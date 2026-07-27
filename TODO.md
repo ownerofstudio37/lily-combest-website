@@ -25,6 +25,8 @@ Last updated: 2026-07-27
 - [x] Restored homepage-style wave transitions on service detail pages and upgraded the Services hub hero to match the homepage polish.
 - [x] Added wave continuity across About, Blog index, Blog article templates, Contact, and Privacy pages.
 - [x] Added local SEO content, wellness scope language, service FAQs/schema, expanded starter blog content, service sitemap coverage, and robots.txt crawl fix.
+- [x] Added launch fundamentals: `.env.example`, smoke script, contact/admin-login rate limiting, duplicate blog slug handling, server-rendered blog pages, BlogPosting schema, basic blog HTML sanitization, and admin blog editor/preview workflow.
+- [x] Generated `package-lock.json` and ran `npm audit`; current high-severity findings are in `next`, bundled `postcss`, and `resend`'s email-rendering dependency chain.
 
 ## Critical / High Priority
 
@@ -34,23 +36,23 @@ Last updated: 2026-07-27
 - [ ] Verify every production admin/API route with the configured Netlify environment variables.
 - [ ] Move the project folder or build through a path without an apostrophe; local `next build` fails under `Momma's New Website` because Next's generated metadata loader does not escape that path.
 - [ ] Initialize ESLint non-interactively and add a clean `npm run lint` baseline.
-- [ ] Decide whether public blog source of truth is Supabase or markdown; right now public APIs use Supabase with markdown fallback, while the sitemap reads markdown only.
-- [ ] Convert `/blog/[slug]` from a client-only page to a server-rendered page with `generateMetadata` for per-post title, description, canonical, Open Graph, and Article schema.
-- [ ] Sanitize or strictly validate generated/stored blog HTML before rendering with `dangerouslySetInnerHTML`.
-- [ ] Add rate limiting and basic spam protection to `/api/contact` and admin login.
-- [ ] Remove or hide `/api/test-gemini` from production, or require admin authentication.
+- [x] Decide whether public blog source of truth is Supabase or markdown; public pages, APIs, and sitemap now use Supabase with markdown fallback.
+- [x] Convert `/blog/[slug]` from a client-only page to a server-rendered page with `generateMetadata` for per-post title, description, canonical, Open Graph, and Article schema.
+- [x] Sanitize or strictly validate generated/stored blog HTML before rendering with `dangerouslySetInnerHTML`.
+- [x] Add rate limiting and basic spam protection to `/api/contact` and admin login.
+- [x] Remove or hide `/api/test-gemini` from production, or require admin authentication.
 
 ## SEO / Blog Tooling
 
-- [ ] Add a real blog editor for title, slug, excerpt, content, featured image, publish state, canonical URL, tags, and meta description.
-- [ ] Add an SEO score/checklist to the blog writer before saving: title length, slug quality, excerpt/meta length, H2 usage, internal links, local relevance, CTA, and image alt text.
-- [ ] Add duplicate slug handling in `/api/admin/blog/save`.
-- [ ] Add post preview before publish and draft edit/update flows from `/admin/blog`.
-- [ ] Add BlogPosting structured data for each article.
+- [x] Add a real blog editor for title, slug, excerpt, content, featured image, publish state, keywords, and meta description.
+- [x] Add an SEO score/checklist to the blog editor before saving: title length, slug quality, excerpt/meta length, H2 usage, internal links, local relevance, CTA, and image presence.
+- [x] Add duplicate slug handling in `/api/admin/blog/save`.
+- [x] Add post preview before publish and draft edit/update flows from `/admin/blog`.
+- [x] Add BlogPosting structured data for each article.
 - [ ] Add FAQ schema where blog posts answer common wellness questions.
 - [ ] Add an internal-link suggestion tool for service pages, blog posts, and contact CTAs.
 - [ ] Add an image picker/uploader workflow for featured blog images.
-- [ ] Add Search Console launch checklist into `/admin/seo`: verify property, submit sitemap, inspect homepage, inspect top service pages, inspect newest posts.
+- [x] Add Search Console launch checklist into `/admin/seo`: verify property, submit sitemap, inspect homepage, inspect top service pages, inspect newest posts.
 - [ ] Track blog post freshness and flag posts older than 6-12 months for review.
 
 ## SEO Content / Local SEO
@@ -81,13 +83,15 @@ Last updated: 2026-07-27
 
 ## Technical / Launch
 
-- [ ] Add `.env.example` with all required variables and safe placeholders.
-- [ ] Configure `next-env.d.ts` and required Next TypeScript settings intentionally rather than through the interactive lint prompt.
-- [ ] Add a basic smoke script for homepage, services, blog, contact, login, admin auth check, and SEO audit API.
+- [x] Add `.env.example` with all required variables and safe placeholders.
+- [x] Configure `next-env.d.ts` and required Next TypeScript settings intentionally rather than through the interactive lint prompt.
+- [x] Add a basic smoke script for homepage, services, blog, contact, login, admin auth check, and SEO audit API.
 - [x] Add sitemap coverage for all service pages.
-- [ ] Add sitemap coverage for future Supabase-published blog posts.
+- [x] Add sitemap coverage for future Supabase-published blog posts.
 - [x] Remove `Disallow: /_next/` from `robots.txt` so crawlers can fetch rendering assets.
-- [ ] Run `npm audit` and plan dependency upgrades for the current high-severity findings.
+- [x] Run `npm audit` and plan dependency upgrades for the current high-severity findings.
+- [ ] Upgrade Next.js/PostCSS after compatibility testing; `npm audit fix --force` wants a breaking Next major upgrade.
+- [ ] Upgrade Resend after checking the current API surface; `npm audit fix --force` wants a breaking Resend major upgrade.
 - [ ] Verify Netlify build with production env vars.
 - [ ] Test contact email delivery in Resend logs after domain verification.
 - [ ] Verify Core Web Vitals after the final image/content pass.

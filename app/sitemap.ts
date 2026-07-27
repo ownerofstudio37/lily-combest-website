@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/blog'
+import { getPublicPosts } from '@/lib/publicBlog'
 import { siteConfig } from '@/lib/siteConfig'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -64,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Blog posts
-  const posts = await getAllPosts()
+  const posts = await getPublicPosts()
   const blogPages: MetadataRoute.Sitemap = posts.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),

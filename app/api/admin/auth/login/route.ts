@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { adminSessionCookie, createAdminSessionToken, getConfiguredAdminPassword } from '@/lib/adminAuth'
+import { checkRateLimit } from '@/lib/rateLimit'
 
 export async function POST(request: NextRequest) {
+  const limited = checkRateLimit(request, 'admin-login', { limit: 6, windowMs: 15 * 60 * 1000 })
+  if (limited) return limited
+
   const { password } = await request.json()
   const adminPassword = getConfiguredAdminPassword()
 

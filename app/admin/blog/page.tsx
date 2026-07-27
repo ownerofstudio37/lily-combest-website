@@ -1,4 +1,5 @@
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import BlogEditor from './BlogEditor'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,7 +18,7 @@ interface BlogPost {
   updated_at: string
 }
 
-export default async function BlogManagement() {
+export default async function BlogManagement({ searchParams }: { searchParams?: { edit?: string } }) {
   let posts: BlogPost[] = []
   let error: string | null = null
 
@@ -36,6 +37,7 @@ export default async function BlogManagement() {
 
   const publishedPosts = posts.filter(p => p.published)
   const draftPosts = posts.filter(p => !p.published)
+  const selectedPost = posts.find((post) => post.id === searchParams?.edit) || null
 
   return (
     <div className="space-y-8">
@@ -49,6 +51,8 @@ export default async function BlogManagement() {
           {error}
         </div>
       )}
+
+      <BlogEditor post={selectedPost} />
 
       {/* Published Posts */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -79,6 +83,9 @@ export default async function BlogManagement() {
                     </div>
                   </div>
                   <div className="flex gap-2">
+                    <a href={`/admin/blog?edit=${post.id}`} className="text-[rgb(var(--color-primary))] hover:underline text-sm">
+                      Edit
+                    </a>
                     <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 text-sm">
                       View
                     </a>
@@ -105,7 +112,12 @@ export default async function BlogManagement() {
                     <p className="text-sm text-gray-600 mt-1">/blog/{post.slug}</p>
                     <p className="text-xs text-gray-500 mt-2">Saved: {new Date(post.updated_at).toLocaleDateString()}</p>
                   </div>
-                  <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Draft</span>
+                  <div className="flex items-center gap-3">
+                    <a href={`/admin/blog?edit=${post.id}`} className="text-[rgb(var(--color-primary))] hover:underline text-sm">
+                      Edit
+                    </a>
+                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Draft</span>
+                  </div>
                 </div>
               </div>
             ))}

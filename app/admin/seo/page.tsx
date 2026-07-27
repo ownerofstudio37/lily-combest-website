@@ -140,6 +140,25 @@ export default function AdminSeoAudit() {
             </div>
           </div>
 
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <h2 className="text-lg font-bold text-gray-950">Search Console Launch Checklist</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {[
+                'Verify the lillycombest.com property in Google Search Console.',
+                'Submit https://lillycombest.com/sitemap.xml.',
+                'Inspect and request indexing for the homepage.',
+                'Inspect Services and all service detail pages.',
+                'Inspect the newest published blog posts.',
+                'Review Coverage, Page Experience, and Enhancement reports after Google recrawls.',
+              ].map((item) => (
+                <label key={item} className="flex gap-3 rounded-xl border border-gray-100 bg-[rgb(var(--color-cream))] p-4 text-sm text-gray-800">
+                  <input type="checkbox" className="mt-1 h-4 w-4 rounded border-gray-300" />
+                  <span>{item}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
             <div className="border-b border-gray-100 p-5">
               <h2 className="text-lg font-bold text-gray-950">Findings</h2>
