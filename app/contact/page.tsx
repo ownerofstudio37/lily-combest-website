@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useLocale } from '../components/LocaleProvider'
 import WaveDivider from '../components/WaveDivider'
@@ -11,6 +11,8 @@ export default function Contact(){
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const messageLength = message.trim().length
+  const canSubmit = useMemo(() => name.trim().length > 1 && email.includes('@') && messageLength > 12 && status !== 'sending', [email, messageLength, name, status])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -59,17 +61,24 @@ export default function Contact(){
           </div>
 
           <div className="grid lg:grid-cols-5 gap-8 items-start">
-            <form id="consultation-request" name="contact" method="POST" onSubmit={handleSubmit} className="organic-card lg:col-span-3 p-6">
+            <form id="consultation-request" name="contact" method="POST" onSubmit={handleSubmit} className="organic-card scroll-mt-24 lg:col-span-3 p-6">
+              <div className="mb-6 rounded-2xl bg-[rgba(var(--color-primary-light),0.45)] px-4 py-3 text-sm leading-6 text-[rgb(var(--color-primary-dark))]">
+                A few details are enough. Lilly can ask follow-up questions after she reviews your note.
+              </div>
+
               <label htmlFor="contact-name" className="block mb-2 text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.name') || 'Your name'}</label>
-              <input id="contact-name" title="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="w-full border border-[rgba(74,93,63,0.2)] rounded-lg px-3 py-2 mb-4 bg-white/70 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))]" name="name" autoComplete="name" required />
+              <input id="contact-name" title="Your name" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} className="form-field mb-4" name="name" autoComplete="name" required />
 
               <label htmlFor="contact-email" className="block mb-2 text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.email') || 'Your email'}</label>
-              <input id="contact-email" title="Your email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} className="w-full border border-[rgba(74,93,63,0.2)] rounded-lg px-3 py-2 mb-4 bg-white/70 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))]" type="email" name="email" autoComplete="email" required />
+              <input id="contact-email" title="Your email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} className="form-field mb-4" type="email" name="email" autoComplete="email" required />
 
-              <label htmlFor="contact-message" className="block mb-2 text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.message') || 'Message'}</label>
-              <textarea id="contact-message" title="Message" placeholder="Tell Lilly your goals and preferred dates/times." value={message} onChange={e => setMessage(e.target.value)} className="w-full border border-[rgba(74,93,63,0.2)] rounded-lg px-3 py-2 mb-4 bg-white/70 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))]" name="message" rows={5} required />
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <label htmlFor="contact-message" className="block text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.message') || 'Message'}</label>
+                <span className={`text-xs font-semibold ${messageLength > 12 ? 'text-[rgb(var(--color-primary))]' : 'text-gray-500'}`}>{messageLength} chars</span>
+              </div>
+              <textarea id="contact-message" title="Message" placeholder="Tell Lilly your goals and preferred dates/times." value={message} onChange={e => setMessage(e.target.value)} className="form-field mb-4 min-h-36 resize-y" name="message" rows={5} required />
 
-              <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-60">
+              <button type="submit" disabled={!canSubmit} className="btn-primary w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60">
                 {status === 'sending' ? 'Sending…' : (t('contact.form.send') || 'Send Message')}
               </button>
 

@@ -37,6 +37,7 @@ Last updated: 2026-07-27
 - [x] Added an admin Supabase schema setup guide in Advanced Settings.
 - [x] Polished the admin dashboard UI and added a protected admin visual QA screenshot script.
 - [x] Audited and upgraded micro-interactions across the public site: shared motion utilities, card lift, image zoom, nav underline states, button press states, and reduced-motion support.
+- [x] Polished mobile navigation and consultation request interactions with active menu states, body scroll lock, route-aware highlighting, form field focus states, submit readiness, and CTA scroll attention.
 
 ## Critical / High Priority
 

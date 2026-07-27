@@ -15,6 +15,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     const formAnchor = document.getElementById('consultation-request')
     if (formAnchor) {
       formAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      formAnchor.classList.remove('request-attention')
+      window.setTimeout(() => formAnchor.classList.add('request-attention'), 80)
+      window.setTimeout(() => formAnchor.classList.remove('request-attention'), 1200)
       window.history.replaceState(null, '', '#consultation-request')
       return
     }
@@ -45,6 +48,6 @@ export default function Booking(){
   const { openBooking } = useBooking()
 
   return (
-    <button onClick={openBooking} className="inline-block bg-[rgb(var(--color-primary))] text-white px-5 py-2 rounded-md">Request a consultation date</button>
+    <button onClick={openBooking} className="btn-primary">Request a consultation date</button>
   )
 }
