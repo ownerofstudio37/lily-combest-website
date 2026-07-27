@@ -64,15 +64,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-[rgb(245,241,232)]">
       {/* Header */}
-      <header className="border-b border-[rgba(74,93,63,0.12)] bg-white/85 shadow-sm backdrop-blur">
+      <header className="sticky top-0 z-30 border-b border-[rgba(74,93,63,0.12)] bg-white/90 shadow-sm backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary))]">Wellness Studio</p>
               <h1 className="text-2xl font-bold text-gray-950">Lilly Combest Admin</h1>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">{user?.email}</span>
+            <div className="flex items-center justify-between gap-4 sm:justify-end">
+              <span className="truncate text-sm text-gray-600">{user?.email}</span>
               <button
                 onClick={handleLogout}
                 className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-[rgba(var(--color-primary-light),0.55)] hover:text-gray-950"
@@ -85,10 +85,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         {/* Sidebar Navigation */}
-        <nav className="w-64 border-r border-[rgba(74,93,63,0.1)] bg-white/90 p-6 shadow-sm min-h-screen">
-          <div className="space-y-2">
+        <nav className="w-full overflow-x-auto border-b border-[rgba(74,93,63,0.1)] bg-white/90 p-3 shadow-sm lg:min-h-screen lg:w-64 lg:overflow-visible lg:border-b-0 lg:border-r lg:p-6">
+          <div className="flex min-w-max gap-2 lg:min-w-0 lg:flex-col lg:space-y-2">
             <Link
               href="/admin"
               className="block px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700 font-medium"
@@ -96,8 +96,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               Dashboard
             </Link>
 
-            <div className="pt-4 border-t mt-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-3">CRM & Content</h3>
+            <div className="contents lg:block lg:pt-4 lg:border-t lg:mt-4">
+              <h3 className="hidden text-xs font-semibold text-gray-500 uppercase mb-3 lg:block">CRM & Content</h3>
               <Link
                 href="/admin/contacts"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700"
@@ -114,8 +114,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
             </div>
 
-            <div className="pt-4 border-t mt-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-3">Content Management</h3>
+            <div className="contents lg:block lg:pt-4 lg:border-t lg:mt-4">
+              <h3 className="hidden text-xs font-semibold text-gray-500 uppercase mb-3 lg:block">Content Management</h3>
               <Link
                 href="/admin/blog"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700"
@@ -132,8 +132,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
             </div>
 
-            <div className="pt-4 border-t mt-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-3">AI Tools</h3>
+            <div className="contents lg:block lg:pt-4 lg:border-t lg:mt-4">
+              <h3 className="hidden text-xs font-semibold text-gray-500 uppercase mb-3 lg:block">AI Tools</h3>
               <Link
                 href="/admin/ai/blog-writer"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700"
@@ -164,8 +164,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
             </div>
 
-            <div className="pt-4 border-t mt-4">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-3">Administration</h3>
+            <div className="contents lg:block lg:pt-4 lg:border-t lg:mt-4">
+              <h3 className="hidden text-xs font-semibold text-gray-500 uppercase mb-3 lg:block">Administration</h3>
               <Link
                 href="/admin/analytics"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[rgba(var(--color-primary-light),0.55)] text-gray-700"
@@ -192,7 +192,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>

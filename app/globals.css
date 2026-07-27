@@ -60,6 +60,44 @@
     backdrop-filter: blur(6px);
   }
 
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgb(var(--color-primary-dark));
+    color: rgb(var(--color-secondary-light));
+    font-weight: 700;
+    padding: 0.8rem 1.35rem;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgb(var(--color-secondary));
+    color: rgb(var(--color-primary-dark));
+    font-weight: 700;
+    padding: 0.8rem 1.35rem;
+  }
+
+  .btn-quiet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--color-primary), 0.18);
+    background: rgba(255, 255, 255, 0.72);
+    color: rgb(var(--color-primary-dark));
+    font-weight: 700;
+    padding: 0.75rem 1.2rem;
+  }
+
   .section-cream {
     background: linear-gradient(180deg, rgba(245, 241, 232, 1) 0%, rgba(240, 236, 224, 1) 100%);
   }

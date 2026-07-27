@@ -11,11 +11,19 @@ Last updated: 2026-07-27
 - [x] Hardened admin session cookies so the cookie stores an HMAC signature instead of the raw admin secret.
 - [x] Changed production admin login behavior so a missing `ADMIN_PASSWORD` fails closed instead of falling back to `admin123`.
 - [x] Started a small UI facelift by aligning admin chrome with the Lilly wellness palette and replacing viewport-scaled hero typography.
+- [x] Confirmed production environment variables are set in Netlify: `ADMIN_PASSWORD`, `GEMINI_API_KEY`, `NEXT_PUBLIC_CALENDLY_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `RESEND_API_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`.
+- [x] Made admin navigation responsive with a mobile horizontal tool rail and desktop sidebar.
+- [x] Added shared `btn-primary`, `btn-secondary`, and `btn-quiet` UI classes.
+- [x] Improved blog index layout with category chips, featured post treatment, and stronger empty/error states.
+- [x] Added clearer post-submit next-step messaging on the contact form.
+- [x] Replaced hard-coded placeholder analytics/settings values with honest setup and status panels.
 
 ## Critical / High Priority
 
-- [ ] Add real production `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` in Netlify.
-- [ ] Add `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, and `GEMINI_API_KEY` in production and verify every admin/API route.
+- [x] Add real production `ADMIN_PASSWORD` in Netlify.
+- [x] Add `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `RESEND_API_KEY`, `GEMINI_API_KEY`, and `NEXT_PUBLIC_CALENDLY_URL` in production.
+- [ ] Add optional `ADMIN_SESSION_SECRET` in Netlify so session signing can rotate independently from the login password.
+- [ ] Verify every production admin/API route with the configured Netlify environment variables.
 - [ ] Move the project folder or build through a path without an apostrophe; local `next build` fails under `Momma's New Website` because Next's generated metadata loader does not escape that path.
 - [ ] Initialize ESLint non-interactively and add a clean `npm run lint` baseline.
 - [ ] Decide whether public blog source of truth is Supabase or markdown; right now public APIs use Supabase with markdown fallback, while the sitemap reads markdown only.
@@ -52,16 +60,16 @@ Last updated: 2026-07-27
 
 ## UX / UI Facelift
 
-- [ ] Make admin navigation responsive; current sidebar is desktop-first and can crowd smaller screens.
+- [x] Make admin navigation responsive; current sidebar is desktop-first and can crowd smaller screens.
 - [ ] Refresh public service detail pages so they match the homepage's richer section rhythm instead of feeling like framed article cards.
 - [ ] Reduce repeated wave dividers where they create visual noise on long pages.
-- [ ] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
-- [ ] Add visible focus states for all nav links, buttons, forms, and admin actions.
+- [x] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
+- [x] Add visible focus states for all nav links, buttons, forms, and admin actions.
 - [ ] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.
-- [ ] Improve blog index layout with category filters, featured post treatment, and stronger empty/error states.
+- [x] Improve blog index layout with category filters, featured post treatment, and stronger empty/error states.
 - [ ] Replace stock-like imagery over time with real Lilly photos and branded wellness assets.
-- [ ] Add clearer "what happens next" messaging after contact form submission.
-- [ ] Remove hard-coded placeholder analytics/settings values or replace them with environment/status checks.
+- [x] Add clearer "what happens next" messaging after contact form submission.
+- [x] Remove hard-coded placeholder analytics/settings values or replace them with environment/status checks.
 
 ## Technical / Launch
 

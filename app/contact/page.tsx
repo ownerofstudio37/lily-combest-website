@@ -74,11 +74,16 @@ export default function Contact(){
               <label htmlFor="contact-message" className="block mb-2 text-sm font-medium text-[rgb(var(--color-ink))]">{t('contact.form.message') || 'Message'}</label>
               <textarea id="contact-message" title="Message" placeholder="Tell Lilly your goals and preferred dates/times." value={message} onChange={e => setMessage(e.target.value)} className="w-full border border-[rgba(74,93,63,0.2)] rounded-lg px-3 py-2 mb-4 bg-white/70 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--color-primary))]" name="message" rows={5} required />
 
-              <button type="submit" disabled={status === 'sending'} className="bg-[rgb(47,60,41)] text-[rgb(244,232,237)] font-semibold px-6 py-3 rounded-full hover:brightness-110 transition">
+              <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-60">
                 {status === 'sending' ? 'Sending…' : (t('contact.form.send') || 'Send Message')}
               </button>
 
-              {status === 'success' && <p className="mt-4 text-green-700">Thanks — we’ll be in touch soon.</p>}
+              {status === 'success' && (
+                <div className="mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-green-900">
+                  <p className="font-semibold">Thanks, your request was sent.</p>
+                  <p className="mt-1 text-sm">Lilly will review your goals and reply with next steps or consultation times. You can also email <a href="mailto:lilly@lillycombest.com" className="font-semibold underline">lilly@lillycombest.com</a>.</p>
+                </div>
+              )}
               {status === 'error' && <p className="mt-4 text-red-600">Sorry, something went wrong. Try emailing <a href="mailto:lilly@lillycombest.com" className="text-[rgb(var(--color-primary))]">lilly@lillycombest.com</a></p>}
             </form>
 
