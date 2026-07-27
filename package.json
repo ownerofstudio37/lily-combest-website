@@ -8,6 +8,7 @@
     "start": "next start",
     "smoke": "node scripts/smoke.mjs",
     "visual:qa": "node scripts/visual-qa.mjs",
+    "visual:admin": "node scripts/admin-visual-qa.mjs",
     "lint": "tsc --noEmit --pretty false"
   },
   "dependencies": {

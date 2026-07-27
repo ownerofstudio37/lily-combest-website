@@ -33,12 +33,16 @@ Last updated: 2026-07-27
 - [x] Completed responsive visual QA pass with Playwright screenshots, added reusable visual QA script, improved blog article readability/FAQ schema, service-detail local/related sections, homepage first-30-days section, and stronger image alt text.
 - [x] Improved admin content tooling with blog freshness flags, internal link suggestions, curated image picker, FAQ editor/schema workflow, and persistent Search Console checklist.
 - [x] Added admin reliability pass: health status API/panels, production QA checklist, graceful Supabase fallbacks, and blog editor autosave/local draft recovery.
+- [x] Cleaned up the admin SEO audit endpoint so production builds do not import filesystem code through the API route.
+- [x] Added an admin Supabase schema setup guide in Advanced Settings.
+- [x] Polished the admin dashboard UI and added a protected admin visual QA screenshot script.
 
 ## Critical / High Priority
 
 - [x] Add real production `ADMIN_PASSWORD` in Netlify.
 - [x] Add `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `RESEND_API_KEY`, `GEMINI_API_KEY`, and `NEXT_PUBLIC_CALENDLY_URL` in production.
 - [ ] Add optional `ADMIN_SESSION_SECRET` in Netlify so session signing can rotate independently from the login password.
+- [x] Add local admin visual QA coverage for dashboard, contacts, blog, SEO, settings, and QA checklist pages.
 - [ ] Verify every production admin/API route with the configured Netlify environment variables.
 - [x] Move the project folder or build through a path without an apostrophe; local `next build` now passes in the current folder after the Next 16 migration.
 - [ ] Initialize ESLint non-interactively and add a clean `npm run lint` baseline.
@@ -81,7 +85,7 @@ Last updated: 2026-07-27
 - [x] Reduce repeated wave dividers where they create visual noise on long pages.
 - [x] Add consistent button styles in `globals.css` for primary, secondary, and quiet actions.
 - [x] Add visible focus states for all nav links, buttons, forms, and admin actions.
-- [ ] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.
+- [x] Add mobile QA for hero text wrapping, three-stat row, nav menu, contact form, and blog cards.
 - [x] Improve blog index layout with category filters, featured post treatment, and stronger empty/error states.
 - [ ] Replace stock-like imagery over time with real Lilly photos and branded wellness assets.
 - [x] Add clearer "what happens next" messaging after contact form submission.
